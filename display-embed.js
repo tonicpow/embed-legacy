@@ -11,11 +11,13 @@ if(document.readyState === "complete" || document.readyState === "interactive") 
 function loadIframe() {
 
   //Set config
-  const networkUrl = "https://app.tonicpow.com";
-  const footerLinkHeight = 22;
-  const defaultHeight = 250;
-  const defaultWidth = 300;
-  const defaultRatePerBlock = 1;
+  const networkUrl = "https://app.tonicpow.com";              // Url for Tonic App
+  const footerLinkHeight = 22;                                // Size for the footer link area
+  const defaultHeight = 250;                                  // Height of the embed
+  const defaultWidth = 300;                                   // Width of the embed
+  const defaultRatePerBlock = 1;                              // Default rate per block
+  const defaultUnitId = "embed-1";                            // Default unit-id to use if not set
+  const defaultPubKey = "1LWyDs4qzmfAhGpSZk1K1kLmNdafBDdJSD"; // Default pubkey to set if not found
 
   // Get sticker address from parent page
   let stickerAddress = (document.head.querySelector("[name=bitcoin-address][content]")) ? document.head.querySelector("[name=bitcoin-address][content]").content : "";
@@ -34,7 +36,7 @@ function loadIframe() {
   }
 
   // Collection of unit ids displayed
-  let unitIds = [];
+  // let unitIds = [];
 
   // Loop all ad divs that we found
   for (let i = tonicDivs.length - 1; i >= 0; i--) {
@@ -54,23 +56,28 @@ function loadIframe() {
     // Get data-unit-id
     let dataUnitId = tonicDivs[i].getAttribute('data-unit-id');
     if (!dataUnitId || dataUnitId === "") {
-      createErrorMessage("missing data-unit-id", tonicDivs[i], displayWidth, displayHeight);
-      continue; // keep trying to load other ads
+      console.log("data-unit-id not found, using default: " + defaultUnitId);
+      dataUnitId = defaultUnitId;
+      //createErrorMessage("missing data-unit-id", tonicDivs[i], displayWidth, displayHeight);
+      //continue; // keep trying to load other ads
     }
 
+    // @mrz turned off - this is a feature, not a bug/error
     // Detect unit-id already used
-    if (unitIds.indexOf(dataUnitId) > -1) {
-      createErrorMessage("data-unit-id was already previously used", tonicDivs[i], displayWidth, displayHeight);
-      continue; // keep trying to load other ads
-    } else {
-      unitIds.push(dataUnitId);
-    }
+    //if (unitIds.indexOf(dataUnitId) > -1) {
+    //  createErrorMessage("data-unit-id was already previously used", tonicDivs[i], displayWidth, displayHeight);
+    //  continue; // keep trying to load other ads
+    //} else {
+    //  unitIds.push(dataUnitId);
+    //}
     
     // Get data-pubkey
     let dataPubKey = tonicDivs[i].getAttribute('data-pubkey');
     if (!dataPubKey || dataPubKey === "") {
-      createErrorMessage("missing data-pubkey", tonicDivs[i], displayWidth, displayHeight);
-      continue; // keep trying to load other ads
+      console.log("data-pubkey not found, using default: " + defaultPubKey);
+      dataPubKey = defaultPubKey;
+      //createErrorMessage("missing data-pubkey", tonicDivs[i], displayWidth, displayHeight);
+      //continue; // keep trying to load other ads
     }
     
     // Got a state to load by default
