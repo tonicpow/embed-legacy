@@ -33,6 +33,8 @@ function loadIframe() {
     return; // No need to go further
   }
 
+  //todo: detect that all tonicDivs have unique unit-ids
+
   // Loop all ad divs that we found
   for (let i = tonicDivs.length - 1; i >= 0; i--) {
 
@@ -40,6 +42,7 @@ function loadIframe() {
     let dataUnitId = tonicDivs[i].getAttribute('data-unit-id');
     if (!dataUnitId || dataUnitId === "") {
       console.error("missing data-unit-id");
+      //todo: fill in the space with an error messge or image?
       continue; // keep trying to load other ads
     }
 
@@ -47,6 +50,7 @@ function loadIframe() {
     let dataPubKey = tonicDivs[i].getAttribute('data-pubkey');
     if (!dataPubKey || dataPubKey === "") {
       console.error("missing data-pubkey");
+      //todo: fill in the space with an error messge or image?
       continue; // keep trying to load other ads
     }
 
