@@ -1,6 +1,11 @@
-document.addEventListener("DOMContentLoaded", function () {
+// On complete / interactive or if DOM loaded
+if(document.readyState === "complete" || document.readyState === "interactive") {
   loadIframe();
-});
+} else {
+  document.addEventListener("DOMContentLoaded", function () {
+    loadIframe();
+  });
+}
 
 // loadIframe - loads the iframes in place of divs for ad-embed
 function loadIframe() {
