@@ -11,7 +11,11 @@ if(document.readyState === "complete" || document.readyState === "interactive") 
 function loadIframe() {
 
   //Set config
-  let networkUrl = "https://app.tonicpow.com";
+  const networkUrl = "https://app.tonicpow.com";
+  const footerLinkHeight = 22;
+  const defaultHeight = 250;
+  const defaultWidth = 300;
+  const defaultRatePerBlock = 1;
 
   // Get sticker address from parent page
   let stickerAddress = (document.head.querySelector("[name=bitcoin-address][content]")) ? document.head.querySelector("[name=bitcoin-address][content]").content : "";
@@ -49,13 +53,13 @@ function loadIframe() {
     // Got a width size?
     let displayWidth = tonicDivs[i].getAttribute('data-width');
     if (!displayWidth || displayWidth === "") {
-      displayWidth = "300";
+      displayWidth = defaultWidth;
     }
 
     // Got a height size?
     let displayHeight = tonicDivs[i].getAttribute('data-height');
     if (!displayHeight || displayHeight === "") {
-      displayHeight = "250";
+      displayHeight = defaultHeight;
     }
 
     // Got a state to load by default
@@ -64,11 +68,17 @@ function loadIframe() {
       loadState = "";
     }
 
+    // Got a default rate
+    let rate = tonicDivs[i].getAttribute('data-rate');
+    if (!rate || rate === "") {
+      rate = defaultRatePerBlock;
+    }
+
     // Build the iframe, pass along configuration variables
     let iframe = document.createElement('iframe');
-    iframe.src = networkUrl + "/"+loadState+"?unit_id=" + dataUnitId + "&pubkey=" + dataPubKey + "&affiliate=" + affiliate + "&sticker_address=" + stickerAddress + "&sticker_tx=" + stickerTx + "&cache=" + Math.random();
+    iframe.src = networkUrl + "/"+loadState+"?unit_id=" + dataUnitId + "&pubkey=" + dataPubKey + "&affiliate=" + affiliate + "&sticker_address=" + stickerAddress + "&sticker_tx=" + stickerTx + "&rate=" + rate + "&cache=" + Math.random();
     iframe.width = displayWidth;
-    iframe.height = displayHeight;
+    iframe.height = (parseInt(displayHeight) + footerLinkHeight);
 
     // Add the data to the iframe
     iframe.setAttribute("data-unit-id", dataUnitId);
