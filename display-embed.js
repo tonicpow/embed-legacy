@@ -128,7 +128,7 @@ function loadIframe() {
 // @param tonicDiv is the div element to replace with this error div
 // @param width is the width of the error div
 // @param height is the height of the error div
-function createErrorMessage(message, tonicDiv, width, height) {
+/*function createErrorMessage(message, tonicDiv, width, height) {
   // Create the div
   let errorDiv = document.createElement('div');
   errorDiv.style.textAlign = "center";
@@ -146,7 +146,7 @@ function createErrorMessage(message, tonicDiv, width, height) {
 
   // Show error to developer
   console.error("displayed error: " + message);
-}
+}*/
 
 // Source: https://davidwalsh.name/query-string-javascript
 // getUrlParameter()
