@@ -7,7 +7,7 @@ if(document.readyState === "complete" || document.readyState === "interactive") 
   });
 }
 
-// loadIframe - loads the iframes in place of divs for ad-embed
+// loadIframe - replaces each tonicpow div with a corresponding iframe
 function loadIframe() {
 
   //Set config
