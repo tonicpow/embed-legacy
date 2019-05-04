@@ -7,7 +7,7 @@ if(document.readyState === "complete" || document.readyState === "interactive") 
   });
 }
 
-// loadIframe - replaces each tonic div with a corresponding iframe
+// loadIframe() - replaces each tonic div with a corresponding iframe
 function loadIframe() {
 
   //Set config
@@ -116,8 +116,12 @@ function loadIframe() {
   }
 }
 
-// createErrorMessage
-function createErrorMessage(message, element, width, height) {
+// createErrorMessage()
+// @param message is the error message to display
+// @param tonicDiv is the div element to replace with this error div
+// @param width is the width of the error div
+// @param height is the height of the error div
+function createErrorMessage(message, tonicDiv, width, height) {
   // Create the div
   let errorDiv = document.createElement('div');
   errorDiv.style.textAlign = "center";
@@ -131,7 +135,7 @@ function createErrorMessage(message, element, width, height) {
     '<p style="font-weight:bold;color:red;font-size:20px;">' + message + '</p>';
 
   // Replace the div for the error div
-  element.parentNode.replaceChild(errorDiv, element);
+  tonicDiv.parentNode.replaceChild(errorDiv, tonicDiv);
 
   // Show error to developer
   console.error("displayed error: " + message);
@@ -139,6 +143,7 @@ function createErrorMessage(message, element, width, height) {
 
 // Source: https://davidwalsh.name/query-string-javascript
 // getUrlParameter()
+// @param name is the name of the query parameter
 function getUrlParameter(name) {
   name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
   let regex = new RegExp('[\\?&]' + name + '=([^&#]*)');
