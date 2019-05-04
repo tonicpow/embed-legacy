@@ -39,31 +39,6 @@ function loadIframe() {
   // Loop all ad divs that we found
   for (let i = tonicDivs.length - 1; i >= 0; i--) {
 
-    // Get data-unit-id
-    let dataUnitId = tonicDivs[i].getAttribute('data-unit-id');
-    if (!dataUnitId || dataUnitId === "") {
-      console.error("missing data-unit-id");
-      //todo: fill in the space with an error message or image?
-      continue; // keep trying to load other ads
-    }
-
-    // Detect unit-id already used
-    if (unitIds.indexOf(dataUnitId) > -1) {
-      console.error("data-unit-id was already previously used");
-      //todo: fill in the space with an error message or image?
-      continue; // keep trying to load other ads
-    } else {
-      unitIds.push(dataUnitId);
-    }
-    
-    // Get data-pubkey
-    let dataPubKey = tonicDivs[i].getAttribute('data-pubkey');
-    if (!dataPubKey || dataPubKey === "") {
-      console.error("missing data-pubkey");
-      //todo: fill in the space with an error message or image?
-      continue; // keep trying to load other ads
-    }
-
     // Got a width size?
     let displayWidth = tonicDivs[i].getAttribute('data-width');
     if (!displayWidth || displayWidth === "") {
@@ -76,6 +51,28 @@ function loadIframe() {
       displayHeight = defaultHeight;
     }
 
+    // Get data-unit-id
+    let dataUnitId = tonicDivs[i].getAttribute('data-unit-id');
+    if (!dataUnitId || dataUnitId === "") {
+      createErrorMessage("missing data-unit-id", tonicDivs[i], displayWidth, displayHeight);
+      continue; // keep trying to load other ads
+    }
+
+    // Detect unit-id already used
+    if (unitIds.indexOf(dataUnitId) > -1) {
+      createErrorMessage("data-unit-id was already previously used", tonicDivs[i], displayWidth, displayHeight);
+      continue; // keep trying to load other ads
+    } else {
+      unitIds.push(dataUnitId);
+    }
+    
+    // Get data-pubkey
+    let dataPubKey = tonicDivs[i].getAttribute('data-pubkey');
+    if (!dataPubKey || dataPubKey === "") {
+      createErrorMessage("missing data-pubkey", tonicDivs[i], displayWidth, displayHeight);
+      continue; // keep trying to load other ads
+    }
+    
     // Got a state to load by default
     let loadState = tonicDivs[i].getAttribute('data-state');
     if (!loadState || loadState === "") {
@@ -117,6 +114,27 @@ function loadIframe() {
     tonicDivs[i].parentNode.replaceChild(iframe, tonicDivs[i]);
     console.log("tonic campaign loaded - unit_id: " + dataUnitId);
   }
+}
+
+// createErrorMessage
+function createErrorMessage(message, element, width, height) {
+  // Create the div
+  let errorDiv = document.createElement('div');
+  errorDiv.style.textAlign = "center";
+  errorDiv.style.width = width + "px";
+  errorDiv.style.height = height + "px";
+  errorDiv.style.paddingTop = "40px";
+  errorDiv.style.border = "1px solid red";
+
+  // Set the html
+  errorDiv.innerHTML =
+    '<p style="font-weight:bold;color:red;font-size:20px;">' + message + '</p>';
+
+  // Replace the div for the error div
+  element.parentNode.replaceChild(errorDiv, element);
+
+  // Show error to developer
+  console.error("displayed error: " + message);
 }
 
 // Source: https://davidwalsh.name/query-string-javascript
