@@ -94,7 +94,16 @@ function loadIframe() {
 
     // Build the iframe, pass along configuration variables
     let iframe = document.createElement('iframe');
-    iframe.src = networkUrl + "/"+loadState+"?unit_id=" + dataUnitId + "&pubkey=" + dataPubKey + "&affiliate=" + affiliate + "&sticker_address=" + stickerAddress + "&sticker_tx=" + stickerTx + "&rate=" + rate + "&cache=" + Math.random();
+    iframe.src = networkUrl + "/"+loadState+"?" +
+      "unit_id=" + dataUnitId +
+      "&pubkey=" + dataPubKey +
+      "&affiliate=" + affiliate +
+      "&sticker_address=" + stickerAddress +
+      "&sticker_tx=" + stickerTx +
+      "&rate=" + rate +
+      "&width=" + displayWidth +
+      "&height=" + displayHeight +
+      "cache=" + Math.random();
     iframe.width = displayWidth;
     iframe.height = (parseInt(displayHeight) + footerLinkHeight);
 
