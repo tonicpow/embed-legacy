@@ -33,7 +33,8 @@ function loadIframe() {
     return; // No need to go further
   }
 
-  //todo: detect that all tonicDivs have unique unit-ids
+  // Collection of unit ids displayed
+  let unitIds = [];
 
   // Loop all ad divs that we found
   for (let i = tonicDivs.length - 1; i >= 0; i--) {
@@ -46,6 +47,15 @@ function loadIframe() {
       continue; // keep trying to load other ads
     }
 
+    // Detect unit-id already used
+    if (unitIds.indexOf(dataUnitId) > -1) {
+      console.error("data-unit-id was already previously used");
+      //todo: fill in the space with an error message or image?
+      continue; // keep trying to load other ads
+    } else {
+      unitIds.push(dataUnitId);
+    }
+    
     // Get data-pubkey
     let dataPubKey = tonicDivs[i].getAttribute('data-pubkey');
     if (!dataPubKey || dataPubKey === "") {
@@ -95,7 +105,7 @@ function loadIframe() {
     // iframe.allowpaymentrequest = true;
     // iframe.referrerpolicy = "unsafe-url";
     // iframe.scrolling = "no"; (this stops scrolling as well
-    
+
     // Name and border
     iframe.importance = "high";
     iframe.name = "tonic_"+dataUnitId;
