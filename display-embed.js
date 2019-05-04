@@ -1,14 +1,15 @@
 // On complete / interactive or if DOM loaded
 if(document.readyState === "complete" || document.readyState === "interactive") {
-  loadIframe();
+  iframeLoader();
   connectBitsocket();
 } else {
   document.addEventListener("DOMContentLoaded", function () {
-    loadIframe();
+    iframeLoader();
     connectBitsocket();
   });
 }
 
+// connectBitsocket()
 function connectBitsocket () {
   // Write a bitquery
   const MAP_PREFIX = '1PuQa7K62MiKCtssSLKy1kh56WWU7MtUR5';
@@ -35,8 +36,8 @@ function connectBitsocket () {
   }
 }
 
-// loadIframe() - replaces each tonic div with a corresponding iframe
-function loadIframe() {
+// iframeLoader() - replaces each tonic div with a corresponding iframe
+function iframeLoader() {
 
   //Set config
   const networkUrl = "https://app.tonicpow.com";              // Url for Tonic App
