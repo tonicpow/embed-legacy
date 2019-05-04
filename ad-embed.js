@@ -5,10 +5,13 @@ document.addEventListener("DOMContentLoaded", function(){
 // loadIframe - loads the iframes in place of divs for ad-embed
 function loadIframe(){
 
-  // Get sticker
+  //Set config
+  let adNetworkUrl = "https://tonicpow.firebaseapp.com";
+
+  // Get sticker from parent page
   let stickerAddress = document.head.querySelector("[name=bitcoin-address][content]").content;
 
-  // Get query params from parent url
+  // Get query params from parent page / url
   let affiliate = getUrlParameter("affiliate");
 
   // Get all tonic divs
@@ -37,7 +40,7 @@ function loadIframe(){
 
     // Build the iframe, pass along configuration variables
     let iframe = document.createElement('iframe');
-    iframe.src = "https://tonicpow.firebaseapp.com/?unit_id="+dataUnitId+"&pubkey="+dataPubKey+"&affiliate="+affiliate+"&sticker_address="+stickerAddress;
+    iframe.src = adNetworkUrl+"/?unit_id="+dataUnitId+"&pubkey="+dataPubKey+"&affiliate="+affiliate+"&sticker_address="+stickerAddress;
 
     // Replace the div for the iframe
     ads[i].parentNode.replaceChild(iframe, ads[i]);
