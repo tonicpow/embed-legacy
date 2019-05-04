@@ -5,12 +5,13 @@ if(document.readyState === "complete" || document.readyState === "interactive") 
 } else {
   document.addEventListener("DOMContentLoaded", function () {
     loadIframe();
+    connectBitsocket();
   });
 }
 
 function connectBitsocket () {
   // Write a bitquery
-  const MAP_PREFIX = '1PuQa7K62MiKCtssSLKy1kh56WWU7MtUR5'
+  const MAP_PREFIX = '1PuQa7K62MiKCtssSLKy1kh56WWU7MtUR5';
   let query = {
     "v": 3, "q": {
       "find": {
@@ -20,13 +21,13 @@ function connectBitsocket () {
         'out.s9': 'tonicpow'
       } 
     }
-  }
+  };
 
   // Encode it in base64 format
-  let b64 = btoa(JSON.stringify(query))
+  let b64 = btoa(JSON.stringify(query));
 
   // Subscribe
-  let bitsocket = new EventSource('https://babel.bitdb.network/s/1DHDifPvtPgKFPZMRSxmVHhiPvFmxZwbfh/'+b64)
+  let bitsocket = new EventSource('https://babel.bitdb.network/s/1DHDifPvtPgKFPZMRSxmVHhiPvFmxZwbfh/'+b64);
 
   // Event handler
   bitsocket.onmessage = function(e) {
