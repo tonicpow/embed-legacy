@@ -1,2 +1,2 @@
-# hackathon-ad-embed
-Hackathon - Ad Embed
+# TonicPow - Ad Embed Script
+todo: this!
