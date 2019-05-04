@@ -45,6 +45,12 @@ function loadIframe(){
     let iframe = document.createElement('iframe');
     iframe.src = adNetworkUrl+"/?unit_id="+dataUnitId+"&pubkey="+dataPubKey+"&affiliate="+affiliate+"&sticker_address="+stickerAddress+"&sticker_tx="+stickerTx;
 
+    // Add the data to the iframe
+    iframe.setAttribute("data-unit-id",dataUnitId);
+    iframe.setAttribute("data-pubkey",dataPubKey);
+    iframe.setAttribute("data-affiliate",affiliate);
+    iframe.setAttribute("data-sticker-address",stickerAddress);
+
     // Replace the div for the iframe
     ads[i].parentNode.replaceChild(iframe, ads[i]);
     console.log("Ad Displayed! unit_id: "+dataUnitId);
