@@ -7,7 +7,7 @@ if(document.readyState === "complete" || document.readyState === "interactive") 
   });
 }
 
-// loadIframe - replaces each tonicpow div with a corresponding iframe
+// loadIframe - replaces each tonic div with a corresponding iframe
 function loadIframe() {
 
   //Set config
@@ -66,7 +66,7 @@ function loadIframe() {
 
     // Build the iframe, pass along configuration variables
     let iframe = document.createElement('iframe');
-    iframe.src = networkUrl + "/"+loadState+"?unit_id=" + dataUnitId + "&pubkey=" + dataPubKey + "&affiliate=" + affiliate + "&sticker_address=" + stickerAddress + "&sticker_tx=" + stickerTx;
+    iframe.src = networkUrl + "/"+loadState+"?unit_id=" + dataUnitId + "&pubkey=" + dataPubKey + "&affiliate=" + affiliate + "&sticker_address=" + stickerAddress + "&sticker_tx=" + stickerTx + "&cache=" + Math.random();
     iframe.width = displayWidth;
     iframe.height = displayHeight;
 
