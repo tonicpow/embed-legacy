@@ -122,9 +122,9 @@ function iframeLoader() {
     }
 
     // Got a default image url?
-    let defaultImageUrl = tonicDivs[i].getAttribute('data-default-image');
-    if (!defaultImageUrl || defaultImageUrl === "") {
-      defaultImageUrl = "";
+    let imageUrl = tonicDivs[i].getAttribute('data-image');
+    if (!imageUrl || imageUrl === "") {
+      imageUrl = "";
     }
 
     // Build the iframe, pass along configuration variables
@@ -138,7 +138,7 @@ function iframeLoader() {
       "&rate=" + rate +
       "&width=" + displayWidth +
       "&height=" + displayHeight +
-      "&default_image=" + defaultImageUrl +
+      "&image=" + defaultImageUrl +
       "cache=" + Math.random();
     iframe.width = displayWidth;
     iframe.height = (parseInt(displayHeight) + footerLinkHeight);
