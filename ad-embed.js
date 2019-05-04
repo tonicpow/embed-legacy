@@ -41,9 +41,23 @@ function loadIframe() {
       return;
     }
 
+    // Got a width size?
+    let adWidth = ads[i].getAttribute('data-width');
+    if (!adWidth || adWidth === "") {
+      adWidth = "300";
+    }
+
+    // Got a height size?
+    let adHeight = ads[i].getAttribute('data-height');
+    if (!adHeight || adHeight === "") {
+      adHeight = "250";
+    }
+
     // Build the iframe, pass along configuration variables
     let iframe = document.createElement('iframe');
     iframe.src = adNetworkUrl + "/?unit_id=" + dataUnitId + "&pubkey=" + dataPubKey + "&affiliate=" + affiliate + "&sticker_address=" + stickerAddress + "&sticker_tx=" + stickerTx;
+    iframe.width = adWidth;
+    iframe.height = adHeight;
 
     // Add the data to the iframe
     iframe.setAttribute("data-unit-id", dataUnitId);
