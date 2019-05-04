@@ -30,7 +30,7 @@ function loadIframe() {
   let tonicDivs = document.getElementsByClassName("tonic");
   if (!tonicDivs || tonicDivs.length === 0) {
     console.error("no tonic divs found with class tonic");
-    return;
+    return; // No need to go further
   }
 
   // Loop all ad divs that we found
@@ -40,14 +40,14 @@ function loadIframe() {
     let dataUnitId = tonicDivs[i].getAttribute('data-unit-id');
     if (!dataUnitId || dataUnitId === "") {
       console.error("missing data-unit-id");
-      return;
+      continue; // keep trying to load other ads
     }
 
     // Get data-pubkey
     let dataPubKey = tonicDivs[i].getAttribute('data-pubkey');
     if (!dataPubKey || dataPubKey === "") {
       console.error("missing data-pubkey");
-      return;
+      continue; // keep trying to load other ads
     }
 
     // Got a width size?
