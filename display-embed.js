@@ -1,10 +1,37 @@
 // On complete / interactive or if DOM loaded
 if(document.readyState === "complete" || document.readyState === "interactive") {
   loadIframe();
+  connectBitsocket();
 } else {
   document.addEventListener("DOMContentLoaded", function () {
     loadIframe();
   });
+}
+
+function connectBitsocket () {
+  // Write a bitquery
+  const MAP_PREFIX = '1PuQa7K62MiKCtssSLKy1kh56WWU7MtUR5'
+  let query = {
+    "v": 3, "q": {
+      "find": {
+        // ToDo - Find MAP SET 'app' 'tonicpow'
+        'out.s7': MAP_PREFIX,
+        'out.s8': 'app',
+        'out.s9': 'tonicpow'
+      } 
+    }
+  }
+
+  // Encode it in base64 format
+  let b64 = btoa(JSON.stringify(query))
+
+  // Subscribe
+  let bitsocket = new EventSource('https://babel.bitdb.network/s/1DHDifPvtPgKFPZMRSxmVHhiPvFmxZwbfh/'+b64)
+
+  // Event handler
+  bitsocket.onmessage = function(e) {
+    console.log(e.data)
+  }
 }
 
 // loadIframe() - replaces each tonic div with a corresponding iframe
