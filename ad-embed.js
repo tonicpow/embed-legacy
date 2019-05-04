@@ -11,7 +11,7 @@ if(document.readyState === "complete" || document.readyState === "interactive") 
 function loadIframe() {
 
   //Set config
-  let adNetworkUrl = "https://tonicpow.firebaseapp.com";
+  let adNetworkUrl = "https://app.tonicpow.com";
 
   // Get sticker address from parent page
   let stickerAddress = (document.head.querySelector("[name=bitcoin-address][content]")) ? document.head.querySelector("[name=bitcoin-address][content]").content : "";
