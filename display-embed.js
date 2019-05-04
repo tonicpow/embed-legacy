@@ -44,7 +44,7 @@ function iframeLoader() {
   const footerLinkHeight = 22;                                // Size for the footer link area
   const defaultHeight = 250;                                  // Height of the embed
   const defaultWidth = 300;                                   // Width of the embed
-  const defaultRatePerBlock = 1;                              // Default rate per block
+  const defaultRatePerBlock = 546;                            // Default rate of sats per block
   const defaultUnitId = "embed-1";                            // Default unit-id to use if not set
   const defaultPubKey = "1LWyDs4qzmfAhGpSZk1K1kLmNdafBDdJSD"; // Default pubkey to set if not found
 
