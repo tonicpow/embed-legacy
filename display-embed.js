@@ -138,7 +138,7 @@ function iframeLoader() {
       "&rate=" + rate +
       "&width=" + displayWidth +
       "&height=" + displayHeight +
-      "&image=" + defaultImageUrl +
+      "&image=" + imageUrl +
       "cache=" + Math.random();
     iframe.width = displayWidth;
     iframe.height = (parseInt(displayHeight) + footerLinkHeight);
