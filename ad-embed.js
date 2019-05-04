@@ -70,6 +70,21 @@ function loadIframe() {
     iframe.setAttribute("data-affiliate", affiliate);
     iframe.setAttribute("data-sticker-address", stickerAddress);
 
+    // Extra attributes
+    // iframe.allowfullscreen = true;
+    // iframe.allowpaymentrequest = true;
+    // iframe.referrerpolicy = "unsafe-url";
+    // iframe.scrolling = "no"; (this stops scrolling as well
+
+
+    // Name and border
+    iframe.importance = "high";
+    iframe.name = "iframe_"+dataUnitId;
+    iframe.frameBorder = "0";
+    iframe.style.border="none";
+    iframe.style.overflow="hidden"; // (app should take care of this)
+
+
     // Replace the div for the iframe
     ads[i].parentNode.replaceChild(iframe, ads[i]);
     console.log("Ad Displayed! unit_id: " + dataUnitId);
