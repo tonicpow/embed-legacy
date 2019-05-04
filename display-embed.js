@@ -1,15 +1,14 @@
 // On complete / interactive or if DOM loaded
 if(document.readyState === "complete" || document.readyState === "interactive") {
   iframeLoader();
-  connectBitsocket();
 } else {
   document.addEventListener("DOMContentLoaded", function () {
     iframeLoader();
-    connectBitsocket();
   });
 }
 
 // connectBitsocket()
+// Gets loaded in iframeLoader
 function connectBitsocket () {
   // Write a bitquery
   const MAP_PREFIX = '1PuQa7K62MiKCtssSLKy1kh56WWU7MtUR5';
@@ -64,8 +63,8 @@ function iframeLoader() {
     return; // No need to go further
   }
 
-  // Collection of unit ids displayed
-  // let unitIds = [];
+  // Connect socket now that we have tonic divs
+  connectBitsocket();
 
   // Loop all ad divs that we found
   for (let i = tonicDivs.length - 1; i >= 0; i--) {
@@ -87,26 +86,13 @@ function iframeLoader() {
     if (!dataUnitId || dataUnitId === "") {
       console.log("data-unit-id not found, using default: " + defaultUnitId);
       dataUnitId = defaultUnitId;
-      //createErrorMessage("missing data-unit-id", tonicDivs[i], displayWidth, displayHeight);
-      //continue; // keep trying to load other ads
     }
-
-    // @mrz turned off - this is a feature, not a bug/error
-    // Detect unit-id already used
-    //if (unitIds.indexOf(dataUnitId) > -1) {
-    //  createErrorMessage("data-unit-id was already previously used", tonicDivs[i], displayWidth, displayHeight);
-    //  continue; // keep trying to load other ads
-    //} else {
-    //  unitIds.push(dataUnitId);
-    //}
     
     // Get data-pubkey
     let dataPubKey = tonicDivs[i].getAttribute('data-pubkey');
     if (!dataPubKey || dataPubKey === "") {
       console.log("data-pubkey not found, using default: " + defaultPubKey);
       dataPubKey = defaultPubKey;
-      //createErrorMessage("missing data-pubkey", tonicDivs[i], displayWidth, displayHeight);
-      //continue; // keep trying to load other ads
     }
     
     // Got a state to load by default
@@ -167,31 +153,6 @@ function iframeLoader() {
     console.log("tonic campaign loaded - unit_id: " + dataUnitId);
   }
 }
-
-// createErrorMessage()
-// @param message is the error message to display
-// @param tonicDiv is the div element to replace with this error div
-// @param width is the width of the error div
-// @param height is the height of the error div
-/*function createErrorMessage(message, tonicDiv, width, height) {
-  // Create the div
-  let errorDiv = document.createElement('div');
-  errorDiv.style.textAlign = "center";
-  errorDiv.style.width = width + "px";
-  errorDiv.style.height = height + "px";
-  errorDiv.style.paddingTop = "40px";
-  errorDiv.style.border = "1px solid red";
-
-  // Set the html
-  errorDiv.innerHTML =
-    '<p style="font-weight:bold;color:red;font-size:20px;">' + message + '</p>';
-
-  // Replace the div for the error div
-  tonicDiv.parentNode.replaceChild(errorDiv, tonicDiv);
-
-  // Show error to developer
-  console.error("displayed error: " + message);
-}*/
 
 // Source: https://davidwalsh.name/query-string-javascript
 // getUrlParameter()
