@@ -58,9 +58,15 @@ function loadIframe() {
       displayHeight = "250";
     }
 
+    // Got a state to load by default
+    let loadState = tonicDivs[i].getAttribute('data-state');
+    if (!loadState || loadState === "") {
+      loadState = "";
+    }
+
     // Build the iframe, pass along configuration variables
     let iframe = document.createElement('iframe');
-    iframe.src = networkUrl + "/?unit_id=" + dataUnitId + "&pubkey=" + dataPubKey + "&affiliate=" + affiliate + "&sticker_address=" + stickerAddress + "&sticker_tx=" + stickerTx;
+    iframe.src = networkUrl + "/"+loadState+"?unit_id=" + dataUnitId + "&pubkey=" + dataPubKey + "&affiliate=" + affiliate + "&sticker_address=" + stickerAddress + "&sticker_tx=" + stickerTx;
     iframe.width = displayWidth;
     iframe.height = displayHeight;
 
