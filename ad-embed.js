@@ -8,15 +8,18 @@ function loadIframe(){
   //Set config
   let adNetworkUrl = "https://tonicpow.firebaseapp.com";
 
-  // Get sticker from parent page
-  let stickerAddress = document.head.querySelector("[name=bitcoin-address][content]").content;
+  // Get sticker address from parent page
+  let stickerAddress = (document.head.querySelector("[name=bitcoin-address][content]")) ? document.head.querySelector("[name=bitcoin-address][content]").content : "";
+
+  // Get sticker tx from parent page
+  let stickerTx = (document.head.querySelector("[name=bitcoin-tx][content]")) ? document.head.querySelector("[name=bitcoin-tx][content]").content : "";
 
   // Get query params from parent page / url
   let affiliate = getUrlParameter("affiliate");
 
   // Get all tonic divs
   let ads = document.getElementsByClassName("tonic");
-  if (ads.length === 0) {
+  if (!ads || ads.length === 0) {
     console.error("no ad-divs found with class tonic");
     return;
   }
@@ -40,10 +43,11 @@ function loadIframe(){
 
     // Build the iframe, pass along configuration variables
     let iframe = document.createElement('iframe');
-    iframe.src = adNetworkUrl+"/?unit_id="+dataUnitId+"&pubkey="+dataPubKey+"&affiliate="+affiliate+"&sticker_address="+stickerAddress;
+    iframe.src = adNetworkUrl+"/?unit_id="+dataUnitId+"&pubkey="+dataPubKey+"&affiliate="+affiliate+"&sticker_address="+stickerAddress+"&sticker_tx="+stickerTx;
 
     // Replace the div for the iframe
     ads[i].parentNode.replaceChild(iframe, ads[i]);
+    console.log("Ad Displayed! unit_id: "+dataUnitId);
   }
 }
 
