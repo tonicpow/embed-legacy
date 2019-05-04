@@ -122,7 +122,7 @@ function iframeLoader() {
     }
 
     // Got a default image url?
-    let defaultImageUrl = tonicDivs[i].getAttribute('data-image');
+    let defaultImageUrl = tonicDivs[i].getAttribute('data-default-image');
     if (!defaultImageUrl || defaultImageUrl === "") {
       defaultImageUrl = "";
     }
