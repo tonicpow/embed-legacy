@@ -11,7 +11,7 @@ if(document.readyState === "complete" || document.readyState === "interactive") 
 function loadIframe() {
 
   //Set config
-  let adNetworkUrl = "https://app.tonicpow.com";
+  let networkUrl = "https://app.tonicpow.com";
 
   // Get sticker address from parent page
   let stickerAddress = (document.head.querySelector("[name=bitcoin-address][content]")) ? document.head.querySelector("[name=bitcoin-address][content]").content : "";
@@ -23,46 +23,46 @@ function loadIframe() {
   let affiliate = getUrlParameter("affiliate");
 
   // Get all tonic divs
-  let ads = document.getElementsByClassName("tonic");
-  if (!ads || ads.length === 0) {
-    console.error("no ad-divs found with class tonic");
+  let tonicDivs = document.getElementsByClassName("tonic");
+  if (!tonicDivs || tonicDivs.length === 0) {
+    console.error("no tonic divs found with class tonic");
     return;
   }
 
   // Loop all ad divs that we found
-  for (let i = ads.length - 1; i >= 0; i--) {
+  for (let i = tonicDivs.length - 1; i >= 0; i--) {
 
     // Get data-unit-id
-    let dataUnitId = ads[i].getAttribute('data-unit-id');
+    let dataUnitId = tonicDivs[i].getAttribute('data-unit-id');
     if (!dataUnitId || dataUnitId === "") {
       console.error("missing data-unit-id");
       return;
     }
 
     // Get data-pubkey
-    let dataPubKey = ads[i].getAttribute('data-pubkey');
+    let dataPubKey = tonicDivs[i].getAttribute('data-pubkey');
     if (!dataPubKey || dataPubKey === "") {
       console.error("missing data-pubkey");
       return;
     }
 
     // Got a width size?
-    let adWidth = ads[i].getAttribute('data-width');
-    if (!adWidth || adWidth === "") {
-      adWidth = "300";
+    let displayWidth = tonicDivs[i].getAttribute('data-width');
+    if (!displayWidth || displayWidth === "") {
+      displayWidth = "300";
     }
 
     // Got a height size?
-    let adHeight = ads[i].getAttribute('data-height');
-    if (!adHeight || adHeight === "") {
-      adHeight = "250";
+    let displayHeight = tonicDivs[i].getAttribute('data-height');
+    if (!displayHeight || displayHeight === "") {
+      displayHeight = "250";
     }
 
     // Build the iframe, pass along configuration variables
     let iframe = document.createElement('iframe');
-    iframe.src = adNetworkUrl + "/?unit_id=" + dataUnitId + "&pubkey=" + dataPubKey + "&affiliate=" + affiliate + "&sticker_address=" + stickerAddress + "&sticker_tx=" + stickerTx;
-    iframe.width = adWidth;
-    iframe.height = adHeight;
+    iframe.src = networkUrl + "/?unit_id=" + dataUnitId + "&pubkey=" + dataPubKey + "&affiliate=" + affiliate + "&sticker_address=" + stickerAddress + "&sticker_tx=" + stickerTx;
+    iframe.width = displayWidth;
+    iframe.height = displayHeight;
 
     // Add the data to the iframe
     iframe.setAttribute("data-unit-id", dataUnitId);
@@ -75,19 +75,17 @@ function loadIframe() {
     // iframe.allowpaymentrequest = true;
     // iframe.referrerpolicy = "unsafe-url";
     // iframe.scrolling = "no"; (this stops scrolling as well
-
-
+    
     // Name and border
     iframe.importance = "high";
-    iframe.name = "iframe_"+dataUnitId;
+    iframe.name = "tonic_"+dataUnitId;
     iframe.frameBorder = "0";
     iframe.style.border="none";
     iframe.style.overflow="hidden"; // (app should take care of this)
 
-
     // Replace the div for the iframe
-    ads[i].parentNode.replaceChild(iframe, ads[i]);
-    console.log("Ad Displayed! unit_id: " + dataUnitId);
+    tonicDivs[i].parentNode.replaceChild(iframe, tonicDivs[i]);
+    console.log("tonic campaign loaded - unit_id: " + dataUnitId);
   }
 }
 
