@@ -63,6 +63,9 @@ function iframeLoader() {
 
   // Convert affiliate if $handcash detected
   affiliate = (affiliate.includes('$')) ? handCashLookup(affiliate) : affiliate;
+  if (typeof affiliate === "undefined" || !affiliate || affiliate === "") {
+    affiliate = "";
+  }
 
   // Get all tonic divs
   let tonicDivs = document.getElementsByClassName("tonic");
@@ -98,14 +101,14 @@ function iframeLoader() {
 
     // Get data-pubkey
     let dataPubKey = tonicDivs[i].getAttribute('data-pubkey');
-    if (!dataPubKey || dataPubKey === "") {
+
+    // Convert pubkey if needed from $handcash
+    dataPubKey = (dataPubKey.includes('$')) ? handCashLookup(dataPubKey) : dataPubKey;
+    if (typeof dataPubKey === "undefined" || !dataPubKey || dataPubKey === "") {
       console.log("data-pubkey not found, using default: " + defaultPubKey);
       dataPubKey = defaultPubKey;
     }
-
-    // Convert pubkey if needed
-    dataPubKey = (dataPubKey.includes('$')) ? handCashLookup(dataPubKey) : dataPubKey;
-
+    
     // Got a state to load by default
     let loadState = tonicDivs[i].getAttribute('data-state');
     if (!loadState || loadState === "") {
@@ -124,6 +127,18 @@ function iframeLoader() {
       imageUrl = "";
     }
 
+    // Got a custom background color
+    let backgroundColor = tonicDivs[i].getAttribute('data-background-color');
+    if (!backgroundColor || backgroundColor === "") {
+      backgroundColor = "";
+    }
+
+    // Got a custom link color
+    let linkColor = tonicDivs[i].getAttribute('data-link-color');
+    if (!linkColor || linkColor === "") {
+      linkColor = "";
+    }
+
     // Build the iframe, pass along configuration variables
     let iframe = document.createElement('iframe');
     iframe.src = networkUrl + "/" + loadState + "?" +
@@ -136,6 +151,8 @@ function iframeLoader() {
       "&width=" + displayWidth +
       "&height=" + displayHeight +
       "&image=" + imageUrl +
+      "&background_color=" + backgroundColor +
+      "&link_color=" + linkColor +
       "cache=" + Math.random();
     iframe.width = displayWidth;
     iframe.height = (parseInt(displayHeight) + footerLinkHeight);
@@ -180,7 +197,6 @@ function handCashLookup(handle) {
 
   // Did we already look this up?
   walletAddress = localStorage.getItem(handle);
-  console.log(walletAddress);
   if (walletAddress !== null && walletAddress.length >= 34 && walletAddress.startsWith('1')) {
     console.log("handcash found locally, skipping lookup! " + handle + ":" + walletAddress);
     return walletAddress;
@@ -193,7 +209,7 @@ function handCashLookup(handle) {
 
     // Setup the request
     let request = new XMLHttpRequest();
-    request.open('GET', 'https://api.handcash.io/api/receivingAddress/' + handle.substr(1), true);
+    request.open('GET', 'https://api.handcash.io/api/receivingAddress/' + handle.substr(1), false);
 
     // Onload
     request.onload = function () {
@@ -208,6 +224,10 @@ function handCashLookup(handle) {
           localStorage.setItem(handle, walletAddress);
           return walletAddress;
         }
+      } else if (request.status === 405) {
+        //todo: handle this better
+        console.log("method not allowed from handcash");
+        return "";
       } else {
         // We reached our target server, but it returned an error
         console.error(request);
