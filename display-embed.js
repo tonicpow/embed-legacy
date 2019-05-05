@@ -63,7 +63,7 @@ function iframeLoader() {
 
   // Get the affiliate and convert if needed ($handcash)
   let affiliate = params.get("affiliate");
-  affiliate = (affiliate.includes('$')) ? handCashLookup(affiliate) : affiliate;
+  affiliate = (affiliate !== null && affiliate.includes('$')) ? handCashLookup(affiliate) : affiliate;
   if (typeof affiliate === "undefined" || !affiliate || affiliate === "" || affiliate.length <= 25) {
     console.log("affiliate not found or invalid: " + affiliate + " using empty affiliate value");
     affiliate = "";
