@@ -1,6 +1,7 @@
 <img src="https://github.com/mrz1836/tonicpow-embed/blob/master/images/tonicpow-logo.png" height="100">
 
 ![last commit](https://img.shields.io/github/last-commit/mrz1836/tonicpow-embed.svg)
+![version](https://img.shields.io/github/release/mrz1836/tonicpow-embed.svg)
 ![license](https://img.shields.io/github/license/mrz1836/tonicpow-embed.svg?style=flat)
 [![standard-readme compliant](https://img.shields.io/badge/standard--readme-OK-green.svg?style=flat)](https://github.com/RichardLitt/standard-readme)
 [![app health](https://img.shields.io/website-up-down-green-red/https/faucet.allaboard.cash.svg?label=status)](https://tonicpow.com/?affiliate=$tonicpow)
@@ -27,7 +28,7 @@
 ```
 
 ## Documentation
-- Full documentation can be [found here](https://tonicpow.com/?affiliate=$tonicpow) and script generator.
+Full documentation can be [found here](https://tonicpow.com/?affiliate=$tonicpow) and script generator.
 
 |Attribute |Example |Description |
 |:---|:---|:---|
@@ -45,10 +46,10 @@
 - View the [live demos](https://tonicpow.com/?affiliate=$tonicpow)
 
 ## Code Standards
-- Always use the language's best practices
+- Always use the language's best practices!
 
 ## Usage
-- Setup your own embed using the [TonicPow](https://tonicpow.com/?affiliate=$tonicpow) generator script
+- Setup your own embed using the [TonicPow](https://tonicpow.com/?affiliate=$tonicpow) generator script or [above installation](https://github.com/mrz1836/tonicpow-embed#installation).
 
 ## Maintainers
 [Attila](https://github.com/attilaaf) - [Satchmo](https://github.com/rohenaz) - [MrZ](https://github.com/mrz1836)
