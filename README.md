@@ -41,6 +41,7 @@ Full documentation and a script generator can be [found here](https://tonicpow.c
 |data-image|https://...|Default image url if no ad is present|
 |data-bg-color|#000|Change the background color via CSS value (#FFF)|
 |data-link-color|#FFF|Change the link color via CSS value (#007bff)|
+|data-funding|true|Enable or disable funding campaigns|
 
 #### Handcash Support
 This embed script converts [$handcash](https://handcash.io/) handles to wallet addresses on-the-fly when loading.

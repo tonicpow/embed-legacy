@@ -177,6 +177,10 @@ function iframeLoader() {
     // Force currency to lowercase
     currency = currency.toLowerCase();
 
+    // Got a funding flag? (default is always on)
+    let funding = tonicDiv.getAttribute('data-funding');
+    funding = (funding === "false") ? "false" : "true";
+
     // Build the iframe, pass along configuration variables
     let iframe = document.createElement('iframe');
     iframe.src = networkUrl + "/" + loadState + "?" +
@@ -192,6 +196,7 @@ function iframeLoader() {
       "&image=" + imageUrl +
       "&background_color=" + backgroundColor +
       "&link_color=" + linkColor +
+      "&funding=" + funding +
       "cache=" + Math.random();
     iframe.width = displayWidth;
     iframe.height = (parseInt(displayHeight) + footerLinkHeight);
