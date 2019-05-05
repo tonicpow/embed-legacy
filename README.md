@@ -1,5 +1,4 @@
 <img src="https://github.com/mrz1836/tonicpow-embed/blob/master/images/tonicpow-logo.png" height="100">
-Our nifty embed script for serving ad units on your web application.
 
 ![last commit](https://img.shields.io/github/last-commit/mrz1836/tonicpow-embed.svg)
 ![license](https://img.shields.io/github/license/mrz1836/tonicpow-embed.svg?style=flat)
