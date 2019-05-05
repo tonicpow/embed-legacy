@@ -30,9 +30,12 @@
 ## Documentation
 Full documentation and a script generator can be [found here](https://tonicpow.com/?affiliate=$tonicpow).
 
+Required attributes are one of the following: `data-pubkey` or `data-handcash`
+
 |Attribute |Example |Description |
 |:---|:---|:---|
-|data-pubkey|$tonicpow|Your Bitcoin wallet pubkey address or a $handcash handle.|
+|data-pubkey|1BrwAE...|Your bitcoin wallet pubkey address.|
+|data-handcash|$tonicpow|Your $handcash handle. Used in place of data-pubkey. |
 |data-unit-id|embed-1|To show multiple units on one page, set each to a unique identifier of your choice.|
 |data-rate|546|Set the rate of sats per block. The default is 546.|
 |data-currency|bsv|Set the currency rate (bsv or usd)|
@@ -45,7 +48,7 @@ Full documentation and a script generator can be [found here](https://tonicpow.c
 
 #### Handcash Support
 This embed script converts [$handcash](https://handcash.io/) handles to wallet addresses on-the-fly when loading.
-You can supply a [$handcash](https://handcash.io/) handle via `data-pubkey` or wallet address.
+You can supply a [$handcash](https://handcash.io/) handle via `data-handcash` or wallet address via `data-pubkey`.
 
 #### Bitcoin Sticker Protocol Support
 Using the [bitcoin sticker protocol](https://sticker.planaria.network/), this embed forwards the address or transaction of 

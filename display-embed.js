@@ -109,6 +109,26 @@ function iframeLoader() {
     // Get the data-pubkey
     let dataPubKey = tonicDiv.getAttribute('data-pubkey');
 
+    // Do we have a handcash handle?
+    let dataHandCash = tonicDiv.getAttribute('data-handcash');
+    if (dataHandCash && dataHandCash.length > 0) {
+      let walletAddress = handCashLookup(dataHandCash);
+      if(walletAddress && walletAddress.length <= 25){
+        dataPubKey = walletAddress;
+      }
+    }
+
+    // Check pubkey (maybe set via handcash)
+    if (typeof dataPubKey === "undefined" || !dataPubKey || dataPubKey === "" || dataPubKey.length <= 25) {
+      if (stickerAddress) {
+        dataPubKey = stickerAddress;
+        console.log("data-pubkey not found or invalid: " + dataPubKey + " using sticker address: " + stickerAddress);
+      } else {
+        dataPubKey = defaultPubKey;
+        console.log("data-pubkey not found or invalid: " + dataPubKey + " using default address: " + defaultPubKey);
+      }
+    }
+
     // Convert data-pubkey if needed from $handcash
     dataPubKey = (dataPubKey.includes('$')) ? handCashLookup(dataPubKey) : dataPubKey;
     if (typeof dataPubKey === "undefined" || !dataPubKey || dataPubKey === "" || dataPubKey.length <= 25) {
