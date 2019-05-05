@@ -45,7 +45,7 @@ function iframeLoader() {
 
   //Set config
   const networkUrl = "https://app.tonicpow.com";              // Url for Tonic App
-  const footerLinkHeight = 22;                                // Size for the footer link area (px)
+  const footerLinkHeight = 28;                                // Size for the footer link area (px)
   const defaultHeight = 250;                                  // Height of the embed (px)
   const defaultWidth = 300;                                   // Width of the embed (px)
   const defaultRatePerBlock = 546;                            // Default rate of sats per block
