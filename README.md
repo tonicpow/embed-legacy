@@ -29,10 +29,16 @@
 ## Documentation
 - Full documentation can be [found here](https://tonicpow.com/?affiliate=$tonicpow) and script generator.
 
-|Attribute |Description   |
-|:---|:---|
-|data-pubkey|Your Bitcoin wallet address or a $handcash handle.|
-|data-unit-id|To show multiple units on one page, set each to a unique identifier of your choice.|
+|Attribute |Example |Description |
+|:---|:---|:---|
+|data-pubkey|$tonicpow|Your Bitcoin wallet address or a $handcash handle.|
+|data-unit-id|banner-1|To show multiple units on one page, set each to a unique identifier of your choice.|
+|data-rate|546|Set the rate of sats per block. The default is 546.|
+|data-width|300|Set a custom width. The default is 300px.|
+|data-height|250|Set a custom height. The default is 250px; There is an additional 22px footer.|
+|data-image|https://...|Default image url if no ad is present|
+|data-bg-color|#000|Change the background color via CSS value (#FFF)|
+|data-link-color|#FFF|Change the link color via CSS value (#007bff)|
 
 
 ## Examples
