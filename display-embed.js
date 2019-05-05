@@ -1,7 +1,12 @@
-// On complete / interactive or if DOM loaded
-if(document.readyState === "complete" || document.readyState === "interactive") {
+// On complete / interactive or if DOM loaded, start the loader
+if (document.readyState === "complete" || document.readyState === "interactive") {
+
+  // This loads if the <script> is dynamically injected into the page
   iframeLoader();
+
 } else {
+
+  // This loads if the <script> is hardcoded in the html page
   document.addEventListener("DOMContentLoaded", function () {
     iframeLoader();
   });
@@ -9,7 +14,7 @@ if(document.readyState === "complete" || document.readyState === "interactive") 
 
 // connectBitSocket()
 // Gets loaded in iframeLoader
-function connectBitSocket () {
+function connectBitSocket() {
   // Write a bit query
   const MAP_PREFIX = '1PuQa7K62MiKCtssSLKy1kh56WWU7MtUR5';
   let query = {
@@ -19,7 +24,7 @@ function connectBitSocket () {
         'out.s7': MAP_PREFIX,
         'out.s8': 'app',
         'out.s9': 'tonicpow'
-      } 
+      }
     }
   };
 
@@ -27,10 +32,10 @@ function connectBitSocket () {
   let b64 = btoa(JSON.stringify(query));
 
   // Subscribe
-  let bitSocket = new EventSource('https://babel.bitdb.network/s/1DHDifPvtPgKFPZMRSxmVHhiPvFmxZwbfh/'+b64);
+  let bitSocket = new EventSource('https://babel.bitdb.network/s/1DHDifPvtPgKFPZMRSxmVHhiPvFmxZwbfh/' + b64);
 
   // Event handler
-  bitSocket.onmessage = function(e) {
+  bitSocket.onmessage = function (e) {
     console.log(e.data)
   }
 }
@@ -90,17 +95,17 @@ function iframeLoader() {
       console.log("data-unit-id not found, using default: " + defaultUnitId);
       dataUnitId = defaultUnitId;
     }
-    
+
     // Get data-pubkey
     let dataPubKey = tonicDivs[i].getAttribute('data-pubkey');
     if (!dataPubKey || dataPubKey === "") {
       console.log("data-pubkey not found, using default: " + defaultPubKey);
       dataPubKey = defaultPubKey;
     }
-    
+
     // Convert pubkey if needed
     dataPubKey = (dataPubKey.includes('$')) ? handCashLookup(dataPubKey) : dataPubKey;
-    
+
     // Got a state to load by default
     let loadState = tonicDivs[i].getAttribute('data-state');
     if (!loadState || loadState === "") {
@@ -121,7 +126,7 @@ function iframeLoader() {
 
     // Build the iframe, pass along configuration variables
     let iframe = document.createElement('iframe');
-    iframe.src = networkUrl + "/"+loadState+"?" +
+    iframe.src = networkUrl + "/" + loadState + "?" +
       "unit_id=" + dataUnitId +
       "&pubkey=" + dataPubKey +
       "&affiliate=" + affiliate +
@@ -149,10 +154,10 @@ function iframeLoader() {
 
     // Name and border
     iframe.importance = "high";
-    iframe.name = "tonic_"+dataUnitId;
+    iframe.name = "tonic_" + dataUnitId;
     iframe.frameBorder = "0";
-    iframe.style.border="none";
-    iframe.style.overflow="hidden"; // (app should take care of this)
+    iframe.style.border = "none";
+    iframe.style.overflow = "hidden"; // (app should take care of this)
 
     // Replace the div for the iframe
     tonicDivs[i].parentNode.replaceChild(iframe, tonicDivs[i]);
@@ -161,6 +166,7 @@ function iframeLoader() {
 }
 
 // handCashLookup() - looks up a handle and returns an address
+// @param handle is the $handcash handle
 function handCashLookup(handle) {
 
   // Config
@@ -175,31 +181,31 @@ function handCashLookup(handle) {
   // Did we already look this up?
   walletAddress = localStorage.getItem(handle);
   console.log(walletAddress);
-  if  (walletAddress !== null && walletAddress.length >= 34 && walletAddress.startsWith('1')) {
+  if (walletAddress !== null && walletAddress.length >= 34 && walletAddress.startsWith('1')) {
     console.log("handcash found locally, skipping lookup! " + handle + ":" + walletAddress);
     return walletAddress;
   }
 
-  // lookup handcash
+  // Lookup handcash
   try {
 
-    console.log("fetching handcash handle: "+handle);
+    console.log("fetching handcash handle: " + handle);
 
     // Setup the request
     let request = new XMLHttpRequest();
     request.open('GET', 'https://api.handcash.io/api/receivingAddress/' + handle.substr(1), true);
 
     // Onload
-    request.onload = function() {
+    request.onload = function () {
       if (request.status >= 200 && request.status < 400) {
 
         // Success!
         let data = JSON.parse(request.responseText);
 
         // Got our bitcoin address?
-        if(data.hasOwnProperty('receivingAddress')){
+        if (data.hasOwnProperty('receivingAddress')) {
           walletAddress = data.receivingAddress;
-          localStorage.setItem(handle,walletAddress);
+          localStorage.setItem(handle, walletAddress);
           return walletAddress;
         }
       } else {
@@ -210,7 +216,7 @@ function handCashLookup(handle) {
     };
 
     // On error
-    request.onerror = function() {
+    request.onerror = function () {
       // There was a connection error of some sort
       console.error(request);
       return "";
