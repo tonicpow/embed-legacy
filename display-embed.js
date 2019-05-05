@@ -49,6 +49,8 @@ function iframeLoader() {
   const defaultHeight = 250;                                  // Height of the embed (px)
   const defaultWidth = 300;                                   // Width of the embed (px)
   const defaultRatePerBlock = 546;                            // Default rate of sats per block
+  const defaultCurrency = "bsv";                              // Default currency type (bsv, usd)
+  const acceptedCurrencies = ['bsv','usd'];                   // List of accepted currencies for conversions
   const defaultUnitId = "embed-1";                            // Default unit-id to use if not set
   const defaultPubKey = "1LWyDs4qzmfAhGpSZk1K1kLmNdafBDdJSD"; // Default pubkey to set if not found (donations!)
 
@@ -159,6 +161,22 @@ function iframeLoader() {
       linkColor = "";
     }
 
+    // Got a custom supported currency
+    let currency = tonicDiv.getAttribute('data-currency');
+    if (!currency || currency === "") {
+      currency = defaultCurrency;
+    } else {
+
+      // Not accepted at this time, switch back to default (user mistake?)
+      if (acceptedCurrencies.indexOf(currency) === -1) {
+        currency = defaultCurrency;
+        rate = defaultRatePerBlock;
+      }
+    }
+
+    // Force currency to lowercase
+    currency = currency.toLowerCase();
+
     // Build the iframe, pass along configuration variables
     let iframe = document.createElement('iframe');
     iframe.src = networkUrl + "/" + loadState + "?" +
@@ -168,6 +186,7 @@ function iframeLoader() {
       "&sticker_address=" + stickerAddress +
       "&sticker_tx=" + stickerTx +
       "&rate=" + rate +
+      "&currency=" + currency +
       "&width=" + displayWidth +
       "&height=" + displayHeight +
       "&image=" + imageUrl +

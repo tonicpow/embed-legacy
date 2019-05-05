@@ -35,6 +35,7 @@ Full documentation and a script generator can be [found here](https://tonicpow.c
 |data-pubkey|$tonicpow|Your Bitcoin wallet pubkey address or a $handcash handle.|
 |data-unit-id|embed-1|To show multiple units on one page, set each to a unique identifier of your choice.|
 |data-rate|546|Set the rate of sats per block. The default is 546.|
+|data-currency|bsv|Set the currency rate (bsv or usd)|
 |data-width|300|Set a custom width. The default is 300px.|
 |data-height|250|Set a custom height. The default is 250px; There is an additional 22px footer.|
 |data-image|https://...|Default image url if no ad is present|
