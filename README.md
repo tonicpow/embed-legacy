@@ -27,8 +27,13 @@
 ```
 
 ## Documentation
-- TODO: fill in the attribute spec @mrz
-- More information can be [found here](https://tonicpow.com/?affiliate=$tonicpow)
+- Full documentation can be [found here](https://tonicpow.com/?affiliate=$tonicpow) and script generator.
+
+|Attribute |Description   |
+|:---|:---|
+|data-pubkey|Your Bitcoin wallet address or a $handcash handle.|
+|data-unit-id|To show multiple units on one page, set each to a unique identifier of your choice.|
+
 
 ## Examples
 - View the [live demos](https://tonicpow.com/?affiliate=$tonicpow)
