@@ -82,71 +82,74 @@ function iframeLoader() {
   // Loop all ad divs that we found
   for (let i = tonicDivs.length - 1; i >= 0; i--) {
 
+    // Set the div
+    let tonicDiv = tonicDivs[i];
+
     // Got a custom width size?
-    let displayWidth = tonicDivs[i].getAttribute('data-width');
+    let displayWidth = tonicDiv.getAttribute('data-width');
     if (!displayWidth || displayWidth === "") {
       displayWidth = defaultWidth;
     }
 
     // Got a custom height size?
-    let displayHeight = tonicDivs[i].getAttribute('data-height');
+    let displayHeight = tonicDiv.getAttribute('data-height');
     if (!displayHeight || displayHeight === "") {
       displayHeight = defaultHeight;
     }
 
     // Get the data-unit-id
-    let dataUnitId = tonicDivs[i].getAttribute('data-unit-id');
+    let dataUnitId = tonicDiv.getAttribute('data-unit-id');
     if (!dataUnitId || dataUnitId === "") {
       console.log("data-unit-id not found, using default: " + defaultUnitId);
       dataUnitId = defaultUnitId;
     }
 
     // Get the data-pubkey
-    let dataPubKey = tonicDivs[i].getAttribute('data-pubkey');
+    let dataPubKey = tonicDiv.getAttribute('data-pubkey');
 
-    // Convert pubkey if needed from $handcash
+    // Convert data-pubkey if needed from $handcash
     dataPubKey = (dataPubKey.includes('$')) ? handCashLookup(dataPubKey) : dataPubKey;
     if (typeof dataPubKey === "undefined" || !dataPubKey || dataPubKey === "" || dataPubKey.length <= 25) {
       console.log("data-pubkey not found or invalid: " + dataPubKey + " using default pubkey: " + defaultPubKey);
       dataPubKey = defaultPubKey;
     }
 
-    // If we have an affiliate, let's store it
+    // If we have an affiliate, let's store it for the future
     let knownAffiliate = localStorage.getItem("affiliate_"+dataPubKey);
     if (knownAffiliate) {
       affiliate = knownAffiliate;
-      console.log("affiliate found in local storage");
+      console.log("affiliate found in local storage: " + affiliate);
     } else if (affiliate) {
       localStorage.setItem("affiliate_" + dataPubKey, affiliate);
-      console.log("saving affiliate in local storage");
+      console.log("saving affiliate in local storage: " + affiliate);
     }
 
     // Got a state to load by default
-    let loadState = tonicDivs[i].getAttribute('data-state');
+    let loadState = tonicDiv.getAttribute('data-state');
     if (!loadState || loadState === "") {
       loadState = "";
     }
 
     // Got a default rate?
-    let rate = tonicDivs[i].getAttribute('data-rate');
+    let rate = tonicDiv.getAttribute('data-rate');
     if (!rate || rate === "") {
       rate = defaultRatePerBlock;
     }
 
     // Got a default image url?
-    let imageUrl = tonicDivs[i].getAttribute('data-image');
+    let imageUrl = tonicDiv.getAttribute('data-image');
     if (!imageUrl || imageUrl === "") {
       imageUrl = "";
     }
 
     // Got a custom background color
-    let backgroundColor = tonicDivs[i].getAttribute('data-background-color');
+    let backgroundColor = tonicDiv.getAttribute('data-bg-color');
     if (!backgroundColor || backgroundColor === "") {
       backgroundColor = "";
     }
 
     // Got a custom link color
-    let linkColor = tonicDivs[i].getAttribute('data-link-color');
+    let linkColor = tonicDiv.getAttribute('data-link-color');
     if (!linkColor || linkColor === "") {
       linkColor = "";
     }
@@ -189,7 +192,7 @@ function iframeLoader() {
     iframe.style.overflow = "hidden"; // (app should take care of this)
 
     // Replace the div for the iframe
-    tonicDivs[i].parentNode.replaceChild(iframe, tonicDivs[i]);
+    tonicDiv.parentNode.replaceChild(iframe, tonicDiv);
     console.log("tonic campaign loaded - unit_id: " + dataUnitId);
   }
 }
