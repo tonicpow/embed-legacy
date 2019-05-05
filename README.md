@@ -57,7 +57,7 @@ The affiliate relationship is stored in local session for future visits.
 ## Examples
 
 #### Demo Ads
-View the [live demo ads](https://tonicpow.com/?affiliate=$tonicpow)
+View the [interactive live demo ads](https://tonicpow.com/?affiliate=$tonicpow) and [more examples here](https://github.com/mrz1836/tonicpow-embed/blob/master/example.html)
 
 #### Affiliate
 Replace `$your-handle` with your [$handcash](https://handcash.io/) handle and share!
