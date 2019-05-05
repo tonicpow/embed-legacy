@@ -50,7 +50,7 @@ function iframeLoader() {
   const defaultWidth = 300;                                   // Width of the embed (px)
   const defaultRatePerBlock = 546;                            // Default rate of sats per block
   const defaultUnitId = "embed-1";                            // Default unit-id to use if not set
-  const defaultPubKey = "1LWyDs4qzmfAhGpSZk1K1kLmNdafBDdJSD"; // Default pubkey to set if not found
+  const defaultPubKey = "1LWyDs4qzmfAhGpSZk1K1kLmNdafBDdJSD"; // Default pubkey to set if not found (donations!)
 
   // Get sticker address from parent page
   let stickerAddress = (document.head.querySelector("[name=bitcoin-address][content]")) ? document.head.querySelector("[name=bitcoin-address][content]").content : "";
