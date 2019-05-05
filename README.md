@@ -28,12 +28,7 @@
 ```
 
 ## Documentation
-Full documentation and script generator can be [found here](https://tonicpow.com/?affiliate=$tonicpow).
-
-This embed script converts [$handcash](https://handcash.io/) handles to wallet addresses on-the-fly when loading.
-You can supply a [$handcash](https://handcash.io/) handle via `data-pubkey`.
-
-This embed sends across data from using the [sticker protocol](https://sticker.planaria.network/)
+Full documentation and a script generator can be [found here](https://tonicpow.com/?affiliate=$tonicpow).
 
 |Attribute |Example |Description |
 |:---|:---|:---|
@@ -46,9 +41,29 @@ This embed sends across data from using the [sticker protocol](https://sticker.p
 |data-bg-color|#000|Change the background color via CSS value (#FFF)|
 |data-link-color|#FFF|Change the link color via CSS value (#007bff)|
 
+#### Handcash Support
+This embed script converts [$handcash](https://handcash.io/) handles to wallet addresses on-the-fly when loading.
+You can supply a [$handcash](https://handcash.io/) handle via `data-pubkey` or wallet address.
+
+#### Bitcoin Sticker Protocol Support
+Using the [bitcoin sticker protocol](https://sticker.planaria.network/), this embed forwards the address or transaction of 
+the current page for future use. (IE: tips, likes, etc) 
+
+#### Affiliates
+If you share any url and append `?affiliate=$your-handle` the embed will process your $handcash handle and store it associated to all ads on the page.
+The affiliate relationship is stored in local session for future visits. 
+
 
 ## Examples
-- View the [live demos](https://tonicpow.com/?affiliate=$tonicpow)
+
+#### Demo Ads
+View the [live demo ads](https://tonicpow.com/?affiliate=$tonicpow)
+
+#### Affiliate
+Replace `$your-handle` with your handle and share!
+```
+https://tonicpow.com/?affiliate=$your-handle
+```
 
 ## Code Standards
 - Always use the language's best practices!
