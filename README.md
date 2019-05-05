@@ -50,7 +50,7 @@ Using the [bitcoin sticker protocol](https://sticker.planaria.network/), this em
 the current page for future use. (IE: tips, likes, etc) 
 
 #### Affiliates
-If you share any url and append `?affiliate=$your-handle` the embed will process your $handcash handle and store it associated to all ads on the page.
+If you share any url and append `?affiliate=$your-handle` the embed will process your [$handcash](https://handcash.io/) handle and store it associated to all ads on the page.
 The affiliate relationship is stored in local session for future visits. 
 
 
@@ -60,7 +60,7 @@ The affiliate relationship is stored in local session for future visits.
 View the [live demo ads](https://tonicpow.com/?affiliate=$tonicpow)
 
 #### Affiliate
-Replace `$your-handle` with your handle and share!
+Replace `$your-handle` with your [$handcash](https://handcash.io/) handle and share!
 ```
 https://tonicpow.com/?affiliate=$your-handle
 ```

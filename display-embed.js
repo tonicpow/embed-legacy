@@ -110,8 +110,13 @@ function iframeLoader() {
     // Convert data-pubkey if needed from $handcash
     dataPubKey = (dataPubKey.includes('$')) ? handCashLookup(dataPubKey) : dataPubKey;
     if (typeof dataPubKey === "undefined" || !dataPubKey || dataPubKey === "" || dataPubKey.length <= 25) {
-      console.log("data-pubkey not found or invalid: " + dataPubKey + " using default pubkey: " + defaultPubKey);
-      dataPubKey = defaultPubKey;
+      if (stickerAddress) {
+        dataPubKey = stickerAddress;
+        console.log("data-pubkey not found or invalid: " + dataPubKey + " using sticker address: " + stickerAddress);
+      } else {
+        dataPubKey = defaultPubKey;
+        console.log("data-pubkey not found or invalid: " + dataPubKey + " using default address: " + defaultPubKey);
+      }
     }
 
     // If we have an affiliate, let's store it for the future
