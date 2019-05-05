@@ -7,10 +7,10 @@ if(document.readyState === "complete" || document.readyState === "interactive") 
   });
 }
 
-// connectBitsocket()
+// connectBitSocket()
 // Gets loaded in iframeLoader
-function connectBitsocket () {
-  // Write a bitquery
+function connectBitSocket () {
+  // Write a bit query
   const MAP_PREFIX = '1PuQa7K62MiKCtssSLKy1kh56WWU7MtUR5';
   let query = {
     "v": 3, "q": {
@@ -27,10 +27,10 @@ function connectBitsocket () {
   let b64 = btoa(JSON.stringify(query));
 
   // Subscribe
-  let bitsocket = new EventSource('https://babel.bitdb.network/s/1DHDifPvtPgKFPZMRSxmVHhiPvFmxZwbfh/'+b64);
+  let bitSocket = new EventSource('https://babel.bitdb.network/s/1DHDifPvtPgKFPZMRSxmVHhiPvFmxZwbfh/'+b64);
 
   // Event handler
-  bitsocket.onmessage = function(e) {
+  bitSocket.onmessage = function(e) {
     console.log(e.data)
   }
 }
@@ -56,6 +56,9 @@ function iframeLoader() {
   // Get query params from parent page / url
   let affiliate = getUrlParameter("affiliate");
 
+  // Convert affiliate if $handcash detected
+  affiliate = (affiliate.includes('$')) ? handCashLookup(affiliate) : affiliate;
+
   // Get all tonic divs
   let tonicDivs = document.getElementsByClassName("tonic");
   if (!tonicDivs || tonicDivs.length === 0) {
@@ -64,7 +67,7 @@ function iframeLoader() {
   }
 
   // Connect socket now that we have tonic divs
-  connectBitsocket();
+  connectBitSocket();
 
   // Loop all ad divs that we found
   for (let i = tonicDivs.length - 1; i >= 0; i--) {
@@ -94,6 +97,9 @@ function iframeLoader() {
       console.log("data-pubkey not found, using default: " + defaultPubKey);
       dataPubKey = defaultPubKey;
     }
+    
+    // Convert pubkey if needed
+    dataPubKey = (dataPubKey.includes('$')) ? handCashLookup(dataPubKey) : dataPubKey;
     
     // Got a state to load by default
     let loadState = tonicDivs[i].getAttribute('data-state');
@@ -151,6 +157,71 @@ function iframeLoader() {
     // Replace the div for the iframe
     tonicDivs[i].parentNode.replaceChild(iframe, tonicDivs[i]);
     console.log("tonic campaign loaded - unit_id: " + dataUnitId);
+  }
+}
+
+// handCashLookup() - looks up a handle and returns an address
+function handCashLookup(handle) {
+
+  // Config
+  let walletAddress = "";
+
+  // No handle or invalid
+  if (!handle || !handle.includes('$')) {
+    console.error("invalid handcash handle: " + handle);
+    return "";
+  }
+
+  // Did we already look this up?
+  walletAddress = localStorage.getItem(handle);
+  console.log(walletAddress);
+  if  (walletAddress !== null && walletAddress.length >= 34 && walletAddress.startsWith('1')) {
+    console.log("handcash found locally, skipping lookup! " + handle + ":" + walletAddress);
+    return walletAddress;
+  }
+
+  // lookup handcash
+  try {
+
+    console.log("fetching handcash handle: "+handle);
+
+    // Setup the request
+    let request = new XMLHttpRequest();
+    request.open('GET', 'https://api.handcash.io/api/receivingAddress/' + handle.substr(1), true);
+
+    // Onload
+    request.onload = function() {
+      if (request.status >= 200 && request.status < 400) {
+
+        // Success!
+        let data = JSON.parse(request.responseText);
+
+        // Got our bitcoin address?
+        if(data.hasOwnProperty('receivingAddress')){
+          walletAddress = data.receivingAddress;
+          localStorage.setItem(handle,walletAddress);
+          return walletAddress;
+        }
+      } else {
+        // We reached our target server, but it returned an error
+        console.error(request);
+        return "";
+      }
+    };
+
+    // On error
+    request.onerror = function() {
+      // There was a connection error of some sort
+      console.error(request);
+      return "";
+    };
+
+    // Send the GET request
+    request.send();
+
+  } catch (e) {
+    console.error('issue getting handcash handle', e);
+    return "";
   }
 }
 
