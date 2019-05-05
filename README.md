@@ -1,4 +1,6 @@
-[![TonicPow Embed](https://github.com/mrz1836/tonicpow-embed/blob/master/images/tonicpow-logo.png)]([Embed](https://tonicpow.com/?affiliate=$tonicpow)) 
+<img src="https://github.com/mrz1836/tonicpow-embed/blob/master/images/tonicpow-logo.png" height="100">
+
+![TonicPow Embed](https://github.com/mrz1836/tonicpow-embed/blob/master/images/tonicpow-logo.png){: style="height:150px;width:150px"} 
 Our nifty embed script for serving ad units on your web application.
 
 ![last commit](https://img.shields.io/github/last-commit/mrz1836/tonicpow-embed.svg)
