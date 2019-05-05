@@ -61,12 +61,14 @@ The affiliate relationship is stored in local session for future visits.
 View the [interactive live demo ads](https://tonicpow.com/?affiliate=$tonicpow) and [more examples here](https://github.com/tonicpow/embed/blob/master/example.html)
 
 #### Affiliate
-Replace `$your-handle` with your [$handcash](https://handcash.io/) handle and share!
+Replace `$your-handle` with your [$handcash](https://handcash.io/) handle or [bsv wallet address](https://en.bitcoin.it/wiki/Address) and share!
 Receive a payment if an Ad is placed using your affiliate link. Any website that uses [TonicPow](https://tonicpow.com/?affiliate=$tonicpow) supports the [$handcash](https://handcash.io/) affiliate functionality.
 ```
 https://tonicpow.com/?affiliate=$your-handle
 
 https://some-website.com/?affiliate=$your-handle
+
+https://some-website.com/?affiliate=1BrwAE2qg6qBaB2n...
 ```
 
 ## Code Standards
