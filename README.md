@@ -61,8 +61,11 @@ View the [interactive live demo ads](https://tonicpow.com/?affiliate=$tonicpow) 
 
 #### Affiliate
 Replace `$your-handle` with your [$handcash](https://handcash.io/) handle and share!
+Receive a payment if an Ad is placed using your affiliate link. Any website that uses [TonicPow](https://tonicpow.com/?affiliate=$tonicpow) supports the [$handcash](https://handcash.io/) affiliate functionality.
 ```
 https://tonicpow.com/?affiliate=$your-handle
+
+https://some-website.com/?affiliate=$your-handle
 ```
 
 ## Code Standards
