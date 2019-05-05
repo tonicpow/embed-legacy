@@ -44,7 +44,7 @@ Required attributes are one of the following: `data-pubkey` or `data-handcash`
 |data-image|https://...|Default image url if no ad is present|
 |data-bg-color|#000|Change the background color via CSS value (#FFF)|
 |data-link-color|#FFF|Change the link color via CSS value (#007bff)|
-|data-funding|false|Enable funding campaigns, default is false (off)|
+|data-funding|true|Toggle funding campaigns, default is true (on)|
 
 #### Handcash Support
 This embed script converts [$handcash](https://handcash.io/) handles to wallet addresses on-the-fly when loading.
