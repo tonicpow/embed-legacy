@@ -52,7 +52,8 @@ the current page for future use. (IE: tips, likes, etc)
 
 #### Affiliates
 If you share any url and append `?affiliate=$your-handle` the embed will process your [$handcash](https://handcash.io/) handle and store it associated to all ads on the page.
-The affiliate relationship is stored in local session for future visits. 
+If you don't have [$handcash](https://handcash.io/) you can provide your [bsv wallet address](https://en.bitcoin.it/wiki/Address)  `?affiliate=1BrwAE2qg6qBaB2n...`. 
+The affiliate/publisher relationship is stored in user's local session for future visits. 
 
 
 ## Examples
