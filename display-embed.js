@@ -58,10 +58,11 @@ function iframeLoader() {
   // Get sticker tx from parent page
   let stickerTx = (document.head.querySelector("[name=bitcoin-tx][content]")) ? document.head.querySelector("[name=bitcoin-tx][content]").content : "";
 
-  // Get query params from parent page / url
-  let affiliate = getUrlParameter("affiliate");
+  // Get the params
+  let params = new URLSearchParams(window.location.search);
 
-  // Convert affiliate if $handcash detected
+  // Get the affiliate and convert if needed ($handcash)
+  let affiliate = params.get("affiliate");
   affiliate = (affiliate.includes('$')) ? handCashLookup(affiliate) : affiliate;
   if (typeof affiliate === "undefined" || !affiliate || affiliate === "" || affiliate.length <= 25) {
     console.log("affiliate not found or invalid: " + affiliate + " using empty affiliate value");
@@ -250,14 +251,4 @@ function handCashLookup(handle) {
     console.error('issue getting handcash handle', e);
     return "";
   }
-}
-
-// Source: https://davidwalsh.name/query-string-javascript
-// getUrlParameter()
-// @param name is the name of the query parameter
-function getUrlParameter(name) {
-  name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
-  let regex = new RegExp('[\\?&]' + name + '=([^&#]*)');
-  let results = regex.exec(location.search);
-  return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
 }
