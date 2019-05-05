@@ -16,7 +16,15 @@
 - [License](https://github.com/mrz1836/tonicpow-embed#license)
 
 ## Installation
-- TODO: finish this! @mrz
+1. Add the script to your site.
+```html
+<script src="https://tonicpow.com/tonic.js"></script>
+```
+
+2. Add this tag wherever it will be displayed.
+```html
+<div class="tonic" data-pubkey="YOUR_PUBKEY"></div>
+```
 
 ## Documentation
 - TODO: fill in the attribute spec @mrz
