@@ -28,12 +28,17 @@
 ```
 
 ## Documentation
-Full documentation can be [found here](https://tonicpow.com/?affiliate=$tonicpow) and script generator.
+Full documentation and script generator can be [found here](https://tonicpow.com/?affiliate=$tonicpow).
+
+This embed script converts [$handcash](https://handcash.io/) handles to wallet addresses on-the-fly when loading.
+You can supply a [$handcash](https://handcash.io/) handle via `data-pubkey`.
+
+This embed sends across data from using the [sticker protocol](https://sticker.planaria.network/)
 
 |Attribute |Example |Description |
 |:---|:---|:---|
-|data-pubkey|$tonicpow|Your Bitcoin wallet address or a $handcash handle.|
-|data-unit-id|banner-1|To show multiple units on one page, set each to a unique identifier of your choice.|
+|data-pubkey|$tonicpow|Your Bitcoin wallet pubkey address or a $handcash handle.|
+|data-unit-id|embed-1|To show multiple units on one page, set each to a unique identifier of your choice.|
 |data-rate|546|Set the rate of sats per block. The default is 546.|
 |data-width|300|Set a custom width. The default is 300px.|
 |data-height|250|Set a custom height. The default is 250px; There is an additional 22px footer.|
