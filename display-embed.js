@@ -45,9 +45,9 @@ function iframeLoader() {
 
   //Set config
   const networkUrl = "https://app.tonicpow.com";              // Url for Tonic App
-  const footerLinkHeight = 22;                                // Size for the footer link area
-  const defaultHeight = 250;                                  // Height of the embed
-  const defaultWidth = 300;                                   // Width of the embed
+  const footerLinkHeight = 22;                                // Size for the footer link area (px)
+  const defaultHeight = 250;                                  // Height of the embed (px)
+  const defaultWidth = 300;                                   // Width of the embed (px)
   const defaultRatePerBlock = 546;                            // Default rate of sats per block
   const defaultUnitId = "embed-1";                            // Default unit-id to use if not set
   const defaultPubKey = "1LWyDs4qzmfAhGpSZk1K1kLmNdafBDdJSD"; // Default pubkey to set if not found
@@ -63,7 +63,8 @@ function iframeLoader() {
 
   // Convert affiliate if $handcash detected
   affiliate = (affiliate.includes('$')) ? handCashLookup(affiliate) : affiliate;
-  if (typeof affiliate === "undefined" || !affiliate || affiliate === "") {
+  if (typeof affiliate === "undefined" || !affiliate || affiliate === "" || affiliate.length <= 25) {
+    console.log("affiliate not found or invalid: " + affiliate + " using empty affiliate value");
     affiliate = "";
   }
 
@@ -104,8 +105,8 @@ function iframeLoader() {
 
     // Convert pubkey if needed from $handcash
     dataPubKey = (dataPubKey.includes('$')) ? handCashLookup(dataPubKey) : dataPubKey;
-    if (typeof dataPubKey === "undefined" || !dataPubKey || dataPubKey === "") {
-      console.log("data-pubkey not found, using default: " + defaultPubKey);
+    if (typeof dataPubKey === "undefined" || !dataPubKey || dataPubKey === "" || dataPubKey.length <= 25) {
+      console.log("data-pubkey not found or invalid: " + dataPubKey + " using default pubkey: " + defaultPubKey);
       dataPubKey = defaultPubKey;
     }
     
