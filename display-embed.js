@@ -171,6 +171,7 @@ function iframeLoader() {
       "cache=" + Math.random();
     iframe.width = displayWidth;
     iframe.height = (parseInt(displayHeight) + footerLinkHeight);
+    iframe.name = "tonic_" + dataUnitId;
 
     // Add the data to the iframe
     iframe.setAttribute("data-unit-id", dataUnitId);
@@ -186,7 +187,6 @@ function iframeLoader() {
 
     // Name and border
     iframe.importance = "high";
-    iframe.name = "tonic_" + dataUnitId;
     iframe.frameBorder = "0";
     iframe.style.border = "none";
     iframe.style.overflow = "hidden"; // (app should take care of this)
