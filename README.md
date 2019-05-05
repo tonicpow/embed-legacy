@@ -1,20 +1,20 @@
-<img src="https://github.com/mrz1836/tonicpow-embed/blob/master/images/tonicpow-logo.png" height="100">
+<img src="https://github.com/tonicpow/embed/blob/master/images/tonicpow-logo.png" height="100">
 
-![last commit](https://img.shields.io/github/last-commit/mrz1836/tonicpow-embed.svg)
-![version](https://img.shields.io/github/release/mrz1836/tonicpow-embed.svg)
-![license](https://img.shields.io/github/license/mrz1836/tonicpow-embed.svg?style=flat)
+![last commit](https://img.shields.io/github/last-commit/tonicpow/embed.svg)
+![version](https://img.shields.io/github/release/tonicpow/embed.svg)
+![license](https://img.shields.io/github/license/tonicpow/embed.svg?style=flat)
 [![standard-readme compliant](https://img.shields.io/badge/standard--readme-OK-green.svg?style=flat)](https://github.com/RichardLitt/standard-readme)
 [![app health](https://img.shields.io/website-up-down-green-red/https/faucet.allaboard.cash.svg?label=status)](https://tonicpow.com/?affiliate=$tonicpow)
 
 ## Table of Contents
-- [Installation](https://github.com/mrz1836/tonicpow-embed#installation)
-- [Documentation](https://github.com/mrz1836/tonicpow-embed#documentation)
-- [Examples](https://github.com/mrz1836/tonicpow-embed#examples)
-- [Code Standards](https://github.com/mrz1836/tonicpow-embed#code-standards)
-- [Usage](https://github.com/mrz1836/tonicpow-embed#usage)
-- [Maintainers](https://github.com/mrz1836/tonicpow-embed#maintainers)
-- [Contributing](https://github.com/mrz1836/tonicpow-embed#contributing)
-- [License](https://github.com/mrz1836/tonicpow-embed#license)
+- [Installation](https://github.com/tonicpow/embed#installation)
+- [Documentation](https://github.com/tonicpow/embed#documentation)
+- [Examples](https://github.com/tonicpow/embed#examples)
+- [Code Standards](https://github.com/tonicpow/embed#code-standards)
+- [Usage](https://github.com/tonicpow/embed#usage)
+- [Maintainers](https://github.com/tonicpow/embed#maintainers)
+- [Contributing](https://github.com/tonicpow/embed#contributing)
+- [License](https://github.com/tonicpow/embed#license)
 
 ## Installation
 1. Add the script to your site.
@@ -57,7 +57,7 @@ The affiliate relationship is stored in local session for future visits.
 ## Examples
 
 #### Demo Ads
-View the [interactive live demo ads](https://tonicpow.com/?affiliate=$tonicpow) and [more examples here](https://github.com/mrz1836/tonicpow-embed/blob/master/example.html)
+View the [interactive live demo ads](https://tonicpow.com/?affiliate=$tonicpow) and [more examples here](https://github.com/tonicpow/embed/blob/master/example.html)
 
 #### Affiliate
 Replace `$your-handle` with your [$handcash](https://handcash.io/) handle and share!
@@ -69,17 +69,17 @@ https://tonicpow.com/?affiliate=$your-handle
 - Always use the language's best practices!
 
 ## Usage
-- Setup your own embed using the [TonicPow](https://tonicpow.com/?affiliate=$tonicpow) generator script or [above installation](https://github.com/mrz1836/tonicpow-embed#installation).
+- Setup your own embed using the [TonicPow](https://tonicpow.com/?affiliate=$tonicpow) generator script or [above installation](https://github.com/tonicpow/embed#installation).
 
 ## Maintainers
-[Attila](https://github.com/attilaaf) - [Satchmo](https://github.com/rohenaz) - [MrZ](https://github.com/mrz1836)
+[Attila](https://github.com/attilaaf) - [Satchmo](https://github.com/rohenaz) - [MrZ](https://github.com/tonicpow)
 
 Support the development of this project and the [TonicPow](https://tonicpow.com/?affiliate=$tonicpow) team 🙏
 
 [![Donate](https://img.shields.io/badge/donate-bitcoin%20SV-brightgreen.svg)](https://tonicpow.com/?affiliate=$tonicpow)
 
 ## Contributing
-Feel free to dive in! [Open an issue](https://github.com/mrz1836/tonicpow-embed/issues/new) or submit PRs.
+Feel free to dive in! [Open an issue](https://github.com/tonicpow/embed/issues/new) or submit PRs.
 
 ## License
-![License](https://img.shields.io/github/license/mrz1836/tonicpow-embed.svg?style=flat)
+![License](https://img.shields.io/github/license/tonicpow/embed.svg?style=flat)
