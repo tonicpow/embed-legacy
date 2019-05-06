@@ -1,5 +1,7 @@
 <img src="https://github.com/tonicpow/embed/blob/master/images/tonicpow-logo.png" height="100">
 
+View a [Tonic in action](https://tonicpow.com/?affiliate=$tonicpow). Checkout the [Tonic protocol](https://github.com/tonicpow/embed/blob/master/PROTOCOL.md).
+
 ![last commit](https://img.shields.io/github/last-commit/tonicpow/embed.svg)
 ![version](https://img.shields.io/github/release/tonicpow/embed.svg)
 ![license](https://img.shields.io/github/license/tonicpow/embed.svg?style=flat)
