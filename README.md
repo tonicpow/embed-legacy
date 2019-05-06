@@ -32,6 +32,8 @@ View a [Tonic in action](https://tonicpow.com/?affiliate=$tonicpow). Checkout th
 ## Documentation
 Full documentation and a script generator can be [found here](https://tonicpow.com/?affiliate=$tonicpow).
 
+This embed works in relation to the [Tonic protocol](https://github.com/tonicpow/embed/blob/master/PROTOCOL.md).
+
 Required attributes are one of the following: `data-pubkey` or `data-handcash`
 
 |Attribute |Example |Supported |Description |
