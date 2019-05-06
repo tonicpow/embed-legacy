@@ -42,6 +42,7 @@ Required attributes are one of the following: `data-pubkey` or `data-handcash`
 |data-currency|bsv|_No_|Set the currency rate (bsv or usd)|
 |data-width|300|_No_|Set a custom width. The default is 300px.|
 |data-height|250|_No_|Set a custom height. The default is 250px; There is an additional 22px footer.|
+|data-state|create|**Yes**|Used to load custom tonic state|
 |data-image|https://...|_No_|Default image url if no ad is present|
 |data-bg-color|#000|_No_|Change the background color via CSS value (#FFF)|
 |data-link-color|#FFF|_No_|Change the link color via CSS value (#007bff)|
