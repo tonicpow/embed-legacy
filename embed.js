@@ -224,13 +224,13 @@ function iframeLoader() {
     // iframe.allowfullscreen = true;
     // iframe.allowpaymentrequest = true;
     // iframe.referrerpolicy = "unsafe-url";
-    // iframe.scrolling = "no"; (this stops scrolling as well
-
+    
     // Name and border
     iframe.importance = "high";
     iframe.frameBorder = "0";
     iframe.style.border = "none";
     iframe.style.overflow = "hidden"; // (app should take care of this)
+    iframe.scrolling = "no"; // (this stops scrolling as well
 
     // Replace the div for the iframe
     tonicDiv.parentNode.replaceChild(iframe, tonicDiv);
