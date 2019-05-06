@@ -88,8 +88,6 @@ https://some-website.com/?affiliate=1BrwAE2qg6qBaB2n...
 
 Support the development of this project and the [TonicPow](https://tonicpow.com/?affiliate=$tonicpow) team 🙏
 
-[![Donate](https://img.shields.io/badge/donate-bitcoin%20SV-brightgreen.svg)](https://tonicpow.com/?affiliate=$tonicpow)
-
 ## Contributing
 Feel free to dive in! [Open an issue](https://github.com/tonicpow/embed/issues/new) or submit PRs.
 
