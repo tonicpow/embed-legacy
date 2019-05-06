@@ -114,7 +114,7 @@ function iframeLoader() {
     let dataHandCash = tonicDiv.getAttribute('data-handcash');
     if (dataHandCash && dataHandCash.length > 0) {
       let walletAddress = handCashLookup(dataHandCash);
-      if(walletAddress && walletAddress.length <= 25){
+      if(walletAddress && walletAddress.length >= 25){
         dataPubKey = walletAddress;
       }
     }
