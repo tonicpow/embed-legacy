@@ -119,6 +119,8 @@ function iframeLoader() {
       }
     }
 
+    //todo: check for RelayX 1handle - support unavailable at this time @mrz
+
     // Check pubkey (maybe set via handcash)
     if (typeof dataPubKey === "undefined" || !dataPubKey || dataPubKey === "" || dataPubKey.length <= 25) {
       if (stickerAddress) {
@@ -129,18 +131,6 @@ function iframeLoader() {
         console.log("data-pubkey not found or invalid: " + dataPubKey + " using default address: " + defaultPubKey);
       }
     }
-
-    // Convert data-pubkey if needed from $handcash
-    /*dataPubKey = (dataPubKey.includes('$')) ? handCashLookup(dataPubKey) : dataPubKey;
-    if (typeof dataPubKey === "undefined" || !dataPubKey || dataPubKey === "" || dataPubKey.length <= 25) {
-      if (stickerAddress) {
-        dataPubKey = stickerAddress;
-        console.log("data-pubkey not found or invalid: " + dataPubKey + " using sticker address: " + stickerAddress);
-      } else {
-        dataPubKey = defaultPubKey;
-        console.log("data-pubkey not found or invalid: " + dataPubKey + " using default address: " + defaultPubKey);
-      }
-    }*/
 
     // If we have an affiliate, let's store it for the future
     let knownAffiliate = localStorage.getItem("affiliate_"+dataPubKey);

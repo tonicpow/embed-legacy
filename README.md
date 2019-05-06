@@ -32,19 +32,20 @@ Full documentation and a script generator can be [found here](https://tonicpow.c
 
 Required attributes are one of the following: `data-pubkey` or `data-handcash`
 
-|Attribute |Example |Description |
-|:---|:---|:---|
-|data-pubkey|1BrwAE...|Your bitcoin wallet pubkey address.|
-|data-handcash|$tonicpow|Your $handcash handle. Used in place of data-pubkey. |
-|data-unit-id|embed-1|To show multiple units on one page, set each to a unique identifier of your choice.|
-|data-rate|546|Set the rate of sats per block. The default is 546.|
-|data-currency|bsv|Set the currency rate (bsv or usd)|
-|data-width|300|Set a custom width. The default is 300px.|
-|data-height|250|Set a custom height. The default is 250px; There is an additional 22px footer.|
-|data-image|https://...|Default image url if no ad is present|
-|data-bg-color|#000|Change the background color via CSS value (#FFF)|
-|data-link-color|#FFF|Change the link color via CSS value (#007bff)|
-|data-funding|true|Toggle funding campaigns, default is true (on)|
+|Attribute |Example |Supported |Description |
+|:---|:---|:---|:---|
+|data-pubkey|1BrwAE...|Yes|Your bitcoin wallet pubkey address.|
+|data-handcash|$tonicpow|Yes|Your $handcash handle. Used in place of data-pubkey. |
+|data-relayx|1tonicpow|No|Your RelayX 1handle. Used in place of data-pubkey. |
+|data-unit-id|embed-1|Yes|To show multiple units on one page, set each to a unique identifier of your choice.|
+|data-rate|546|Yes|Set the rate of sats per block. The default is 546.|
+|data-currency|bsv|No|Set the currency rate (bsv or usd)|
+|data-width|300|No|Set a custom width. The default is 300px.|
+|data-height|250|No|Set a custom height. The default is 250px; There is an additional 22px footer.|
+|data-image|https://...|No|Default image url if no ad is present|
+|data-bg-color|#000|No|Change the background color via CSS value (#FFF)|
+|data-link-color|#FFF|No|Change the link color via CSS value (#007bff)|
+|data-funding|true|No|Toggle funding campaigns, default is true (on)|
 
 #### Handcash Support
 This embed script converts [$handcash](https://handcash.io/) handles to wallet addresses on-the-fly when loading.
