@@ -80,7 +80,7 @@ function iframeLoader() {
   }
 
   // Connect socket now that we have tonic divs
-  connectBitSocket();
+  //connectBitSocket(); //todo: turned off for now - use one socket and push data to tonics
 
   // Loop all ad divs that we found
   for (let i = tonicDivs.length - 1; i >= 0; i--) {
