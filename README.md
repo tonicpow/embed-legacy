@@ -29,15 +29,15 @@ View a [Tonic in action](https://tonicpow.com/?affiliate=$tonicpow). Checkout th
 <div class="tonic" data-pubkey="YOUR_PUBKEY"></div>
 ```
 
-_(Optional)_ Use your $handcash handle in place of your wallet address
+_(Optional)_ Use your [$handcash](https://handcash.io/) handle in place of your wallet address
 ```html
 <div class="tonic" data-handcash="$your-handle"></div>
 ```
 
 ## Documentation
-Full documentation and a script generator can be [found here](https://tonicpow.com/?affiliate=$tonicpow).
+Checkout our nifty [Tonic generator](https://tonicpow.com/?affiliate=$tonicpow).
 
-This embed works in relation to the [Tonic protocol](https://github.com/tonicpow/embed/blob/master/PROTOCOL.md).
+This Tonic embed works in relation to the [Tonic protocol](https://github.com/tonicpow/embed/blob/master/PROTOCOL.md).
 
 Required attributes are one of the following: `data-pubkey` or `data-handcash`
 
@@ -58,7 +58,7 @@ Required attributes are one of the following: `data-pubkey` or `data-handcash`
 |data-funding|true|_No_|Toggle funding campaigns, default is true (on)|
 
 #### Handcash Support
-This embed script converts [$handcash](https://handcash.io/) handles to wallet addresses on-the-fly when loading.
+This Tonic embed script converts [$handcash](https://handcash.io/) handles to wallet addresses on-the-fly when loading.
 You can supply a [$handcash](https://handcash.io/) handle via `data-handcash` or wallet address via `data-pubkey`.
 
 #### Bitcoin Sticker Protocol Support
@@ -73,12 +73,12 @@ The affiliate/publisher relationship is stored in user's local session for futur
 
 ## Examples
 
-#### Demo Ads
+#### Demo Tonics
 View the [interactive live demo ads](https://tonicpow.com/?affiliate=$tonicpow) and [more examples here](https://github.com/tonicpow/embed/blob/master/example.html)
 
 #### Affiliate
 Replace `$your-handle` with your [$handcash](https://handcash.io/) handle or [bsv wallet address](https://en.bitcoin.it/wiki/Address) and share!
-Receive a payment if an Ad is placed using your affiliate link. Any website that uses [TonicPow](https://tonicpow.com/?affiliate=$tonicpow) supports the [$handcash](https://handcash.io/) affiliate functionality.
+Receive a payment if an Ad is purchased using your affiliate link. Any website that uses [TonicPow](https://tonicpow.com/?affiliate=$tonicpow) supports the [$handcash](https://handcash.io/) affiliate functionality.
 ```
 https://tonicpow.com/?affiliate=$your-handle
 
@@ -91,10 +91,10 @@ https://some-website.com/?affiliate=1BrwAE2qg6qBaB2n...
 - Always use the language's best practices!
 
 ## Usage
-- Setup your own embed using the [TonicPow](https://tonicpow.com/?affiliate=$tonicpow) generator script or [above installation](https://github.com/tonicpow/embed#installation).
+- Setup your own Tonic using the [Tonic generator](https://tonicpow.com/?affiliate=$tonicpow) or [above installation](https://github.com/tonicpow/embed#installation).
 
 ## Maintainers
-[Attila](https://github.com/attilaaf) - [Satchmo](https://github.com/rohenaz) - [MrZ](https://github.com/tonicpow)
+[Attila](https://github.com/attilaaf?affiliate=$attila) - [Satchmo](https://github.com/rohenaz?affiliate=$satchmo) - [MrZ](https://github.com/mrz1836?affiliate=$mr-z)
 
 Support the development of this project and the [TonicPow](https://tonicpow.com/?affiliate=$tonicpow) team 🙏
 
