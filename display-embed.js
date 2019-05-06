@@ -130,7 +130,7 @@ function iframeLoader() {
     }
 
     // Convert data-pubkey if needed from $handcash
-    dataPubKey = (dataPubKey.includes('$')) ? handCashLookup(dataPubKey) : dataPubKey;
+    /*dataPubKey = (dataPubKey.includes('$')) ? handCashLookup(dataPubKey) : dataPubKey;
     if (typeof dataPubKey === "undefined" || !dataPubKey || dataPubKey === "" || dataPubKey.length <= 25) {
       if (stickerAddress) {
         dataPubKey = stickerAddress;
@@ -139,16 +139,16 @@ function iframeLoader() {
         dataPubKey = defaultPubKey;
         console.log("data-pubkey not found or invalid: " + dataPubKey + " using default address: " + defaultPubKey);
       }
-    }
+    }*/
 
     // If we have an affiliate, let's store it for the future
     let knownAffiliate = localStorage.getItem("affiliate_"+dataPubKey);
     if (knownAffiliate) {
       affiliate = knownAffiliate;
-      console.log("affiliate found in local storage: " + affiliate);
+      console.log("affiliate found in local storage: hi " + affiliate + "!");
     } else if (affiliate) {
       localStorage.setItem("affiliate_" + dataPubKey, affiliate);
-      console.log("saving affiliate in local storage: " + affiliate);
+      console.log("saving affiliate in local storage: hi " + affiliate + "!");
     }
 
     // Got a state to load by default
