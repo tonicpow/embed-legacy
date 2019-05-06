@@ -24,9 +24,14 @@ View a [Tonic in action](https://tonicpow.com/?affiliate=$tonicpow). Checkout th
 <script src="https://tonicpow.com/tonic.js"></script>
 ```
 
-2. Add this tag wherever it will be displayed.
+2. Replace `data-pubkey` with your BSV address and place the tag wherever it will be displayed.
 ```html
 <div class="tonic" data-pubkey="YOUR_PUBKEY"></div>
+```
+
+_(Optional)_ Use your $handcash handle in place of your wallet address
+```html
+<div class="tonic" data-handcash="$your-handle"></div>
 ```
 
 ## Documentation
