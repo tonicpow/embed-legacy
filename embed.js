@@ -219,7 +219,7 @@ function iframeLoader() {
       "&background_color=" + backgroundColor +
       "&link_color=" + linkColor +
       "&funding=" + funding +
-      "cache=" + Math.random();
+      "&cache=" + Math.random();
     iframe.width = displayWidth;
     iframe.height = (parseInt(displayHeight) + footerLinkHeight);
     iframe.name = "tonic_" + dataUnitId;
