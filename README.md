@@ -3,7 +3,7 @@
 View a [Tonic in action](https://tonicpow.com/?affiliate=$tonicpow). Checkout the [Tonic protocol](https://github.com/tonicpow/embed/blob/master/PROTOCOL.md).
 
 ![last commit](https://img.shields.io/github/last-commit/tonicpow/embed.svg)
-![version](https://img.shields.io/github/release/tonicpow/embed.svg)
+![version](https://img.shields.io/github/release-pre/tonicpow/embed.svg)
 ![license](https://img.shields.io/github/license/tonicpow/embed.svg?style=flat)
 [![standard-readme compliant](https://img.shields.io/badge/standard--readme-OK-green.svg?style=flat)](https://github.com/RichardLitt/standard-readme)
 [![app health](https://img.shields.io/website-up-down-green-red/https/faucet.allaboard.cash.svg?label=status)](https://tonicpow.com/?affiliate=$tonicpow)
