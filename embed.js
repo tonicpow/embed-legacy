@@ -16,12 +16,13 @@ if (document.readyState === "complete" || document.readyState === "interactive")
 // Gets loaded in iframeLoader
 function connectBitSocket() {
   // Write a bit query
-  const MAP_PREFIX = '1PuQa7K62MiKCtssSLKy1kh56WWU7MtUR5';
+  const mapPrefix = '1PuQa7K62MiKCtssSLKy1kh56WWU7MtUR5';
+  
   let query = {
     "v": 3, "q": {
       "find": {
         // ToDo - Find MAP SET 'app' 'tonicpow'
-        'out.s7': MAP_PREFIX,
+        'out.s7': mapPrefix,
         'out.s8': 'app',
         'out.s9': 'tonicpow'
       }
@@ -162,6 +163,7 @@ function iframeLoader() {
     if (!rate || rate === "") {
       rate = defaultRatePerBlock;
     }
+    
 
     // Got a default image url?
     let imageUrl = tonicDiv.getAttribute('data-image');
