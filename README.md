@@ -27,6 +27,12 @@
 <div class="tonic" data-pubkey="YOUR_PUBKEY"></div>
 ```
 
+## Building
+```
+npm install
+npm run build
+```
+
 ## Documentation
 Full documentation and a script generator can be [found here](https://tonicpow.com/?affiliate=$tonicpow).
 
