@@ -61,7 +61,7 @@ TonicPow.processTonics = (tonics) => {
 }
 
 // iframeLoader() - replaces each tonic div with a corresponding iframe
-TonicPow.iframeLoader = () => {
+TonicPow.iframeLoader = async () => {
   // Set config
   const networkUrl = 'http://localhost:3000' // 'https://app.tonicpow.com' // Url for Tonic App
   const footerLinkHeight = 28 // Size for the footer link area (px)
@@ -85,7 +85,7 @@ TonicPow.iframeLoader = () => {
   // Get the affiliate and convert if needed ($handcash)
   let affiliate = params.get('affiliate')
   if (affiliate) {
-    affiliate = (affiliate !== null && affiliate.includes('$')) ? Handcash.lookup(affiliate) : affiliate
+    affiliate = (affiliate !== null && affiliate.includes('$')) ? await Handcash.lookup(affiliate) : affiliate
 
     if (typeof affiliate === 'undefined' || !affiliate || affiliate === '' || affiliate.length <= 25) {
       // console.log('affiliate not found or invalid: " + affiliate + " using empty affiliate value')
@@ -128,7 +128,7 @@ TonicPow.iframeLoader = () => {
     let dataPubKey = tonicDiv.getAttribute('data-pubkey')
 
     // Convert data-pubkey if needed from $handcash
-    dataPubKey = (dataPubKey && dataPubKey.includes('$')) ? Handcash.lookup(dataPubKey) : dataPubKey
+    dataPubKey = (dataPubKey && dataPubKey.includes('$')) ? await Handcash.lookup(dataPubKey) : dataPubKey
     if (typeof dataPubKey === 'undefined' || !dataPubKey || dataPubKey === '' || dataPubKey.length <= 25) {
       if (stickerAddress) {
         dataPubKey = stickerAddress
@@ -220,9 +220,6 @@ TonicPow.iframeLoader = () => {
     iframe.setAttribute('data-affiliate', affiliate)
     iframe.setAttribute('data-sticker-address', stickerAddress)
 
-    // Add to iframe map
-    TonicPow.Iframes.set(dataUnitId, dataPubKey)
-
     // Extra attributes
     // iframe.allowfullscreen = true;
     // iframe.allowpaymentrequest = true;
@@ -235,10 +232,14 @@ TonicPow.iframeLoader = () => {
     iframe.style.border = 'none'
     iframe.style.overflow = 'hidden' // (app should take care of this)
 
+
+    // Add to iframe map
+    TonicPow.Iframes.set(dataUnitId, dataPubKey)
+
     // Replace the div for the iframe
     tonicDiv.parentNode.replaceChild(iframe, tonicDiv)
   }
-  // console.log('Tonic Map:', TonicPow.Iframes)
+  console.log('Tonic Map:', TonicPow.Iframes)
 }
 
 window.TonicPow = TonicPow
