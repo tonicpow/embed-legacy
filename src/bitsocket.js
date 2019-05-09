@@ -14,20 +14,29 @@ const query = {
 // base64 encoded query
 const b64 = btoa(JSON.stringify(query))
 
-BitSocket.connect = () => {
+BitSocket.socket = null
+BitSocket.callback = null
+
+BitSocket.connect = (cb) => {
+  BitSocket.callback = cb
+  console.log('connect with callback', BitSocket.callback)
   // Subscribe
-  let bitsocket = new EventSource('https://genesis.bitdb.network/s/1FnauZ9aUH2Bex6JzdcV4eNX7oLSSEbxtN/' + b64)
+  BitSocket.socket = new EventSource('https://genesis.bitdb.network/s/1FnauZ9aUH2Bex6JzdcV4eNX7oLSSEbxtN/' + b64)
 
   // Event handler
-  bitsocket.onmessage = async (e) => {
+  BitSocket.socket.onmessage = (e) => {
     let data = JSON.parse(e.data || {}).data || []
     let type = JSON.parse(e.data || {}).type || ''
     console.log('message type', type)
     if (data) {
       switch (type) {
+        case 'open':
+          BitSocket.callback(type, data)
+          break
         case 'u':
           if (!data.length) { return }
-          BitSocket.onmessage(data)
+          console.log('data', data)
+          BitSocket.callback(type, data)
           break
         case 'block':
           conole.log('NEW BLOCK. Update ad if current schedule expired.', data)
@@ -37,6 +46,12 @@ BitSocket.connect = () => {
       }
     }
   }
+
+  BitSocket.socket.onerror = (e) => {
+    return BitSocket.callback('error', e)
+  }  
 }
+
+
 
 export default BitSocket

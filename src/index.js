@@ -14,28 +14,50 @@ if (document.readyState === 'complete' || document.readyState === 'interactive')
     iframeLoader()
 
     // Connect socket now that we have tonic divs
-    BitSocket.connect()
-    BitSocket.onmessage = async (data) => {
-      let tonics = await this.processTonics(data)
+    BitSocket.connect((type, data) => {
+      if (type === 'error') {
+        console.error(data)
+        return
+      }
+
+      if (type === 'open') {
+        return
+      }
+
+      // Tonic Tx
+      let tonics = processTonics(data)
       if (tonics.length > 0 && tonics[0].hasOwnProperty('tx')) {
-        tonic = tonics[0]
+        let tonic = tonics[0]
         if (tonicIframes.get(tonic.MAP.ad_unit_id) === tonic.MAP.site_pub_key) {
           // There is a tonic on this page that wants this message
-          let iframe = document.getElementById('iframe_' + tonic.MAP.ad_unit_id)
+          let iframe = document.getElementById('tonic_' + tonic.MAP.ad_unit_id)
           if (iframe) {
             // Post tonic to iframe
             iframe.contentWindow.postMessage({ tonics: JSON.stringify(tonics) }, 'http://localhost:3000')
           }
         }
       }
-    }
+    })
   })
+}
+
+// takes an array of transactions
+function processTonics (tonics) {
+  let newTonics = []
+  for (let tonic of tonics) {
+    // If its in the blacklist, continue
+    // if (this.blacklist.indexOf(tonic.tx.h) !== -1) { continue }
+    let tonicObj = new Tonic(bmap.TransformTxs(tonic))
+    // we always run this to get .html on there
+    newTonics.push(tonicObj)
+  }
+  return newTonics
 }
 
 // iframeLoader() - replaces each tonic div with a corresponding iframe
 function iframeLoader () {
   // Set config
-  const networkUrl = 'https://app.tonicpow.com' // Url for Tonic App
+  const networkUrl = 'http://localhost:3000' // 'https://app.tonicpow.com' // Url for Tonic App
   const footerLinkHeight = 28 // Size for the footer link area (px)
   const defaultHeight = 250 // Height of the embed (px)
   const defaultWidth = 300 // Width of the embed (px)
@@ -56,17 +78,19 @@ function iframeLoader () {
 
   // Get the affiliate and convert if needed ($handcash)
   let affiliate = params.get('affiliate')
-  affiliate = (affiliate !== null && affiliate.includes('$')) ? Handcash.lookup(affiliate) : affiliate
+  if (affiliate) {
+    affiliate = (affiliate !== null && affiliate.includes('$')) ? Handcash.lookup(affiliate) : affiliate
 
-  if (typeof affiliate === 'undefined' || !affiliate || affiliate === '' || affiliate.length <= 25) {
-    console.log('affiliate not found or invalid: " + affiliate + " using empty affiliate value')
-    affiliate = ''
+    if (typeof affiliate === 'undefined' || !affiliate || affiliate === '' || affiliate.length <= 25) {
+      // console.log('affiliate not found or invalid: " + affiliate + " using empty affiliate value')
+      affiliate = ''
+    }  
   }
-
+  
   // Get all tonic divs
   let tonicDivs = document.getElementsByClassName('tonic')
   if (!tonicDivs || tonicDivs.length === 0) {
-    console.error('no tonic divs found with class tonic')
+    console.info('no tonic divs found with class \'tonic\'')
     return // No need to go further
   }
 
@@ -98,7 +122,7 @@ function iframeLoader () {
     let dataPubKey = tonicDiv.getAttribute('data-pubkey')
 
     // Convert data-pubkey if needed from $handcash
-    dataPubKey = (dataPubKey.includes('$')) ? Handcash.lookup(dataPubKey) : dataPubKey
+    dataPubKey = (dataPubKey && dataPubKey.includes('$')) ? Handcash.lookup(dataPubKey) : dataPubKey
     if (typeof dataPubKey === 'undefined' || !dataPubKey || dataPubKey === '' || dataPubKey.length <= 25) {
       if (stickerAddress) {
         dataPubKey = stickerAddress
@@ -113,10 +137,10 @@ function iframeLoader () {
     let knownAffiliate = localStorage.getItem('affiliate_' + dataPubKey)
     if (knownAffiliate) {
       affiliate = knownAffiliate
-      console.log('affiliate found in local storage: ' + affiliate)
+      // console.log('affiliate found in local storage: ' + affiliate)
     } else if (affiliate) {
       localStorage.setItem('affiliate_' + dataPubKey, affiliate)
-      console.log('saving affiliate in local storage: ' + affiliate)
+      // console.log('saving affiliate in local storage: ' + affiliate)
     }
 
     // Got a state to load by default
@@ -182,7 +206,7 @@ function iframeLoader () {
       'cache=' + Math.random()
     iframe.width = displayWidth
     iframe.height = (parseInt(displayHeight) + footerLinkHeight)
-    iframe.name = 'tonic_' + dataUnitId
+    iframe.id = 'tonic_' + dataUnitId
 
     // Add the data to the iframe
     iframe.setAttribute('data-unit-id', dataUnitId)
@@ -208,5 +232,5 @@ function iframeLoader () {
     // Replace the div for the iframe
     tonicDiv.parentNode.replaceChild(iframe, tonicDiv)
   }
-  console.log('Tonic Map:', tonicIframes)
+  // console.log('Tonic Map:', tonicIframes)
 }
