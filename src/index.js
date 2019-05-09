@@ -2,16 +2,22 @@ import Tonic from './tonic.js'
 import bmap from './bmap.js'
 import BitSocket from './BitSocket.js'
 import Handcash from './handcash.js'
-let tonicIframes = new Map()
+
+let TonicPow = {}
+TonicPow.Handcash = Handcash
+TonicPow.bmap = bmap
+TonicPow.BitSocket = BitSocket
+
+TonicPow.Iframes = new Map()
 
 // On complete / interactive or if DOM loaded, start the loader
 if (document.readyState === 'complete' || document.readyState === 'interactive') {
   // This loads if the <script> is dynamically injected into the page
-  iframeLoader()
+  TonicPow.iframeLoader()
 } else {
   // This loads if the <script> is hardcoded in the html page
   document.addEventListener('DOMContentLoaded', function () {
-    iframeLoader()
+    TonicPow.iframeLoader()
 
     // Connect socket now that we have tonic divs
     BitSocket.connect((type, data) => {
@@ -25,10 +31,10 @@ if (document.readyState === 'complete' || document.readyState === 'interactive')
       }
 
       // Tonic Tx
-      let tonics = processTonics(data)
+      let tonics = TonicPow.processTonics(data)
       if (tonics.length > 0 && tonics[0].hasOwnProperty('tx')) {
         let tonic = tonics[0]
-        if (tonicIframes.get(tonic.MAP.ad_unit_id) === tonic.MAP.site_pub_key) {
+        if (TonicPow.Iframes.get(tonic.MAP.ad_unit_id) === tonic.MAP.site_pub_key) {
           // There is a tonic on this page that wants this message
           let iframe = document.getElementById('tonic_' + tonic.MAP.ad_unit_id)
           if (iframe) {
@@ -42,7 +48,7 @@ if (document.readyState === 'complete' || document.readyState === 'interactive')
 }
 
 // takes an array of transactions
-function processTonics (tonics) {
+TonicPow.processTonics = (tonics) => {
   let newTonics = []
   for (let tonic of tonics) {
     // If its in the blacklist, continue
@@ -55,7 +61,7 @@ function processTonics (tonics) {
 }
 
 // iframeLoader() - replaces each tonic div with a corresponding iframe
-function iframeLoader () {
+TomnicPow.iframeLoader = () => {
   // Set config
   const networkUrl = 'http://localhost:3000' // 'https://app.tonicpow.com' // Url for Tonic App
   const footerLinkHeight = 28 // Size for the footer link area (px)
@@ -215,7 +221,7 @@ function iframeLoader () {
     iframe.setAttribute('data-sticker-address', stickerAddress)
 
     // Add to iframe map
-    tonicIframes.set(dataUnitId, dataPubKey)
+    TonicPow.Iframes.set(dataUnitId, dataPubKey)
 
     // Extra attributes
     // iframe.allowfullscreen = true;
@@ -232,5 +238,7 @@ function iframeLoader () {
     // Replace the div for the iframe
     tonicDiv.parentNode.replaceChild(iframe, tonicDiv)
   }
-  // console.log('Tonic Map:', tonicIframes)
+  // console.log('Tonic Map:', TonicPow.Iframes)
 }
+
+window.TonicPow = TonicPow
