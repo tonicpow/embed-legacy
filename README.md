@@ -34,6 +34,12 @@ _(Optional)_ Use your [$handcash](https://handcash.io/) handle in place of your 
 <div class="tonic" data-handcash="$your-handle"></div>
 ```
 
+## Building
+```bash
+$ npm install
+$ npm run build
+```
+
 ## Documentation
 Checkout our nifty [Tonic generator](https://tonicpow.com/?affiliate=$tonicpow).
 
