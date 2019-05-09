@@ -5,7 +5,7 @@ class Tonic {
     }
   }
 
-  get schema () {
+  static get schema () {
     return {
       B: {},
       MAP: {},
