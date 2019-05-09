@@ -199,7 +199,7 @@ TonicPow.iframeLoader = async () => {
     iframe.src = networkUrl + '/' + loadState + '?' +
       'unit_id=' + dataUnitId +
       '&pubkey=' + dataPubKey +
-      '&affiliate=' + affiliate +
+      (affiliate ? '&affiliate=' + affiliate : '') +
       '&sticker_address=' + stickerAddress +
       '&sticker_tx=' + stickerTx +
       '&rate=' + rate +
@@ -217,7 +217,9 @@ TonicPow.iframeLoader = async () => {
     // Add the data to the iframe
     iframe.setAttribute('data-unit-id', dataUnitId)
     iframe.setAttribute('data-pubkey', dataPubKey)
-    iframe.setAttribute('data-affiliate', affiliate)
+    if (affiliate) {
+      iframe.setAttribute('data-affiliate', affiliate)
+    }
     iframe.setAttribute('data-sticker-address', stickerAddress)
 
     // Extra attributes
