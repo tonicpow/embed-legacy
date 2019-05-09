@@ -63,7 +63,7 @@ TonicPow.processTonics = (tonics) => {
 // iframeLoader() - replaces each tonic div with a corresponding iframe
 TonicPow.iframeLoader = () => {
   // Set config
-  const networkUrl = 'http://localhost:3000' // 'https://app.tonicpow.com' // Url for Tonic App
+  const networkUrl = window.location.origin // 'https://app.tonicpow.com' // Url for Tonic App
   const footerLinkHeight = 28 // Size for the footer link area (px)
   const defaultHeight = 250 // Height of the embed (px)
   const defaultWidth = 300 // Width of the embed (px)

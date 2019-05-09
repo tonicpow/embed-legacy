@@ -41,7 +41,7 @@ BitSocket.connect = (cb) => {
         case 'block':
           conole.log('NEW BLOCK. Update ad if current schedule expired.', data)
           for (let iframe of tonicIframes) {
-            iframe.contentWindow.postMessage({ block: JSON.stringify(data) }, 'http://localhost:3000')
+            iframe.contentWindow.postMessage({ block: JSON.stringify(data) }, window.location.origin)
           }
       }
     }
