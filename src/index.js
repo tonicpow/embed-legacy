@@ -128,8 +128,8 @@ TonicPow.iframeLoader = async () => {
     let dataPubKey = tonicDiv.getAttribute('data-pubkey')
 
     // Convert data-pubkey if needed from $handcash
-    dataPubKey = (dataPubKey && dataPubKey.includes('$')) ? await Handcash.lookup(dataPubKey) : dataPubKey
-    if (typeof dataPubKey === 'undefined' || !dataPubKey || dataPubKey === '' || dataPubKey.length <= 25) {
+    dataPubKey = await (dataPubKey && dataPubKey.includes('$')) ? Handcash.lookup(dataPubKey) : dataPubKey
+    if (typeof dataPubKey === 'undefined' || !dataPubKey || dataPubKey.length < 34) {
       if (stickerAddress) {
         dataPubKey = stickerAddress
         console.log('data-pubkey not found or invalid: ' + dataPubKey + ' using sticker address: ' + stickerAddress)
