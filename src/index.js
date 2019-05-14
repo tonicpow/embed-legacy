@@ -39,7 +39,7 @@ if (document.readyState === 'complete' || document.readyState === 'interactive')
           let iframe = document.getElementById('tonic_' + tonic.MAP.ad_unit_id)
           if (iframe) {
             // Post tonic to iframe
-            iframe.contentWindow.postMessage({ tonics: JSON.stringify(tonics) }, 'https://app.tonicpow.com')
+            iframe.contentWindow.postMessage({ tonics: JSON.stringify(tonics) }, 'https://tonicpow.com')
           }
         }
       }
