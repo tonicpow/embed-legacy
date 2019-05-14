@@ -230,7 +230,7 @@ TonicPow.iframeLoader = async () => {
       (imageUrl ? '&image=' + imageUrl : '') +
       (backgroundColor ? '&background_color=' + backgroundColor : '') +
       (linkColor ? '&link_color=' + linkColor : '') +
-      'cache=' + Math.random()
+      '&cache=' + Math.random()
     iframe.width = displayWidth
     iframe.height = (parseInt(displayHeight) + footerLinkHeight)
     iframe.id = 'tonic_' + dataUnitId
@@ -243,6 +243,7 @@ TonicPow.iframeLoader = async () => {
     }
     iframe.setAttribute('data-sticker-address', stickerAddress)
     iframe.setAttribute('data-sticker-tx', stickerTx)
+    iframe.setAttribute('data-handcash', handcashHandle)
 
     // Extra attributes
     // iframe.allowfullscreen = true;
