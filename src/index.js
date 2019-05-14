@@ -130,9 +130,6 @@ TonicPow.iframeLoader = async () => {
     // Get the data-pubkey
     let dataPubKey = tonicDiv.getAttribute('data-pubkey')
 
-    //todo: add handcash detection and conversion to pubkey
-
-    // Convert data-pubkey if needed from $handcash
     // @mrz - no conversion anymore, I split "data-handcash" and "data-pubkey" into their own concerns
     //dataPubKey = await (dataPubKey && dataPubKey.includes('$')) ? Handcash.lookup(dataPubKey) : dataPubKey
     if (typeof dataPubKey === 'undefined' || !dataPubKey || dataPubKey.length < 34) {
@@ -164,10 +161,10 @@ TonicPow.iframeLoader = async () => {
     let knownAffiliate = localStorage.getItem('affiliate_' + dataPubKey)
     if (knownAffiliate) {
       affiliate = knownAffiliate
-      // console.log('affiliate found in local storage: ' + affiliate)
+      console.log('affiliate found in local storage: ' + affiliate)
     } else if (affiliate) {
       localStorage.setItem('affiliate_' + dataPubKey, affiliate)
-      // console.log('saving affiliate in local storage: ' + affiliate)
+      console.log('saving affiliate in local storage: ' + affiliate)
     }
 
     // Got a state to load by default
@@ -256,7 +253,6 @@ TonicPow.iframeLoader = async () => {
     iframe.frameBorder = '0'
     iframe.style.border = 'none'
     iframe.style.overflow = 'hidden' // (app should take care of this)
-
 
     // Add to iframe map
     TonicPow.Iframes.set(dataUnitId, dataPubKey)
