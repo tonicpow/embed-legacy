@@ -85,10 +85,11 @@ TonicPow.iframeLoader = async () => {
   // Get the affiliate and convert if needed ($handcash)
   let affiliate = params.get('affiliate')
   if (affiliate) {
-    affiliate = (affiliate !== null && affiliate.includes('$')) ? await Handcash.lookup(affiliate) : affiliate
+    // condition is always true: affiliate !== null
+    //affiliate = (affiliate !== null && affiliate.includes('$')) ? await Handcash.lookup(affiliate) : affiliate
+    affiliate = (affiliate.includes('$')) ? await Handcash.lookup(affiliate) : affiliate
 
     if (typeof affiliate === 'undefined' || !affiliate || affiliate === '' || affiliate.length <= 25) {
-      // console.log('affiliate not found or invalid: " + affiliate + " using empty affiliate value')
       affiliate = ''
     }  
   }
@@ -128,7 +129,8 @@ TonicPow.iframeLoader = async () => {
     let dataPubKey = tonicDiv.getAttribute('data-pubkey')
 
     // Convert data-pubkey if needed from $handcash
-    dataPubKey = await (dataPubKey && dataPubKey.includes('$')) ? Handcash.lookup(dataPubKey) : dataPubKey
+    // @mrz - no conversion anymore, I split "data-handcash" and "data-pubkey" into their own concerns
+    //dataPubKey = await (dataPubKey && dataPubKey.includes('$')) ? Handcash.lookup(dataPubKey) : dataPubKey
     if (typeof dataPubKey === 'undefined' || !dataPubKey || dataPubKey.length < 34) {
       if (stickerAddress) {
         dataPubKey = stickerAddress
@@ -136,6 +138,21 @@ TonicPow.iframeLoader = async () => {
       } else {
         dataPubKey = defaultPubKey
         console.log('data-pubkey not found or invalid: ' + dataPubKey + ' using default address: ' + defaultPubKey)
+      }
+    }
+
+    // Process handcash handle if given (uses handcash instead of pubkey
+    // Using handcash will override the data-pubkey given
+    let handcashHandle = tonicDiv.getAttribute('data-handcash')
+    let handcashAddress = ''
+    if (handcashHandle && dataPubKey.includes('$')) {
+      handcashAddress = await Handcash.lookup(handcashHandle)
+
+      if (typeof handcashAddress === 'undefined' || !handcashAddress || handcashAddress === '' || handcashAddress.length <= 25) {
+        handcashAddress = ''
+      } else {
+        // override the pubkey with the handcash address
+        dataPubKey = handcashAddress
       }
     }
 
