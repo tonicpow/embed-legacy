@@ -87,10 +87,11 @@ TonicPow.iframeLoader = async () => {
   // Get the affiliate and convert if needed ($handcash)
   let affiliate = params.get('affiliate')
   if (affiliate) {
-    affiliate = (affiliate !== null && affiliate.includes('$')) ? await Handcash.lookup(affiliate) : affiliate
+    // condition is always true: affiliate !== null
+    //affiliate = (affiliate !== null && affiliate.includes('$')) ? await Handcash.lookup(affiliate) : affiliate
+    affiliate = (affiliate.includes('$')) ? await Handcash.lookup(affiliate) : affiliate
 
     if (typeof affiliate === 'undefined' || !affiliate || affiliate === '' || affiliate.length <= 25) {
-      // console.log('affiliate not found or invalid: " + affiliate + " using empty affiliate value')
       affiliate = ''
     }  
   }
@@ -129,10 +130,8 @@ TonicPow.iframeLoader = async () => {
     // Get the data-pubkey
     let dataPubKey = tonicDiv.getAttribute('data-pubkey')
 
-    //todo: add handcash detection and conversion to pubkey
-
-    // Convert data-pubkey if needed from $handcash
-    dataPubKey = await (dataPubKey && dataPubKey.includes('$')) ? Handcash.lookup(dataPubKey) : dataPubKey
+    // @mrz - no conversion anymore, I split "data-handcash" and "data-pubkey" into their own concerns
+    //dataPubKey = await (dataPubKey && dataPubKey.includes('$')) ? Handcash.lookup(dataPubKey) : dataPubKey
     if (typeof dataPubKey === 'undefined' || !dataPubKey || dataPubKey.length < 34) {
       if (stickerAddress) {
         dataPubKey = stickerAddress
@@ -143,14 +142,29 @@ TonicPow.iframeLoader = async () => {
       }
     }
 
+    // Process handcash handle if given (uses handcash instead of pubkey
+    // Using handcash will override the data-pubkey given
+    let handcashHandle = tonicDiv.getAttribute('data-handcash')
+    let handcashAddress = ''
+    if (handcashHandle && dataPubKey.includes('$')) {
+      handcashAddress = await Handcash.lookup(handcashHandle)
+
+      if (typeof handcashAddress === 'undefined' || !handcashAddress || handcashAddress === '' || handcashAddress.length <= 25) {
+        handcashAddress = ''
+      } else {
+        // override the pubkey with the handcash address
+        dataPubKey = handcashAddress
+      }
+    }
+
     // If we have an affiliate, let's store it for the future
     let knownAffiliate = localStorage.getItem('affiliate_' + dataPubKey)
     if (knownAffiliate) {
       affiliate = knownAffiliate
-      // console.log('affiliate found in local storage: ' + affiliate)
+      console.log('affiliate found in local storage: ' + affiliate)
     } else if (affiliate) {
       localStorage.setItem('affiliate_' + dataPubKey, affiliate)
-      // console.log('saving affiliate in local storage: ' + affiliate)
+      console.log('saving affiliate in local storage: ' + affiliate)
     }
 
     // Got a state to load by default
@@ -213,7 +227,7 @@ TonicPow.iframeLoader = async () => {
       (imageUrl ? '&image=' + imageUrl : '') +
       (backgroundColor ? '&background_color=' + backgroundColor : '') +
       (linkColor ? '&link_color=' + linkColor : '') +
-      'cache=' + Math.random()
+      '&cache=' + Math.random()
     iframe.width = displayWidth
     iframe.height = (parseInt(displayHeight) + footerLinkHeight)
     iframe.id = 'tonic_' + dataUnitId
@@ -226,6 +240,7 @@ TonicPow.iframeLoader = async () => {
     }
     iframe.setAttribute('data-sticker-address', stickerAddress)
     iframe.setAttribute('data-sticker-tx', stickerTx)
+    iframe.setAttribute('data-handcash', handcashHandle)
 
     // Extra attributes
     // iframe.allowfullscreen = true;
@@ -238,7 +253,6 @@ TonicPow.iframeLoader = async () => {
     iframe.frameBorder = '0'
     iframe.style.border = 'none'
     iframe.style.overflow = 'hidden' // (app should take care of this)
-
 
     // Add to iframe map
     TonicPow.Iframes.set(dataUnitId, dataPubKey)
