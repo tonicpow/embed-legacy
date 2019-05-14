@@ -73,7 +73,7 @@ TonicPow.iframeLoader = async () => {
   const defaultCurrency = 'bsv' // Default currency type (bsv, usd)
   const acceptedCurrencies = ['bsv', 'usd'] // List of accepted currencies for conversions
   const defaultUnitId = 'embed-1' // Default unit-id to use if not set
-  const defaultPubKey = '1LWyDs4qzmfAhGpSZk1K1kLmNdafBDdJSD' // Default address to set if not found (donations!)
+  const defaultAddress = '1LWyDs4qzmfAhGpSZk1K1kLmNdafBDdJSD' // Default address to set if not found (donations!)
 
   // Get sticker address from parent page
   let stickerAddress = (document.head.querySelector('[name=bitcoin-address][content]')) ? document.head.querySelector('[name=bitcoin-address][content]').content : ''
@@ -137,8 +137,8 @@ TonicPow.iframeLoader = async () => {
         dataAddress = stickerAddress
         console.log('data-address not found or invalid: ' + dataAddress + ' using sticker address: ' + stickerAddress)
       } else {
-        dataAddress = defaultPubKey
-        console.log('data-address not found or invalid: ' + dataAddress + ' using default address: ' + defaultPubKey)
+        dataAddress = defaultAddress
+        console.log('data-address not found or invalid: ' + dataAddress + ' using default address: ' + defaultAddress)
       }
     }
 
