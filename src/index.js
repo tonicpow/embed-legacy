@@ -132,7 +132,7 @@ TonicPow.iframeLoader = async () => {
 
     // @mrz - no conversion anymore, I split "data-handcash" and "data-address" into their own concerns
     //dataAddress = await (dataAddress && dataAddress.includes('$')) ? Handcash.lookup(dataAddress) : dataAddress
-    if (typeof dataAddress === 'undefined' || !dataAddress || dataAddress.length < 34) {
+    if (typeof dataAddress === 'undefined' || !dataAddress || dataAddress.length <= 25) {
       if (stickerAddress) {
         dataAddress = stickerAddress
         console.log('data-address not found or invalid: ' + dataAddress + ' using sticker address: ' + stickerAddress)
