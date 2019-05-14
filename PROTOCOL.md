@@ -53,12 +53,12 @@ OP_RETURN
   'tonicpow'
   'type'
   'campaign_request'
-  'site_pub_key'
-  [ Site Public Key ]
+  'site_address'
+  [ Site Bitcoin Address ]
   'ad_unit_id'
   [ Ad Unit ID ]
-  'affiliate_pub_key'
-  [ Affiliate Public Key ]
+  'affiliate_address'
+  [ Affiliate Address ]
   'num_blocks'
   [ Number of Blocks ]
   'ad_type'
@@ -84,12 +84,12 @@ OP_RETURN
   'tonicpow'
   'type'
   'campaign_request'
-  'site_pub_key'
-  [ Site Public Key ]
+  'site_address'
+  [ Site bitcoin Address ]
   'ad_unit_id'
   [ Ad Unit ID ]
-  'affiliate_pub_key'
-  [ Affiliate Public Key ]
+  'affiliate_address'
+  [ Affiliate Bitcoin Address ]
   'num_blocks'
   [ Number of Blocks ]
   'ad_type'
