@@ -49,7 +49,7 @@ Required attributes are one of the following: `data-address` or `data-handcash`
 
 |Attribute |Example |Supported |Description |
 |:---|:---|:---|:---|
-|data-address|1BrwAE...|**Yes**|Your bitcoin wallet bitcoin sv address.|
+|data-address|1BrwAE...|**Yes**|Your bitcoin sv wallet address.|
 |data-handcash|$tonicpow|**Yes**|Your $handcash handle. Used in place of data-address. |
 |data-relayx|1tonicpow|_No_|Your RelayX 1handle. Used in place of data-address. |
 |data-unit-id|embed-1|**Yes**|To show multiple units on one page, set each to a unique identifier of your choice.|
