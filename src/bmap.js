@@ -41,8 +41,10 @@ bmap.TransformTxs = (tx) => {
 
   // Loop over the tx keys (in, out, tx, blk ...)
   for (let key of Object.keys(tx)) {
+
     // Check for op_return
     if (key === 'out' && tx[key].some((output) => { return output && output.b0 && output.b0.op === 106 })) {
+
       // There can be only one
       let opReturnOutput = tx[key][0]
 

@@ -10,6 +10,8 @@ TonicPow.BitSocket = BitSocket
 
 TonicPow.Iframes = new Map()
 
+//todo: solve the below loading (different case when hardcoded in HTML vs dynamic script loading)
+
 // On complete / interactive or if DOM loaded, start the loader
 if (document.readyState === 'complete' || document.readyState === 'interactive') {
   // This loads if the <script> is dynamically injected into the page
@@ -128,6 +130,8 @@ TonicPow.iframeLoader = async () => {
     // Get the data-pubkey
     let dataPubKey = tonicDiv.getAttribute('data-pubkey')
 
+    //todo: add handcash detection and conversion to pubkey
+
     // Convert data-pubkey if needed from $handcash
     // @mrz - no conversion anymore, I split "data-handcash" and "data-pubkey" into their own concerns
     //dataPubKey = await (dataPubKey && dataPubKey.includes('$')) ? Handcash.lookup(dataPubKey) : dataPubKey
@@ -217,15 +221,15 @@ TonicPow.iframeLoader = async () => {
       'unit_id=' + dataUnitId +
       '&pubkey=' + dataPubKey +
       (affiliate ? '&affiliate=' + affiliate : '') +
-      '&sticker_address=' + stickerAddress +
-      '&sticker_tx=' + stickerTx +
+      (stickerAddress ? '&sticker_address=' + stickerAddress : '') +
+      (stickerTx ? '&sticker_tx=' + stickerTx : '') +
       '&rate=' + rate +
       '&currency=' + currency +
       '&width=' + displayWidth +
       '&height=' + displayHeight +
-      '&image=' + imageUrl +
-      '&background_color=' + backgroundColor +
-      '&link_color=' + linkColor +
+      (imageUrl ? '&image=' + imageUrl : '') +
+      (backgroundColor ? '&background_color=' + backgroundColor : '') +
+      (linkColor ? '&link_color=' + linkColor : '') +
       'cache=' + Math.random()
     iframe.width = displayWidth
     iframe.height = (parseInt(displayHeight) + footerLinkHeight)
@@ -238,6 +242,7 @@ TonicPow.iframeLoader = async () => {
       iframe.setAttribute('data-affiliate', affiliate)
     }
     iframe.setAttribute('data-sticker-address', stickerAddress)
+    iframe.setAttribute('data-sticker-tx', stickerTx)
 
     // Extra attributes
     // iframe.allowfullscreen = true;
