@@ -52,6 +52,4 @@ BitSocket.connect = (cb) => {
   }  
 }
 
-
-
 export default BitSocket
