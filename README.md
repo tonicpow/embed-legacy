@@ -24,9 +24,9 @@ View a [Tonic in action](https://tonicpow.com/?affiliate=$tonicpow). Checkout th
 <script src="https://tonicpow.com/tonic.js"></script>
 ```
 
-2. Replace `data-pubkey` with your BSV address and place the tag wherever it will be displayed.
+2. Replace `data-address` with your BSV address and place the tag wherever it will be displayed.
 ```html
-<div class="tonic" data-pubkey="YOUR_PUBKEY"></div>
+<div class="tonic" data-address="YOUR_ADDRESS"></div>
 ```
 
 _(Optional)_ Use your [$handcash](https://handcash.io/) handle in place of your wallet address
@@ -45,13 +45,13 @@ Checkout our nifty [Tonic generator](https://tonicpow.com/?affiliate=$tonicpow).
 
 This Tonic embed works in relation to the [Tonic protocol](https://github.com/tonicpow/embed/blob/master/PROTOCOL.md).
 
-Required attributes are one of the following: `data-pubkey` or `data-handcash`
+Required attributes are one of the following: `data-address` or `data-handcash`
 
 |Attribute |Example |Supported |Description |
 |:---|:---|:---|:---|
-|data-pubkey|1BrwAE...|**Yes**|Your bitcoin wallet pubkey address.|
-|data-handcash|$tonicpow|**Yes**|Your $handcash handle. Used in place of data-pubkey. |
-|data-relayx|1tonicpow|_No_|Your RelayX 1handle. Used in place of data-pubkey. |
+|data-address|1BrwAE...|**Yes**|Your bitcoin wallet bitcoin sv address.|
+|data-handcash|$tonicpow|**Yes**|Your $handcash handle. Used in place of data-address. |
+|data-relayx|1tonicpow|_No_|Your RelayX 1handle. Used in place of data-address. |
 |data-unit-id|embed-1|**Yes**|To show multiple units on one page, set each to a unique identifier of your choice.|
 |data-rate|546|**Yes**|Set the rate of sats per block. The default is 546.|
 |data-currency|bsv|_No_|Set the currency rate (bsv or usd)|
@@ -65,7 +65,7 @@ Required attributes are one of the following: `data-pubkey` or `data-handcash`
 
 #### Handcash Support
 This Tonic embed script converts [$handcash](https://handcash.io/) handles to wallet addresses on-the-fly when loading.
-You can supply a [$handcash](https://handcash.io/) handle via `data-handcash` or wallet address via `data-pubkey`.
+You can supply a [$handcash](https://handcash.io/) handle via `data-handcash` or wallet address via `data-address`.
 
 #### Bitcoin Sticker Protocol Support
 Using the [bitcoin sticker protocol](https://sticker.planaria.network/), this embed forwards the address or transaction of 
