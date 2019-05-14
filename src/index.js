@@ -36,7 +36,7 @@ if (document.readyState === 'complete' || document.readyState === 'interactive')
       let tonics = TonicPow.processTonics(data)
       if (tonics.length > 0 && tonics[0].hasOwnProperty('tx')) {
         let tonic = tonics[0]
-        if (TonicPow.Iframes.get(tonic.MAP.ad_unit_id) === tonic.MAP.site_pub_key) {
+        if (TonicPow.Iframes.get(tonic.MAP.ad_unit_id) === tonic.MAP.site_address) {
           // There is a tonic on this page that wants this message
           let iframe = document.getElementById('tonic_' + tonic.MAP.ad_unit_id)
           if (iframe) {
@@ -73,7 +73,7 @@ TonicPow.iframeLoader = async () => {
   const defaultCurrency = 'bsv' // Default currency type (bsv, usd)
   const acceptedCurrencies = ['bsv', 'usd'] // List of accepted currencies for conversions
   const defaultUnitId = 'embed-1' // Default unit-id to use if not set
-  const defaultPubKey = '1LWyDs4qzmfAhGpSZk1K1kLmNdafBDdJSD' // Default pubkey to set if not found (donations!)
+  const defaultAddress = '1LWyDs4qzmfAhGpSZk1K1kLmNdafBDdJSD' // Default address to set if not found (donations!)
 
   // Get sticker address from parent page
   let stickerAddress = (document.head.querySelector('[name=bitcoin-address][content]')) ? document.head.querySelector('[name=bitcoin-address][content]').content : ''
@@ -127,43 +127,43 @@ TonicPow.iframeLoader = async () => {
       dataUnitId = defaultUnitId
     }
 
-    // Get the data-pubkey
-    let dataPubKey = tonicDiv.getAttribute('data-pubkey')
+    // Get the data-address
+    let dataAddress = tonicDiv.getAttribute('data-address')
 
-    // @mrz - no conversion anymore, I split "data-handcash" and "data-pubkey" into their own concerns
-    //dataPubKey = await (dataPubKey && dataPubKey.includes('$')) ? Handcash.lookup(dataPubKey) : dataPubKey
-    if (typeof dataPubKey === 'undefined' || !dataPubKey || dataPubKey.length < 34) {
+    // @mrz - no conversion anymore, I split "data-handcash" and "data-address" into their own concerns
+    //dataAddress = await (dataAddress && dataAddress.includes('$')) ? Handcash.lookup(dataAddress) : dataAddress
+    if (typeof dataAddress === 'undefined' || !dataAddress || dataAddress.length < 34) {
       if (stickerAddress) {
-        dataPubKey = stickerAddress
-        console.log('data-pubkey not found or invalid: ' + dataPubKey + ' using sticker address: ' + stickerAddress)
+        dataAddress = stickerAddress
+        console.log('data-address not found or invalid: ' + dataAddress + ' using sticker address: ' + stickerAddress)
       } else {
-        dataPubKey = defaultPubKey
-        console.log('data-pubkey not found or invalid: ' + dataPubKey + ' using default address: ' + defaultPubKey)
+        dataAddress = defaultAddress
+        console.log('data-address not found or invalid: ' + dataAddress + ' using default address: ' + defaultAddress)
       }
     }
 
-    // Process handcash handle if given (uses handcash instead of pubkey
-    // Using handcash will override the data-pubkey given
+    // Process handcash handle if given (uses handcash instead of address
+    // Using handcash will override the data-address given
     let handcashHandle = tonicDiv.getAttribute('data-handcash')
     let handcashAddress = ''
-    if (handcashHandle && dataPubKey.includes('$')) {
+    if (handcashHandle && dataAddress.includes('$')) {
       handcashAddress = await Handcash.lookup(handcashHandle)
 
       if (typeof handcashAddress === 'undefined' || !handcashAddress || handcashAddress === '' || handcashAddress.length <= 25) {
         handcashAddress = ''
       } else {
-        // override the pubkey with the handcash address
-        dataPubKey = handcashAddress
+        // override the address with the handcash address
+        dataAddress = handcashAddress
       }
     }
 
     // If we have an affiliate, let's store it for the future
-    let knownAffiliate = localStorage.getItem('affiliate_' + dataPubKey)
+    let knownAffiliate = localStorage.getItem('affiliate_' + dataAddress)
     if (knownAffiliate) {
       affiliate = knownAffiliate
       console.log('affiliate found in local storage: ' + affiliate)
     } else if (affiliate) {
-      localStorage.setItem('affiliate_' + dataPubKey, affiliate)
+      localStorage.setItem('affiliate_' + dataAddress, affiliate)
       console.log('saving affiliate in local storage: ' + affiliate)
     }
 
@@ -216,7 +216,7 @@ TonicPow.iframeLoader = async () => {
     let iframe = document.createElement('iframe')
     iframe.src = networkUrl + '/' + loadState + '?' +
       'unit_id=' + dataUnitId +
-      '&pubkey=' + dataPubKey +
+      '&address=' + dataAddress +
       (affiliate ? '&affiliate=' + affiliate : '') +
       (stickerAddress ? '&sticker_address=' + stickerAddress : '') +
       (stickerTx ? '&sticker_tx=' + stickerTx : '') +
@@ -234,7 +234,7 @@ TonicPow.iframeLoader = async () => {
 
     // Add the data to the iframe
     iframe.setAttribute('data-unit-id', dataUnitId)
-    iframe.setAttribute('data-pubkey', dataPubKey)
+    iframe.setAttribute('data-address', dataAddress)
     if (affiliate) {
       iframe.setAttribute('data-affiliate', affiliate)
     }
@@ -255,7 +255,7 @@ TonicPow.iframeLoader = async () => {
     iframe.style.overflow = 'hidden' // (app should take care of this)
 
     // Add to iframe map
-    TonicPow.Iframes.set(dataUnitId, dataPubKey)
+    TonicPow.Iframes.set(dataUnitId, dataAddress)
 
     // Replace the div for the iframe
     tonicDiv.parentNode.replaceChild(iframe, tonicDiv)

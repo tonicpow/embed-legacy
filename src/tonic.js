@@ -40,9 +40,9 @@ class Tonic {
     return 'Donate'
   }
 
-  get affiliatePubKey () {
-    if (this.MAP && this.MAP['affiliate_pub_key'] && this.MAP['affiliate_pub_key'] !== '00') {
-      return this.MAP['affiliate_pub_key']
+  get affiliateAddress () {
+    if (this.MAP && this.MAP['affiliate_address'] && this.MAP['affiliate_address'] !== '00') {
+      return this.MAP['affiliate_address']
     }
     return undefined
   }
