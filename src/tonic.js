@@ -41,8 +41,8 @@ class Tonic {
   }
 
   get affiliateAddress () {
-    if (this.MAP && this.MAP['affiliate_pub_key'] && this.MAP['affiliate_pub_key'] !== '00') {
-      return this.MAP['affiliate_pub_key']
+    if (this.MAP && this.MAP['affiliate_address'] && this.MAP['affiliate_address'] !== '00') {
+      return this.MAP['affiliate_address']
     }
     return undefined
   }
