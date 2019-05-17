@@ -260,8 +260,8 @@ TonicPow.iframeLoader = async () => {
     iframe.style.overflow = 'hidden' // (app should take care of this)
 
     // Add transparency
-    iframe.style.backgroundColor = "transparent"
-    iframe.allowTransparency="true"
+    iframe.style.backgroundColor = 'transparent'
+    iframe.allowTransparency = 'true'
 
     // Add to iframe map
     TonicPow.Iframes.set(dataUnitId, dataAddress)
