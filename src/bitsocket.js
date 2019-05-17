@@ -11,6 +11,7 @@ const query = {
   },
   'limit': 10
 }
+
 // base64 encoded query
 const b64 = btoa(JSON.stringify(query))
 

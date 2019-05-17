@@ -37,11 +37,16 @@ if (document.readyState === 'complete' || document.readyState === 'interactive')
       if (tonics.length > 0 && tonics[0].hasOwnProperty('tx')) {
         let tonic = tonics[0]
         if (TonicPow.Iframes.get(tonic.MAP.ad_unit_id) === tonic.MAP.site_address) {
+
           // There is a tonic on this page that wants this message
           let iframe = document.getElementById('tonic_' + tonic.MAP.ad_unit_id)
           if (iframe) {
-            // Post tonic to iframe
-            iframe.contentWindow.postMessage({ tonics: JSON.stringify(tonics) }, 'https://app.tonicpow.com')
+            let params = new URLSearchParams(iframe.src)
+            let address = params.get('address')
+            if (address && address.length > 25 && address === tonic.MAP.address) {
+              // Post tonic to iframe
+              iframe.contentWindow.postMessage({ tonics: JSON.stringify(tonics) }, 'https://app.tonicpow.com')
+            }
           }
         }
       }
