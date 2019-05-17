@@ -51,12 +51,11 @@ Required attributes are one of the following: `data-address` or `data-handcash`
 |:---|:---|:---|:---|
 |data-address|1BrwAE...|**Yes**|Your bitcoin sv wallet address.|
 |data-handcash|$tonicpow|**Yes**|Your $handcash handle. Used in place of data-address. |
-|data-relayx|1tonicpow|_No_|Your RelayX 1handle. Used in place of data-address. |
 |data-unit-id|embed-1|**Yes**|To show multiple units on one page, set each to a unique identifier of your choice.|
 |data-rate|546|**Yes**|Set the rate of sats per block. The default is 546.|
 |data-currency|bsv|_No_|Set the currency rate (bsv or usd)|
-|data-width|300|_No_|Set a custom width. The default is 300px.|
-|data-height|250|_No_|Set a custom height. The default is 250px; There is an additional 22px footer.|
+|data-width|300|**Yes**|Set a custom width. The default is 300px. Minimum is 160x|
+|data-height|250|**Yes**|Set a custom height. The default and minimum is 250px; There is an additional 22px footer.|
 |data-state|create|**Yes**|Used to load custom tonic state|
 |data-image|https://...|_No_|Default image url if no ad is present|
 |data-bg-color|#000|_No_|Change the background color via CSS value (#FFF)|
