@@ -168,10 +168,11 @@ TonicPow.iframeLoader = async () => {
     }
 
     // Got a state to load by default
-    let loadState = tonicDiv.getAttribute('data-state')
-    if (!loadState || loadState === '') {
-      loadState = ''
-    }
+    // @mrz deprecated this feature
+    //let loadState = tonicDiv.getAttribute('data-state')
+    //if (!loadState || loadState === '') {
+    //  loadState = ''
+    //}
 
     // Got a default rate?
     let rate = tonicDiv.getAttribute('data-rate')
@@ -214,7 +215,8 @@ TonicPow.iframeLoader = async () => {
 
     // Build the iframe, pass along configuration variables
     let iframe = document.createElement('iframe')
-    iframe.src = networkUrl + '/' + loadState + '?' +
+    //iframe.src = networkUrl + '/'+ loadState +'?' +
+    iframe.src = networkUrl + '/?' +
       'unit_id=' + dataUnitId +
       '&address=' + dataAddress +
       (affiliate ? '&affiliate=' + affiliate : '') +
