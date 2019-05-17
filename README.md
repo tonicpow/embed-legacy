@@ -57,7 +57,7 @@ Required attributes are one of the following: `data-address` or `data-handcash`
 |data-width|300|**Yes**|Set a custom width. The default is 300px. Minimum is 160x|
 |data-height|250|**Yes**|Set a custom height. The default and minimum is 250px; There is an additional 22px footer.|
 |data-image|https://...|_No_|Default image url if no ad is present||
-|data-link-color|#FFF|_No_|Change the link color via CSS value (#007bff)|
+|data-link-color|#FFF|**Yes**|Change the link color via CSS value (#007bff)|
 |data-funding|true|_No_|Toggle funding campaigns, default is true (on)|
 
 #### Handcash Support

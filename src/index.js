@@ -190,6 +190,14 @@ TonicPow.iframeLoader = async () => {
     let linkColor = tonicDiv.getAttribute('data-link-color')
     if (!linkColor || linkColor === '') {
       linkColor = ''
+    } else {
+      // Sanity check for color
+      linkColor = linkColor.replace(/[^a-zA-Z]+/g, '');
+
+      // Default if invalid
+      if(linkColor.length !== 6 && linkColor.length !== 3){
+        linkColor = '';
+      }
     }
 
     // Got a custom supported currency
@@ -239,6 +247,7 @@ TonicPow.iframeLoader = async () => {
     iframe.setAttribute('data-sticker-address', stickerAddress)
     iframe.setAttribute('data-sticker-tx', stickerTx)
     iframe.setAttribute('data-handcash', handcashHandle)
+    iframe.setAttribute('data-link-color', linkColor)
 
     // Extra attributes
     // iframe.allowfullscreen = true;
