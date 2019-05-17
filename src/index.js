@@ -232,6 +232,9 @@ TonicPow.iframeLoader = async () => {
     iframe.height = (parseInt(displayHeight) + footerLinkHeight)
     iframe.id = 'tonic_' + dataUnitId
 
+    // hack to prevent scrollbars on some browsers (depricated)
+    iframe.setAttribute('scrolling', 'no')
+
     // Add the data to the iframe
     iframe.setAttribute('data-unit-id', dataUnitId)
     iframe.setAttribute('data-address', dataAddress)
