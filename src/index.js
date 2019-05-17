@@ -186,12 +186,6 @@ TonicPow.iframeLoader = async () => {
       imageUrl = ''
     }
 
-    // Got a custom background color
-    let backgroundColor = tonicDiv.getAttribute('data-bg-color')
-    if (!backgroundColor || backgroundColor === '') {
-      backgroundColor = ''
-    }
-
     // Got a custom link color
     let linkColor = tonicDiv.getAttribute('data-link-color')
     if (!linkColor || linkColor === '') {
@@ -227,7 +221,6 @@ TonicPow.iframeLoader = async () => {
       '&width=' + displayWidth +
       '&height=' + displayHeight +
       (imageUrl ? '&image=' + imageUrl : '') +
-      (backgroundColor ? '&background_color=' + backgroundColor : '') +
       (linkColor ? '&link_color=' + linkColor : '') +
       '&cache=' + Math.random()
     iframe.width = displayWidth
@@ -251,7 +244,7 @@ TonicPow.iframeLoader = async () => {
     // iframe.allowfullscreen = true;
     // iframe.allowpaymentrequest = true;
     // iframe.referrerpolicy = "unsafe-url";
-    // iframe.scrolling = "no"; (this stops scrolling as well
+    // iframe.scrolling = "no"; (this stops scrolling as well)
 
     // Name and border
     iframe.importance = 'high'
