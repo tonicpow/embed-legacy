@@ -20,7 +20,7 @@ BitSocket.callback = null
 
 BitSocket.connect = (cb) => {
   BitSocket.callback = cb
-  console.log('connect with callback', BitSocket.callback)
+
   // Subscribe
   BitSocket.socket = new EventSource('https://genesis.bitdb.network/s/1FnauZ9aUH2Bex6JzdcV4eNX7oLSSEbxtN/' + b64)
 
@@ -28,7 +28,6 @@ BitSocket.connect = (cb) => {
   BitSocket.socket.onmessage = (e) => {
     let data = JSON.parse(e.data || {}).data || []
     let type = JSON.parse(e.data || {}).type || ''
-    console.log('message type', type)
     if (data) {
       switch (type) {
         case 'open':
@@ -36,11 +35,10 @@ BitSocket.connect = (cb) => {
           break
         case 'u':
           if (!data.length) { return }
-          console.log('data', data)
           BitSocket.callback(type, data)
           break
         case 'block':
-          conole.log('NEW BLOCK. Update ad if current schedule expired.', data)
+          conole.log('NEW BLOCK.', data)
           for (let iframe of tonicIframes) {
             iframe.contentWindow.postMessage({ block: JSON.stringify(data) }, 'https://app.tonicpow.com')
           }
