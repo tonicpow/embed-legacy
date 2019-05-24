@@ -1,10 +1,10 @@
+import Storage from "./storage";
+
 const Handcash = {}
 
 // handCashLookup() - looks up a handle and returns an address
 // @param handle is the $handcash handle
 Handcash.lookup = async (handle) => {
-  // Config
-  let walletAddress = ''
 
   // No handle or invalid
   if (!handle || !handle.includes('$')) {
@@ -13,8 +13,8 @@ Handcash.lookup = async (handle) => {
   }
 
   // Did we already look this up?
-  walletAddress = localStorage.getItem(handle)
-  if (walletAddress !== null && walletAddress.length >= 34 && walletAddress.startsWith('1')) {
+  let walletAddress = Storage.getStorage(handle)
+  if (walletAddress !== null && walletAddress.length > 25) {
     console.log('handcash found locally, skipping lookup! ' + handle + ':' + walletAddress)
     return walletAddress
   }
@@ -31,7 +31,7 @@ Handcash.lookup = async (handle) => {
     if (typeof data === "object" && data[0] && data[0].hasOwnProperty('receivingAddress')){
       walletAddress = data[0]['receivingAddress']
       if (walletAddress.length > 25) {
-        localStorage.setItem(handle, walletAddress)
+        Storage.setStorage(handle, walletAddress, (24*60*60))  // 1 day expiration
         return walletAddress
       }
 
