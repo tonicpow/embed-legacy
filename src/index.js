@@ -234,7 +234,7 @@ TonicPow.iframeLoader = async () => {
     iframe.height = (parseInt(displayHeight) + footerLinkHeight)
     iframe.id = 'tonic_' + dataTonicId
 
-    // hack to prevent scrollbars on some browsers (depricated)
+    // hack to prevent scrollbars on some browsers (deprecated)
     iframe.setAttribute('scrolling', 'no')
 
     // Add the data to the iframe
@@ -252,8 +252,6 @@ TonicPow.iframeLoader = async () => {
     // iframe.allowfullscreen = true;
     // iframe.allowpaymentrequest = true;
     // iframe.referrerpolicy = "unsafe-url";
-    // iframe.scrolling = "no"; (this stops scrolling as well)
-    // todo: should scrolling be off? this was changed? @mrz
 
     // Name and border
     iframe.importance = 'high'
