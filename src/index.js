@@ -1,59 +1,54 @@
 import Tonic from './tonic.js'
 import bmap from './bmap.js'
 import BitSocket from './BitSocket.js'
+import Storage from './storage.js'
 import Handcash from './handcash.js'
 
 let TonicPow = {}
+TonicPow.Storage = Storage
 TonicPow.Handcash = Handcash
 TonicPow.bmap = bmap
 TonicPow.BitSocket = BitSocket
-
 TonicPow.Iframes = new Map()
 
-//todo: solve the below loading (different case when hardcoded in HTML vs dynamic script loading)
+// Load the iframe(s) and start the BitSocket connection
+document.addEventListener('readystatechange', (event) => {
 
-// On complete / interactive or if DOM loaded, start the loader
-if (document.readyState === 'complete' || document.readyState === 'interactive') {
-  // This loads if the <script> is dynamically injected into the page
+  // Load iframe(s)
   TonicPow.iframeLoader()
-} else {
-  // This loads if the <script> is hardcoded in the html page
-  document.addEventListener('DOMContentLoaded', function () {
-    TonicPow.iframeLoader()
 
-    // Connect socket now that we have tonic divs
-    BitSocket.connect((type, data) => {
-      if (type === 'error') {
-        console.error(data)
-        return
-      }
+  // Connect socket now that we have tonic divs
+  BitSocket.connect((type, data) => {
+    if (type === 'error') {
+      console.error(data)
+      return
+    }
 
-      if (type === 'open') {
-        return
-      }
+    if (type === 'open') {
+      return
+    }
 
-      // Tonic Tx
-      let tonics = TonicPow.processTonics(data)
-      if (tonics.length > 0 && tonics[0].hasOwnProperty('tx')) {
-        let tonic = tonics[0]
-        if (TonicPow.Iframes.get(tonic.MAP.ad_unit_id) === tonic.MAP.site_address) {
+    // Tonic Tx
+    let tonics = TonicPow.processTonics(data)
+    if (tonics.length > 0 && tonics[0].hasOwnProperty('tx')) {
+      let tonic = tonics[0]
+      if (TonicPow.Iframes.get(tonic.MAP.ad_unit_id) === tonic.MAP.site_address) {
 
-          // There is a tonic on this page that wants this message
-          let iframe = document.getElementById('tonic_' + tonic.MAP.ad_unit_id)
-          if (iframe) {
-            let params = new URLSearchParams(iframe.src)
-            let address = params.get('address')
-            console.log('address', address, 'tonic address', tonic.MAP.address, (address && address.length > 25 && address === tonic.MAP.address))
-            if (address && address.length > 25 && address === tonic.MAP.address) {
-              // Post tonic to iframe
-              iframe.contentWindow.postMessage({ tonics: JSON.stringify(tonics) }, 'https://app.tonicpow.com')
-            }
+        // There is a tonic on this page that wants this message
+        let iframe = document.getElementById('tonic_' + tonic.MAP.ad_unit_id)
+        if (iframe) {
+          let params = new URLSearchParams(iframe.src)
+          let address = params.get('address')
+          console.log('address', address, 'tonic address', tonic.MAP.address, (address && address.length > 25 && address === tonic.MAP.address))
+          if (address && address.length > 25 && address === tonic.MAP.address) {
+            // Post tonic to iframe
+            iframe.contentWindow.postMessage({ tonics: JSON.stringify(tonics) }, 'https://app.tonicpow.com')
           }
         }
       }
-    })
+    }
   })
-}
+});
 
 // takes an array of transactions
 TonicPow.processTonics = (tonics) => {
@@ -78,7 +73,7 @@ TonicPow.iframeLoader = async () => {
   const defaultRatePerBlock = 546 // Default rate of sats per block
   const defaultCurrency = 'bsv' // Default currency type (bsv, usd)
   const acceptedCurrencies = ['bsv', 'usd'] // List of accepted currencies for conversions
-  const defaultUnitId = 'embed-1' // Default unit-id to use if not set
+  const defaultTonicId = 'embed-1' // Default unit-id (tonic-id) to use if not set
   const defaultAddress = '1LWyDs4qzmfAhGpSZk1K1kLmNdafBDdJSD' // Default address to set if not found (donations!)
 
   // Get sticker address from parent page
@@ -93,11 +88,10 @@ TonicPow.iframeLoader = async () => {
   // Get the affiliate and convert if needed ($handcash)
   let affiliate = params.get('affiliate')
   if (affiliate) {
-    // condition is always true: affiliate !== null
-    //affiliate = (affiliate !== null && affiliate.includes('$')) ? await Handcash.lookup(affiliate) : affiliate
     affiliate = (affiliate.includes('$')) ? await Handcash.lookup(affiliate) : affiliate
 
     if (typeof affiliate === 'undefined' || !affiliate || affiliate === '' || affiliate.length <= 25) {
+      console.error("failed to set affiliate", affiliate)
       affiliate = ''
     }  
   }
@@ -127,10 +121,11 @@ TonicPow.iframeLoader = async () => {
     }
 
     // Get the data-unit-id
-    let dataUnitId = tonicDiv.getAttribute('data-unit-id')
-    if (!dataUnitId || dataUnitId === '') {
-      console.log('data-unit-id not found, using default: ' + defaultUnitId)
-      dataUnitId = defaultUnitId
+    //todo: finish renaming unit-id to tonic-id
+    let dataTonicId = tonicDiv.getAttribute('data-unit-id')
+    if (!dataTonicId || dataTonicId === '') {
+      console.log('data-unit-id not found, using default: ' + defaultTonicId)
+      dataTonicId = defaultTonicId
     }
 
     // Get the data-address
@@ -152,7 +147,7 @@ TonicPow.iframeLoader = async () => {
     // Using handcash will override the data-address given
     let handcashHandle = tonicDiv.getAttribute('data-handcash')
     let handcashAddress = ''
-    if (handcashHandle && dataAddress.includes('$')) {
+    if (handcashHandle && handcashHandle.includes('$')) {
       handcashAddress = await Handcash.lookup(handcashHandle)
 
       if (typeof handcashAddress === 'undefined' || !handcashAddress || handcashAddress === '' || handcashAddress.length <= 25) {
@@ -163,14 +158,14 @@ TonicPow.iframeLoader = async () => {
       }
     }
 
-    // If we have an affiliate, let's store it for the future
+    // Do we have a known affiliate for this address?
     let knownAffiliate = localStorage.getItem('affiliate_' + dataAddress)
     if (knownAffiliate) {
       affiliate = knownAffiliate
-      console.log('affiliate found in local storage: ' + affiliate)
-    } else if (affiliate) {
+      console.log('existing affiliate found in local storage: ' + affiliate)
+    } else if (affiliate) { // Nope - let's store it for the future!
       localStorage.setItem('affiliate_' + dataAddress, affiliate)
-      console.log('saving affiliate in local storage: ' + affiliate)
+      console.log('saving new affiliate in local storage: ' + affiliate)
     }
 
     // Got a state to load by default
@@ -225,7 +220,7 @@ TonicPow.iframeLoader = async () => {
     let iframe = document.createElement('iframe')
     //iframe.src = networkUrl + '/'+ loadState +'?' +
     iframe.src = networkUrl + '/?' +
-      'unit_id=' + dataUnitId +
+      'unit_id=' + dataTonicId +
       '&address=' + dataAddress +
       (affiliate ? '&affiliate=' + affiliate : '') +
       (stickerAddress ? '&sticker_address=' + stickerAddress : '') +
@@ -239,13 +234,13 @@ TonicPow.iframeLoader = async () => {
       '&cache=' + Math.random()
     iframe.width = displayWidth
     iframe.height = (parseInt(displayHeight) + footerLinkHeight)
-    iframe.id = 'tonic_' + dataUnitId
+    iframe.id = 'tonic_' + dataTonicId
 
     // hack to prevent scrollbars on some browsers (depricated)
     iframe.setAttribute('scrolling', 'no')
 
     // Add the data to the iframe
-    iframe.setAttribute('data-unit-id', dataUnitId)
+    iframe.setAttribute('data-unit-id', dataTonicId)
     iframe.setAttribute('data-address', dataAddress)
     if (affiliate) {
       iframe.setAttribute('data-affiliate', affiliate)
@@ -260,6 +255,7 @@ TonicPow.iframeLoader = async () => {
     // iframe.allowpaymentrequest = true;
     // iframe.referrerpolicy = "unsafe-url";
     // iframe.scrolling = "no"; (this stops scrolling as well)
+    //todo: should scrolling be off? this was changed? @mrz
 
     // Name and border
     iframe.importance = 'high'
@@ -272,7 +268,7 @@ TonicPow.iframeLoader = async () => {
     iframe.allowTransparency = 'true'
 
     // Add to iframe map
-    TonicPow.Iframes.set(dataUnitId, dataAddress)
+    TonicPow.Iframes.set(dataTonicId, dataAddress)
 
     // Replace the div for the iframe
     tonicDiv.parentNode.replaceChild(iframe, tonicDiv)
