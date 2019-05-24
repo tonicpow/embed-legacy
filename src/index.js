@@ -11,43 +11,6 @@ TonicPow.bmap = bmap
 TonicPow.BitSocket = BitSocket
 TonicPow.Iframes = new Map()
 
-// Load the iframe(s) and start the BitSocket connection
-document.addEventListener('readystatechange', (event) => {
-  // Load iframe(s)
-  TonicPow.iframeLoader()
-
-  // Connect socket now that we have tonic divs
-  BitSocket.connect((type, data) => {
-    if (type === 'error') {
-      console.error(data)
-      return
-    }
-
-    if (type === 'open') {
-      return
-    }
-
-    // Tonic Tx
-    let tonics = TonicPow.processTonics(data)
-    if (tonics.length > 0 && tonics[0].hasOwnProperty('tx')) {
-      let tonic = tonics[0]
-      if (TonicPow.Iframes.get(tonic.MAP.ad_unit_id) === tonic.MAP.site_address) {
-        // There is a tonic on this page that wants this message
-        let iframe = document.getElementById('tonic_' + tonic.MAP.ad_unit_id)
-        if (iframe) {
-          let params = new URLSearchParams(iframe.src)
-          let address = params.get('address')
-          console.log('address', address, 'tonic address', tonic.MAP.address, (address && address.length > 25 && address === tonic.MAP.address))
-          if (address && address.length > 25 && address === tonic.MAP.address) {
-            // Post tonic to iframe
-            iframe.contentWindow.postMessage({ tonics: JSON.stringify(tonics) }, 'https://app.tonicpow.com')
-          }
-        }
-      }
-    }
-  })
-})
-
 // takes an array of transactions
 TonicPow.processTonics = (tonics) => {
   let newTonics = []
@@ -270,6 +233,59 @@ TonicPow.iframeLoader = async () => {
     tonicDiv.parentNode.replaceChild(iframe, tonicDiv)
   }
   console.log('Tonic Map:', TonicPow.Iframes)
+}
+
+// Load the application
+TonicPow.load = () => {
+  // Load iframe(s)
+  TonicPow.iframeLoader()
+
+  // Connect socket now that we have tonic divs
+  BitSocket.connect((type, data) => {
+    if (type === 'error') {
+      console.error(data)
+      return
+    }
+
+    if (type === 'open') {
+      return
+    }
+
+    // Tonic Tx
+    let tonics = TonicPow.processTonics(data)
+    if (tonics.length > 0 && tonics[0].hasOwnProperty('tx')) {
+      let tonic = tonics[0]
+      if (TonicPow.Iframes.get(tonic.MAP.ad_unit_id) === tonic.MAP.site_address) {
+        // There is a tonic on this page that wants this message
+        let iframe = document.getElementById('tonic_' + tonic.MAP.ad_unit_id)
+        if (iframe) {
+          let params = new URLSearchParams(iframe.src)
+          let address = params.get('address')
+          console.log('address', address, 'tonic address', tonic.MAP.address, (address && address.length > 25 && address === tonic.MAP.address))
+          if (address && address.length > 25 && address === tonic.MAP.address) {
+            // Post tonic to iframe
+            iframe.contentWindow.postMessage({ tonics: JSON.stringify(tonics) }, 'https://app.tonicpow.com')
+          }
+        }
+      }
+    }
+  })
+}
+
+// Load the iframe(s) if we are loaded dynamically
+if (document.readyState === "complete" || document.readyState === "interactive") {
+
+  // This loads if the <script> is dynamically injected into the page
+  TonicPow.load()
+  console.log("loaded via document.readyState")
+
+} else {
+
+  // This loads if the <script> is hardcoded in the html page in the <head>
+  document.addEventListener("DOMContentLoaded", function () {
+    TonicPow.load()
+    console.log("loaded via DOMContentLoaded")
+  });
 }
 
 window.TonicPow = TonicPow
