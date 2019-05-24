@@ -11,8 +11,8 @@ Storage.removeStorage = (name) => {
   try {
     localStorage.removeItem(name)
     localStorage.removeItem(name + '_expiresIn')
-  } catch(e) {
-    console.log('removeStorage: Error removing key ['+ name + '] from localStorage: ' + JSON.stringify(e) )
+  } catch (e) {
+    console.log('removeStorage: Error removing key [' + name + '] from localStorage: ' + JSON.stringify(e))
     return false
   }
   return true
@@ -27,11 +27,11 @@ returns:
     null : in case of expired key or failure
  */
 Storage.getStorage = (key) => {
-  //epoch time, lets deal only with integer
+  // epoch time, lets deal only with integer
   let now = Date.now()
 
   // Set expiration for storage
-  let expires = localStorage.getItem(key+'_expires')
+  let expires = localStorage.getItem(key + '_expires')
   if (expires === undefined || expires === null) {
     expires = 0
   }
@@ -42,11 +42,11 @@ Storage.getStorage = (key) => {
     return null
   }
 
-  //Get the existing item
+  // Get the existing item
   try {
     return localStorage.getItem(key)
-  } catch(e) {
-    console.log('getStorage: Error reading key ['+ key + '] from localStorage: ' + JSON.stringify(e) )
+  } catch (e) {
+    console.log('getStorage: Error reading key [' + key + '] from localStorage: ' + JSON.stringify(e))
     return null
   }
 }
@@ -60,23 +60,22 @@ params:
 returns:
     <boolean> : telling if operation succeeded
  */
-Storage.setStorage = (key, value, expires) => {
-
+Storage.setStorage = (key, value, expires = null) => {
   // Expired time
-  if (expires === undefined || expires === null) {
-    expires = (24*60*60)  // default: seconds for 1 day
+  if (expires) {
+    expires = Math.abs(expires) // make sure it's positive
   } else {
-    expires = Math.abs(expires) //make sure it's positive
+    expires = (24 * 60 * 60) // default: seconds for 1 day
   }
 
   // millisecs since epoch time, lets deal only with integer
   let now = Date.now()
-  let schedule = now + expires*1000
+  let schedule = now + expires * 1000
   try {
     localStorage.setItem(key, value)
     localStorage.setItem(key + '_expires', schedule)
-  } catch(e) {
-    console.log('setStorage: Error setting key ['+ key + '] in localStorage: ' + JSON.stringify(e) )
+  } catch (e) {
+    console.log('setStorage: Error setting key [' + key + '] in localStorage: ' + JSON.stringify(e))
     return false
   }
   return true
