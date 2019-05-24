@@ -13,7 +13,6 @@ TonicPow.Iframes = new Map()
 
 // Load the iframe(s) and start the BitSocket connection
 document.addEventListener('readystatechange', (event) => {
-
   // Load iframe(s)
   TonicPow.iframeLoader()
 
@@ -33,7 +32,6 @@ document.addEventListener('readystatechange', (event) => {
     if (tonics.length > 0 && tonics[0].hasOwnProperty('tx')) {
       let tonic = tonics[0]
       if (TonicPow.Iframes.get(tonic.MAP.ad_unit_id) === tonic.MAP.site_address) {
-
         // There is a tonic on this page that wants this message
         let iframe = document.getElementById('tonic_' + tonic.MAP.ad_unit_id)
         if (iframe) {
@@ -48,7 +46,7 @@ document.addEventListener('readystatechange', (event) => {
       }
     }
   })
-});
+})
 
 // takes an array of transactions
 TonicPow.processTonics = (tonics) => {
@@ -91,11 +89,11 @@ TonicPow.iframeLoader = async () => {
     affiliate = (affiliate.includes('$')) ? await Handcash.lookup(affiliate) : affiliate
 
     if (typeof affiliate === 'undefined' || !affiliate || affiliate === '' || affiliate.length <= 25) {
-      console.error("failed to set affiliate", affiliate)
+      console.error('failed to set affiliate', affiliate)
       affiliate = ''
-    }  
+    }
   }
-  
+
   // Get all tonic divs
   let tonicDivs = document.getElementsByClassName('tonic')
   if (!tonicDivs || tonicDivs.length === 0) {
@@ -121,7 +119,7 @@ TonicPow.iframeLoader = async () => {
     }
 
     // Get the data-unit-id
-    //todo: finish renaming unit-id to tonic-id
+    // todo: finish renaming unit-id to tonic-id
     let dataTonicId = tonicDiv.getAttribute('data-unit-id')
     if (!dataTonicId || dataTonicId === '') {
       console.log('data-unit-id not found, using default: ' + defaultTonicId)
@@ -132,7 +130,7 @@ TonicPow.iframeLoader = async () => {
     let dataAddress = tonicDiv.getAttribute('data-address')
 
     // @mrz - no conversion anymore, I split "data-handcash" and "data-address" into their own concerns
-    //dataAddress = await (dataAddress && dataAddress.includes('$')) ? Handcash.lookup(dataAddress) : dataAddress
+    // dataAddress = await (dataAddress && dataAddress.includes('$')) ? Handcash.lookup(dataAddress) : dataAddress
     if (typeof dataAddress === 'undefined' || !dataAddress || dataAddress.length <= 25) {
       if (stickerAddress) {
         dataAddress = stickerAddress
@@ -170,10 +168,10 @@ TonicPow.iframeLoader = async () => {
 
     // Got a state to load by default
     // @mrz deprecated this feature
-    //let loadState = tonicDiv.getAttribute('data-state')
-    //if (!loadState || loadState === '') {
+    // let loadState = tonicDiv.getAttribute('data-state')
+    // if (!loadState || loadState === '') {
     //  loadState = ''
-    //}
+    // }
 
     // Got a default rate?
     let rate = tonicDiv.getAttribute('data-rate')
@@ -193,11 +191,11 @@ TonicPow.iframeLoader = async () => {
       linkColor = ''
     } else {
       // Sanity check for color
-      linkColor = linkColor.replace(/[^a-zA-Z]+/g, '');
+      linkColor = linkColor.replace(/[^a-zA-Z]+/g, '')
 
       // Default if invalid
-      if(linkColor.length !== 6 && linkColor.length !== 3){
-        linkColor = '';
+      if (linkColor.length !== 6 && linkColor.length !== 3) {
+        linkColor = ''
       }
     }
 
@@ -218,7 +216,7 @@ TonicPow.iframeLoader = async () => {
 
     // Build the iframe, pass along configuration variables
     let iframe = document.createElement('iframe')
-    //iframe.src = networkUrl + '/'+ loadState +'?' +
+    // iframe.src = networkUrl + '/'+ loadState +'?' +
     iframe.src = networkUrl + '/?' +
       'unit_id=' + dataTonicId +
       '&address=' + dataAddress +
@@ -255,7 +253,7 @@ TonicPow.iframeLoader = async () => {
     // iframe.allowpaymentrequest = true;
     // iframe.referrerpolicy = "unsafe-url";
     // iframe.scrolling = "no"; (this stops scrolling as well)
-    //todo: should scrolling be off? this was changed? @mrz
+    // todo: should scrolling be off? this was changed? @mrz
 
     // Name and border
     iframe.importance = 'high'
