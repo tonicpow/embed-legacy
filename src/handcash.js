@@ -48,52 +48,6 @@ Handcash.lookup = async (handle) => {
     console.log(error, handle);
     return "";
   }
-
-
-  // Lookup handcash
-  /*  try {
-    console.log('fetching handcash handle: ' + handle)
-
-    // Setup the request
-    let request = new XMLHttpRequest()
-    request.open('GET', 'https://api.handcash.io/api/receivingAddress/' + handle.substr(1), false)
-
-    // Onload
-    request.onload = function () {
-      if (request.status >= 200 && request.status < 400) {
-        // Success!
-        let data = JSON.parse(request.responseText)
-
-        // Got our bitcoin address?
-        if (data.hasOwnProperty('receivingAddress')) {
-          walletAddress = data.receivingAddress
-          localStorage.setItem(handle, walletAddress)
-          return walletAddress
-        }
-      } else if (request.status === 405) {
-        // todo: handle this better
-        console.log('method not allowed from handcash')
-        return ''
-      } else {
-        // We reached our target server, but it returned an error
-        console.error(request)
-        return ''
-      }
-    }
-
-    // On error
-    request.onerror = function () {
-      // There was a connection error of some sort
-      console.error(request)
-      return ''
-    }
-
-    // Send the GET request
-    return request.send()
-  } catch (e) {
-    console.error('issue getting handcash handle', e)
-    return ''
-  }*/
 }
 
 export default Handcash
