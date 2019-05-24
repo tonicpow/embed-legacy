@@ -2,7 +2,7 @@ const Handcash = {}
 
 // handCashLookup() - looks up a handle and returns an address
 // @param handle is the $handcash handle
-Handcash.lookup = (handle) => {
+Handcash.lookup = async (handle) => {
   // Config
   let walletAddress = ''
 
@@ -19,8 +19,39 @@ Handcash.lookup = (handle) => {
     return walletAddress
   }
 
-  // Lookup handcash
+  // Try to get the handle receiving address
   try {
+
+    // Fetch the data from the handcash api
+    let data = await Promise.all([
+      fetch('https://api.handcash.io/api/receivingAddress/' + handle.substr(1)).then((response) => response.json()),
+    ]);
+
+    // Did we get a valid object response?
+    if (typeof data === "object" && data[0] && data[0].hasOwnProperty('receivingAddress')){
+      walletAddress = data[0]['receivingAddress']
+      if (walletAddress.length > 25) {
+        localStorage.setItem(handle, walletAddress)
+        return walletAddress
+      }
+
+      // Not a valid receiving address?
+      console.log("receivingAddress was invalid:", walletAddress, data);
+      return "";
+    }
+
+    // Not a valid response?
+    console.log("handcash response was invalid or missing receivingAddress", data);
+    return "";
+
+  } catch (error) {
+    console.log(error, handle);
+    return "";
+  }
+
+
+  // Lookup handcash
+  /*  try {
     console.log('fetching handcash handle: ' + handle)
 
     // Setup the request
@@ -58,11 +89,11 @@ Handcash.lookup = (handle) => {
     }
 
     // Send the GET request
-    request.send()
+    return request.send()
   } catch (e) {
     console.error('issue getting handcash handle', e)
     return ''
-  }
+  }*/
 }
 
 export default Handcash
