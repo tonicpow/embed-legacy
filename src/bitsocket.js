@@ -48,7 +48,7 @@ BitSocket.connect = (cb) => {
 
   BitSocket.socket.onerror = (e) => {
     return BitSocket.callback('error', e)
-  }  
+  }
 }
 
 export default BitSocket
