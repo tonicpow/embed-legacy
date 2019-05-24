@@ -33,7 +33,8 @@
     "tonicpow",
     "tonic pow",
     "embed",
-    "bitcoin"
+    "bitcoin",
+    "bsv"
   ],
   "dependencies": {},
   "devDependencies": {
