@@ -65,6 +65,11 @@ OP_RETURN
   'display'
   'cta_url'
   [ Call to action URL ]
+  'rate'
+  'width'
+  [ Ad width ] (optional)
+  'height'
+  [ Ad height ] (optional)
   'campaign_name'
   [ Campaign name ] (optional)
 ```
@@ -98,6 +103,11 @@ OP_RETURN
   [ Call to action Text ]
   'currency'
   [ Currency to show for Money Button ]
+  'rate'
+  'width'
+  [ Ad width ] (optional)
+  'height'
+  [ Ad height ] (optional)
   'campaign_name'
   [ Campaign name ] (optional)
 ```

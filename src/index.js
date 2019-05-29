@@ -9,6 +9,7 @@ TonicPow.Storage = Storage
 TonicPow.Handcash = Handcash
 TonicPow.bmap = bmap
 TonicPow.BitSocket = BitSocket
+TonicPow.Tonic = Tonic
 TonicPow.Iframes = new Map()
 
 // takes an array of transactions
