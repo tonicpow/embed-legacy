@@ -262,8 +262,8 @@ TonicPow.load = () => {
         if (iframe) {
           let params = new URLSearchParams(iframe.src)
           let address = params.get('address')
-          console.log('address', address, 'tonic address', tonic.MAP.address, (address && address.length > 25 && address === tonic.MAP.address))
-          if (address && address.length > 25 && address === tonic.MAP.address) {
+          console.log('address', address, 'tonic address', tonic.MAP.site_address, (address && address.length > 25 && address === tonic.MAP.site_address))
+          if (address && address.length > 25 && address === tonic.MAP.site_address) {
             // Post tonic to iframe
             iframe.contentWindow.postMessage({ tonics: JSON.stringify(tonics) }, 'https://app.tonicpow.com')
           }
