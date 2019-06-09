@@ -53,18 +53,23 @@ OP_RETURN
   'tonicpow'
   'type'
   'campaign_request'
-  'site_pub_key'
-  [ Site Public Key ]
+  'site_address'
+  [ Site Bitcoin Address ]
   'ad_unit_id'
   [ Ad Unit ID ]
-  'affiliate_pub_key'
-  [ Affiliate Public Key ]
+  'affiliate_address'
+  [ Affiliate Address ]
   'num_blocks'
   [ Number of Blocks ]
   'ad_type'
   'display'
   'cta_url'
   [ Call to action URL ]
+  'rate'
+  'width'
+  [ Ad width ] (optional)
+  'height'
+  [ Ad height ] (optional)
   'campaign_name'
   [ Campaign name ] (optional)
 ```
@@ -84,12 +89,12 @@ OP_RETURN
   'tonicpow'
   'type'
   'campaign_request'
-  'site_pub_key'
-  [ Site Public Key ]
+  'site_address'
+  [ Site bitcoin Address ]
   'ad_unit_id'
   [ Ad Unit ID ]
-  'affiliate_pub_key'
-  [ Affiliate Public Key ]
+  'affiliate_address'
+  [ Affiliate Bitcoin Address ]
   'num_blocks'
   [ Number of Blocks ]
   'ad_type'
@@ -98,6 +103,11 @@ OP_RETURN
   [ Call to action Text ]
   'currency'
   [ Currency to show for Money Button ]
+  'rate'
+  'width'
+  [ Ad width ] (optional)
+  'height'
+  [ Ad height ] (optional)
   'campaign_name'
   [ Campaign name ] (optional)
 ```

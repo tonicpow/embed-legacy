@@ -24,9 +24,9 @@ View a [Tonic in action](https://tonicpow.com/?affiliate=$tonicpow). Checkout th
 <script src="https://tonicpow.com/tonic.js"></script>
 ```
 
-2. Replace `data-pubkey` with your BSV address and place the tag wherever it will be displayed.
+2. Replace `data-address` with your BSV address and place the tag wherever it will be displayed.
 ```html
-<div class="tonic" data-pubkey="YOUR_PUBKEY"></div>
+<div class="tonic" data-address="YOUR_ADDRESS"></div>
 ```
 
 _(Optional)_ Use your [$handcash](https://handcash.io/) handle in place of your wallet address
@@ -34,32 +34,35 @@ _(Optional)_ Use your [$handcash](https://handcash.io/) handle in place of your 
 <div class="tonic" data-handcash="$your-handle"></div>
 ```
 
+## Building
+```bash
+$ npm install
+$ npm run build
+```
+
 ## Documentation
 Checkout our nifty [Tonic generator](https://tonicpow.com/?affiliate=$tonicpow).
 
 This Tonic embed works in relation to the [Tonic protocol](https://github.com/tonicpow/embed/blob/master/PROTOCOL.md).
 
-Required attributes are one of the following: `data-pubkey` or `data-handcash`
+Required attributes are one of the following: `data-address` or `data-handcash`
 
 |Attribute |Example |Supported |Description |
 |:---|:---|:---|:---|
-|data-pubkey|1BrwAE...|**Yes**|Your bitcoin wallet pubkey address.|
-|data-handcash|$tonicpow|**Yes**|Your $handcash handle. Used in place of data-pubkey. |
-|data-relayx|1tonicpow|_No_|Your RelayX 1handle. Used in place of data-pubkey. |
+|data-address|1BrwAE...|**Yes**|Your bitcoin sv wallet address.|
+|data-handcash|$tonicpow|**Yes**|Your $handcash handle. Used in place of data-address. |
 |data-unit-id|embed-1|**Yes**|To show multiple units on one page, set each to a unique identifier of your choice.|
 |data-rate|546|**Yes**|Set the rate of sats per block. The default is 546.|
 |data-currency|bsv|_No_|Set the currency rate (bsv or usd)|
-|data-width|300|_No_|Set a custom width. The default is 300px.|
-|data-height|250|_No_|Set a custom height. The default is 250px; There is an additional 22px footer.|
-|data-state|create|**Yes**|Used to load custom tonic state|
-|data-image|https://...|_No_|Default image url if no ad is present|
-|data-bg-color|#000|_No_|Change the background color via CSS value (#FFF)|
-|data-link-color|#FFF|_No_|Change the link color via CSS value (#007bff)|
+|data-width|300|**Yes**|Set a custom width. The default is 300px. Minimum is 160x|
+|data-height|250|**Yes**|Set a custom height. The default and minimum is 250px; There is an additional 22px footer.|
+|data-image|https://...|_No_|Default image url if no ad is present||
+|data-link-color|#FFF|**Yes**|Change the link color via CSS value (#007bff)|
 |data-funding|true|_No_|Toggle funding campaigns, default is true (on)|
 
 #### Handcash Support
 This Tonic embed script converts [$handcash](https://handcash.io/) handles to wallet addresses on-the-fly when loading.
-You can supply a [$handcash](https://handcash.io/) handle via `data-handcash` or wallet address via `data-pubkey`.
+You can supply a [$handcash](https://handcash.io/) handle via `data-handcash` or wallet address via `data-address`.
 
 #### Bitcoin Sticker Protocol Support
 Using the [bitcoin sticker protocol](https://sticker.planaria.network/), this embed forwards the address or transaction of 
