@@ -226,6 +226,14 @@ TonicPow.load = () => {
   // Load iframe(s)
   TonicPow.iframeLoader()
 
+  // Ping planaria for analytics
+  let url = 'https://b.map.sv/ping/'
+  fetch(url).then((r) => {
+    return r.json()
+  }).then(async (r) => {
+    console.log('r')
+  })
+
   // Connect socket now that we have tonic divs
   // BitSocket.connect((type, data) => {
   //   if (type === 'error') {
