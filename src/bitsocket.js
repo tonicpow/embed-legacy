@@ -38,17 +38,18 @@ BitSocket.connect = (cb) => {
           BitSocket.callback(type, data)
           break
         case 'block':
-          conole.log('NEW BLOCK.', data)
-          for (let iframe of tonicIframes) {
-            iframe.contentWindow.postMessage({ block: JSON.stringify(data) }, 'https://app.tonicpow.com')
-          }
+          console.log('NEW BLOCK.', data)
+          //for (let iframe of tonicIframes) {
+            //todo: update domain later to a const (WIP)
+          //  iframe.contentWindow.postMessage({ block: JSON.stringify(data) }, 'https://app.tonicpow.com')
+          //}
       }
     }
   }
 
   BitSocket.socket.onerror = (e) => {
     return BitSocket.callback('error', e)
-  }  
+  }
 }
 
 export default BitSocket

@@ -1,12 +1,41 @@
 {
   "name": "tonicpow",
-  "version": "0.0.1",
-  "description": "TonicPow Embed Script",
-  "author": "Satchmo <rohenaz@gmail.com>",
+  "version": "0.0.2",
+  "description": "TonicPow embed loader script",
+  "author": "Satchmo <satchmo@tonicpow.com>",
+  "contributors": [
+    {
+      "name": "Satchmo",
+      "url": "https://github.com/rohenaz/"
+    },
+    {
+      "name": "MrZ",
+      "url": "https://github.com/mrz1836/"
+    },
+    {
+      "name": "Attila",
+      "url": "https://github.com/attilaaf/"
+    }
+  ],
+  "bugs": "https://github.com/tonicpow/embed/issues",
+  "homepage": "https://tonicpow.com",
   "private": true,
   "scripts": {
     "build": "webpack --config webpack.config.js"
   },
+  "license": "GNU-V3",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/tonicpow/embed/"
+  },
+  "keywords": [
+    "tonic",
+    "tonicpow",
+    "tonic pow",
+    "embed",
+    "bitcoin",
+    "bsv"
+  ],
   "dependencies": {},
   "devDependencies": {
     "webpack": "^4.30.0",
