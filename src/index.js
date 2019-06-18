@@ -6,7 +6,6 @@ import Handcash from './handcash.js'
 let TonicPow = {}
 TonicPow.Storage = Storage
 TonicPow.Handcash = Handcash
-TonicPow.bmap = bmap
 // TonicPow.BitSocket = BitSocket
 TonicPow.Tonic = Tonic
 TonicPow.Iframes = new Map()
