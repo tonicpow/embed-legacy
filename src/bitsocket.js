@@ -22,7 +22,7 @@ BitSocket.connect = (cb) => {
   BitSocket.callback = cb
 
   // Subscribe
-  BitSocket.socket = new EventSource('https://genesis.bitdb.network/s/1FnauZ9aUH2Bex6JzdcV4eNX7oLSSEbxtN/' + b64)
+  BitSocket.socket = new EventSource('http://planaria.tonicpow.network/s/15jnZfxkjk3XAUTh76hJM1EuSX7CvC1JHS/' + b64)
 
   // Event handler
   BitSocket.socket.onmessage = (e) => {

@@ -1,29 +1,14 @@
 import Tonic from './tonic.js'
-import bmap from './bmap.js'
-import BitSocket from './BitSocket.js'
+// import BitSocket from './BitSocket.js'
 import Storage from './storage.js'
 import Handcash from './handcash.js'
 
 let TonicPow = {}
 TonicPow.Storage = Storage
 TonicPow.Handcash = Handcash
-TonicPow.bmap = bmap
-TonicPow.BitSocket = BitSocket
+// TonicPow.BitSocket = BitSocket
 TonicPow.Tonic = Tonic
 TonicPow.Iframes = new Map()
-
-// takes an array of transactions
-TonicPow.processTonics = (tonics) => {
-  let newTonics = []
-  for (let tonic of tonics) {
-    // If its in the blacklist, continue
-    // if (this.blacklist.indexOf(tonic.tx.h) !== -1) { continue }
-    let tonicObj = new Tonic(bmap.TransformTxs(tonic))
-    // we always run this to get .html on there
-    newTonics.push(tonicObj)
-  }
-  return newTonics
-}
 
 // iframeLoader() - replaces each tonic div with a corresponding iframe
 TonicPow.iframeLoader = async () => {
@@ -241,36 +226,44 @@ TonicPow.load = () => {
   // Load iframe(s)
   TonicPow.iframeLoader()
 
-  // Connect socket now that we have tonic divs
-  BitSocket.connect((type, data) => {
-    if (type === 'error') {
-      console.error(data)
-      return
-    }
-
-    if (type === 'open') {
-      return
-    }
-
-    // Tonic Tx
-    let tonics = TonicPow.processTonics(data)
-    if (tonics.length > 0 && tonics[0].hasOwnProperty('tx')) {
-      let tonic = tonics[0]
-      if (TonicPow.Iframes.get(tonic.MAP.ad_unit_id) === tonic.MAP.site_address) {
-        // There is a tonic on this page that wants this message
-        let iframe = document.getElementById('tonic_' + tonic.MAP.ad_unit_id)
-        if (iframe) {
-          let params = new URLSearchParams(iframe.src)
-          let address = params.get('address')
-          console.log('address', address, 'tonic address', tonic.MAP.site_address, (address && address.length > 25 && address === tonic.MAP.site_address))
-          if (address && address.length > 25 && address === tonic.MAP.site_address) {
-            // Post tonic to iframe
-            iframe.contentWindow.postMessage({ tonics: JSON.stringify(tonics) }, 'https://app.tonicpow.com')
-          }
-        }
-      }
-    }
+  // Ping planaria for analytics
+  let url = 'https://b.map.sv/ping/'
+  fetch(url).then((r) => {
+    return r.json()
+  }).then(async (r) => {
+    console.log('r')
   })
+
+  // Connect socket now that we have tonic divs
+  // BitSocket.connect((type, data) => {
+  //   if (type === 'error') {
+  //     console.error(data)
+  //     return
+  //   }
+
+  //   if (type === 'open') {
+  //     return
+  //   }
+
+  //   // Tonic Tx
+  //   let tonics = TonicPow.processTonics(data)
+  //   if (tonics.length > 0 && tonics[0].hasOwnProperty('tx')) {
+  //     let tonic = tonics[0]
+  //     if (TonicPow.Iframes.get(tonic.MAP.ad_unit_id) === tonic.MAP.site_address) {
+  //       // There is a tonic on this page that wants this message
+  //       let iframe = document.getElementById('tonic_' + tonic.MAP.ad_unit_id)
+  //       if (iframe) {
+  //         let params = new URLSearchParams(iframe.src)
+  //         let address = params.get('address')
+  //         console.log('address', address, 'tonic address', tonic.MAP.site_address, (address && address.length > 25 && address === tonic.MAP.site_address))
+  //         if (address && address.length > 25 && address === tonic.MAP.site_address) {
+  //           // Post tonic to iframe
+  //           iframe.contentWindow.postMessage({ tonics: JSON.stringify(tonics) }, 'https://app.tonicpow.com')
+  //         }
+  //       }
+  //     }
+  //   }
+  // })
 }
 
 // Load the iframe(s) if we are loaded dynamically
