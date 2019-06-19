@@ -2,10 +2,12 @@ import Tonic from './tonic.js'
 // import BitSocket from './BitSocket.js'
 import Storage from './storage.js'
 import Handcash from './handcash.js'
+import Relay from './relay.js'
 
 let TonicPow = {}
 TonicPow.Storage = Storage
 TonicPow.Handcash = Handcash
+TonicPow.Relay = Relay
 // TonicPow.BitSocket = BitSocket
 TonicPow.Tonic = Tonic
 TonicPow.Iframes = new Map()
@@ -32,11 +34,16 @@ TonicPow.iframeLoader = async () => {
   // Get the params
   let params = new URLSearchParams(window.location.search)
 
-  // Get the affiliate and convert if needed ($handcash)
+  // Get the affiliate and convert if needed
   let affiliate = params.get('affiliate')
   if (affiliate) {
+    // ($handcash)
     affiliate = (affiliate.includes('$')) ? await Handcash.lookup(affiliate) : affiliate
 
+    // (1handle) //todo: there needs to be a better way to detect 1handle vs a wallet address
+    affiliate = (affiliate.charAt(0) === '1' && affiliate.length < 25) ? await Relay.lookup(affiliate) : affiliate
+
+    // Invalid affiliate
     if (typeof affiliate === 'undefined' || !affiliate || affiliate === '' || affiliate.length <= 25) {
       console.error('failed to set affiliate', affiliate)
       affiliate = ''
@@ -78,19 +85,18 @@ TonicPow.iframeLoader = async () => {
     // Get the data-address
     let dataAddress = tonicDiv.getAttribute('data-address')
 
-    // @mrz - no conversion anymore, I split "data-handcash" and "data-address" into their own concerns
-    // dataAddress = await (dataAddress && dataAddress.includes('$')) ? Handcash.lookup(dataAddress) : dataAddress
+    // Only a valid bitcoin address is supported, otherwise use `data-handcash` or `data-relayx`
     if (typeof dataAddress === 'undefined' || !dataAddress || dataAddress.length <= 25) {
       if (stickerAddress) {
         dataAddress = stickerAddress
-        console.log('data-address not found or invalid: ' + dataAddress + ' using sticker address: ' + stickerAddress)
+        console.log('data-address not found or invalid: ' + dataAddress + ' using sticker address: ' + stickerAddress + ' tonic-id: ' + dataTonicId)
       } else {
         dataAddress = defaultAddress
-        console.log('data-address not found or invalid: ' + dataAddress + ' using default address: ' + defaultAddress)
+        console.log('data-address not found or invalid: ' + dataAddress + ' using default address: ' + defaultAddress + ' tonic-id: ' + dataTonicId)
       }
     }
 
-    // Process handcash handle if given (uses handcash instead of address
+    // Process handcash handle if given (uses handcash instead of address)
     // Using handcash will override the data-address given
     let handcashHandle = tonicDiv.getAttribute('data-handcash')
     let handcashAddress = ''
@@ -102,6 +108,21 @@ TonicPow.iframeLoader = async () => {
       } else {
         // override the address with the handcash address
         dataAddress = handcashAddress
+      }
+    }
+
+    // Process relayx 1handle handle if given (uses relayX 1handle instead of address)
+    // Using relayx 1handle will override the data-address given
+    let relayHandle = tonicDiv.getAttribute('data-relayx')
+    let relayAddress = ''
+    if (relayHandle && relayHandle.charAt(0) === '1') {
+      relayAddress = await Relay.lookup(relayHandle)
+
+      if (typeof relayAddress === 'undefined' || !relayAddress || relayAddress === '' || relayAddress.length <= 25) {
+        relayAddress = ''
+      } else {
+        // override the address with the 1handle address
+        dataAddress = relayAddress
       }
     }
 
@@ -195,12 +216,13 @@ TonicPow.iframeLoader = async () => {
     iframe.setAttribute('data-sticker-address', stickerAddress)
     iframe.setAttribute('data-sticker-tx', stickerTx)
     iframe.setAttribute('data-handcash', handcashHandle)
+    iframe.setAttribute('data-relayx', relayHandle)
     iframe.setAttribute('data-link-color', linkColor)
 
     // Extra attributes
     // iframe.allowfullscreen = true;
     // iframe.allowpaymentrequest = true;
-    // iframe.referrerpolicy = "unsafe-url";
+    // iframe.referrerpolicy = 'unsafe-url';
 
     // Name and border
     iframe.importance = 'high'
@@ -231,7 +253,7 @@ TonicPow.load = () => {
   fetch(url).then((r) => {
     return r.json()
   }).then(async (r) => {
-    console.log('r')
+    // console.log('r')
   })
 
   // Connect socket now that we have tonic divs
@@ -267,19 +289,16 @@ TonicPow.load = () => {
 }
 
 // Load the iframe(s) if we are loaded dynamically
-if (document.readyState === "complete" || document.readyState === "interactive") {
-
+if (document.readyState === 'complete' || document.readyState === 'interactive') {
   // This loads if the <script> is dynamically injected into the page
   TonicPow.load()
-  console.log("loaded via document.readyState")
-
+  console.log('loaded via document.readyState')
 } else {
-
   // This loads if the <script> is hardcoded in the html page in the <head>
-  document.addEventListener("DOMContentLoaded", function () {
+  document.addEventListener('DOMContentLoaded', function () {
     TonicPow.load()
-    console.log("loaded via DOMContentLoaded")
-  });
+    console.log('loaded via DOMContentLoaded')
+  })
 }
 
 window.TonicPow = TonicPow
