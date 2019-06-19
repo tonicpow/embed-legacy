@@ -55,8 +55,8 @@ Required attributes are one of the following: `data-address` or `data-handcash`
 |Attribute |Example |Supported |Description |
 |:---|:---|:---|:---|
 |data-address|1BrwAE...|**Yes**|Your bitcoin sv wallet address.|
-|data-handcash|$tonicpow|**Yes**|Your $handcash handle. Used in place of data-address. |
-|data-relayx|1tonicpow|**Yes**|Your 1handle from RelayX. Used in place of data-address. |
+|data-handcash|$tonicpow|**Yes**|Your [$handcash](https://handcash.io/?affiliate=$tonicpow) handle. Used in place of data-address. |
+|data-relayx|1tonicpow|**Yes**|Your [RelayX 1handle](https://relayx.io/?affiliate=$tonicpow). Used in place of data-address. |
 |data-unit-id|embed-1|**Yes**|To show multiple units on one page, set each to a unique identifier of your choice.|
 |data-rate|546|**Yes**|Set the rate of sats per block. The default is 546.|
 |data-currency|bsv|_No yet_|Set the currency rate (bsv or usd)|
