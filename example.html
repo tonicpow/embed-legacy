@@ -7,43 +7,25 @@
     <script src="./dist/tonicpow.js"></script>
   </head>
   <body>
-    <div>Tonic Display #1 (No State)</div>
+    <div>Tonic Display (Normal)</div>
     <hr>
-    <div class="tonic" data-pubkey="1DwCepAtXW3P7qb4ApgTBfRjdfqGny3XW5" data-unit-id="banner-one"></div>
+    <div class="tonic" data-address="1DwCepAtXW3P7qb4ApgTBfRjdfqGny3XW5" data-unit-id="banner-one"></div>
 
-
-    <div>Tonic Display #2 (Create State)</div>
+    <div>Tonic Display (Custom size)</div>
     <hr>
-    <div class="tonic" data-pubkey="1BrwAE2qg6qBaB2nqed3TEHeFuvbgSzahf" data-unit-id="banner-two" data-state="create"></div>
+    <div class="tonic" data-address="1HgKAX7USsXkSepeKTLqVEgqLLhzv8xgt3" data-unit-id="banner-five" data-width="400" data-height="400"></div>
 
-
-    <div>Tonic Display #3 (Failed - missing unit-id)</div>
+    <div>Tonic Display (Custom Rate)</div>
     <hr>
-    <div class="tonic" data-pubkey="1Jih4ktbfRDXe31bu4xCL61nisu8g1ZdLX" data-unit-id="" data-rate=""></div>
+    <div class="tonic" data-address="14RzgjmFwgoTfyPNuCMpBKjJLU4WG1Z6q1" data-unit-id="banner-six" data-rate="750"></div>
 
-
-    <div>Tonic Display #4 (Failed - duplicate unit-id)</div>
+    <div>Tonic Display (Handcash / Custom Colors)</div>
     <hr>
-    <div class="tonic" data-pubkey="1BrwAE2qg6qBaB2nqed3TEHeFuvbgSzahf" data-unit-id="banner-dupe" data-rate=""></div>
-    <div class="tonic" data-pubkey="1BrwAE2qg6qBaB2nqed3TEHeFuvbgSzahf" data-unit-id="banner-dupe" data-rate=""></div>
+    <div class="tonic" data-handcash="$mr-z" data-unit-id="banner-eight" data-link-color="#FFF"></div>
 
-
-    <div>Tonic Display #5 (Custom size)</div>
+    <div>Tonic Display (RelayX)</div>
     <hr>
-    <div class="tonic" data-pubkey="1HgKAX7USsXkSepeKTLqVEgqLLhzv8xgt3" data-unit-id="banner-five" data-width="400" data-height="400"></div>
+    <div class="tonic" data-relayx="1mrz" data-unit-id="banner-nine"></div>
 
-
-    <div>Tonic Display #6 (Custom Rate)</div>
-    <hr>
-    <div class="tonic" data-pubkey="14RzgjmFwgoTfyPNuCMpBKjJLU4WG1Z6q1" data-unit-id="banner-six" data-rate="3"></div>
-
-    
-    <div>Tonic Display #7 (Handcash / Default Image)</div>
-    <hr>
-    <div class="tonic" data-handcash="$mr-z" data-unit-id="banner-seven" data-default-image="https://tonicpow.com/images/defaults/mrz.png"></div>
-
-    <div>Tonic Display #8 (Handcash / Custom Colors)</div>
-    <hr>
-    <div class="tonic" data-handcash="$mr-z" data-unit-id="banner-eight" data-bg-color="#000" data-link-color="#FFF"></div>
   </body>
 </html>

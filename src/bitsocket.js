@@ -39,10 +39,10 @@ BitSocket.connect = (cb) => {
           break
         case 'block':
           console.log('NEW BLOCK.', data)
-          //for (let iframe of tonicIframes) {
-            //todo: update domain later to a const (WIP)
+          // for (let iframe of tonicIframes) {
+            // todo: update domain later to a const (WIP)
           //  iframe.contentWindow.postMessage({ block: JSON.stringify(data) }, 'https://app.tonicpow.com')
-          //}
+          // }
       }
     }
   }
