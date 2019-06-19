@@ -85,17 +85,6 @@ TonicPow.iframeLoader = async () => {
     // Get the data-address
     let dataAddress = tonicDiv.getAttribute('data-address')
 
-    // Only a valid bitcoin address is supported, otherwise use `data-handcash` or `data-relayx`
-    if (typeof dataAddress === 'undefined' || !dataAddress || dataAddress.length <= 25) {
-      if (stickerAddress) {
-        dataAddress = stickerAddress
-        console.log('data-address not found or invalid: ' + dataAddress + ' using sticker address: ' + stickerAddress + ' tonic-id: ' + dataTonicId)
-      } else {
-        dataAddress = defaultAddress
-        console.log('data-address not found or invalid: ' + dataAddress + ' using default address: ' + defaultAddress + ' tonic-id: ' + dataTonicId)
-      }
-    }
-
     // Process handcash handle if given (uses handcash instead of address)
     // Using handcash will override the data-address given
     let handcashHandle = tonicDiv.getAttribute('data-handcash')
@@ -109,6 +98,8 @@ TonicPow.iframeLoader = async () => {
         // override the address with the handcash address
         dataAddress = handcashAddress
       }
+    } else {
+      handcashHandle = '' // return to empty string for including in iframe
     }
 
     // Process relayx 1handle handle if given (uses relayX 1handle instead of address)
@@ -123,6 +114,20 @@ TonicPow.iframeLoader = async () => {
       } else {
         // override the address with the 1handle address
         dataAddress = relayAddress
+      }
+    } else {
+      relayHandle = '' // return to empty string for including in iframe
+    }
+
+    // Only a valid bitcoin address is supported, otherwise use `data-handcash` or `data-relayx`
+    // Fail-over is the sticker-address
+    if (typeof dataAddress === 'undefined' || !dataAddress || dataAddress.length <= 25) {
+      if (stickerAddress) {
+        dataAddress = stickerAddress
+        console.log('data-address not found or invalid: ' + dataAddress + ' using sticker address: ' + stickerAddress + ' tonic-id: ' + dataTonicId)
+      } else {
+        dataAddress = defaultAddress
+        console.log('data-address not found or invalid: ' + dataAddress + ' using default address: ' + defaultAddress + ' tonic-id: ' + dataTonicId)
       }
     }
 
