@@ -218,11 +218,11 @@ TonicPow.iframeLoader = async () => {
     if (affiliate) {
       iframe.setAttribute('data-affiliate', affiliate)
     }
+    iframe.setAttribute('data-handcash', handcashHandle)
+    iframe.setAttribute('data-link-color', linkColor)
+    iframe.setAttribute('data-relayx', relayHandle)
     iframe.setAttribute('data-sticker-address', stickerAddress)
     iframe.setAttribute('data-sticker-tx', stickerTx)
-    iframe.setAttribute('data-handcash', handcashHandle)
-    iframe.setAttribute('data-relayx', relayHandle)
-    iframe.setAttribute('data-link-color', linkColor)
 
     // Extra attributes
     // iframe.allowfullscreen = true;
@@ -254,6 +254,7 @@ TonicPow.load = () => {
   TonicPow.iframeLoader()
 
   // Ping planaria for analytics
+  // todo: update to planaria.tonicpow.com when available
   let url = 'https://b.map.sv/ping/'
   fetch(url).then((r) => {
     return r.json()
