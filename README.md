@@ -2,9 +2,9 @@
 
 View a [Tonic in action](https://tonicpow.com/?affiliate=$tonicpow). Checkout the [Tonic protocol](https://github.com/tonicpow/embed/blob/master/PROTOCOL.md).
 
-![last commit](https://img.shields.io/github/last-commit/tonicpow/embed.svg)
-![version](https://img.shields.io/github/release-pre/tonicpow/embed.svg)
-![license](https://img.shields.io/github/license/tonicpow/embed.svg?style=flat)
+[![last commit](https://img.shields.io/github/last-commit/tonicpow/embed.svg?style=flat)](https://github.com/tonicpow/embed/commits/master)
+[![version](https://img.shields.io/github/release-pre/tonicpow/embed.svg?style=flat)](https://github.com/tonicpow/embed/releases)
+[![license](https://img.shields.io/badge/license-Open%20BSV-brightgreen.svg?style=flat)](/LICENSE)
 [![standard-readme compliant](https://img.shields.io/badge/standard--readme-OK-green.svg?style=flat)](https://github.com/RichardLitt/standard-readme)
 [![app health](https://img.shields.io/website-up-down-green-red/https/faucet.allaboard.cash.svg?label=status)](https://tonicpow.com/?affiliate=$tonicpow)
 
@@ -105,4 +105,4 @@ Support the development of this project and the [TonicPow](https://tonicpow.com/
 Feel free to dive in! [Open an issue](https://github.com/tonicpow/embed/issues/new) or submit PRs.
 
 ## License
-![License](https://img.shields.io/github/license/tonicpow/embed.svg?style=flat)
+[![License](https://img.shields.io/badge/license-Open%20BSV-brightgreen.svg?style=flat)](/LICENSE)

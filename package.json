@@ -23,7 +23,7 @@
   "scripts": {
     "build": "webpack --config webpack.config.js"
   },
-  "license": "GNU-V3",
+  "license": "Open BSV",
   "repository": {
     "type": "git",
     "url": "https://github.com/tonicpow/embed/"
