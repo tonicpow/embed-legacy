@@ -59,12 +59,12 @@ Required attributes are one of the following: `data-address` or `data-handcash` 
 |data-relayx|1tonicpow|**Yes**|Your [RelayX 1handle](https://relayx.io/?affiliate=$tonicpow). Used in place of data-address. |
 |data-unit-id|embed-1|**Yes**|To show multiple units on one page, set each to a unique identifier of your choice.|
 |data-rate|546|**Yes**|Set the rate of sats per block. The default is 546.|
-|data-currency|bsv|_No yet_|Set the currency rate (bsv or usd)|
+|data-currency|bsv|_Not yet_|Set the currency rate (bsv or usd)|
 |data-width|300|**Yes**|Set a custom width. The default is 300px. Minimum is 160x|
 |data-height|250|**Yes**|Set a custom height. The default and minimum is 250px; There is an additional 22px footer.|
-|data-image|https://...|_No yet_|Default image url if no ad is present||
+|data-image|https://...|_Not yet_|Default image url if no ad is present||
 |data-link-color|#FFF|**Yes**|Change the link color via CSS value (#007bff)|
-|data-funding|true|_No yet_|Toggle funding campaigns, default is true (on)|
+|data-funding|true|_Not yet_|Toggle funding campaigns, default is true (on)|
 
 #### Handcash Support
 This Tonic embed script converts [$handcash](https://handcash.io/?affiliate=$tonicpow) handles to wallet addresses on-the-fly when loading.
