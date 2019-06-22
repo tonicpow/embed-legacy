@@ -1,4 +1,4 @@
-<img src="https://github.com/tonicpow/embed/blob/master/images/tonicpow-logo.png" height="100">
+<img src="https://github.com/tonicpow/embed/blob/master/images/tonicpow-logo.png" height="100" alt="TonicPow">
 
 View a [Tonic in action](https://tonicpow.com/?affiliate=$tonicpow). Checkout the [Tonic protocol](/PROTOCOL.md).
 
@@ -50,7 +50,7 @@ Checkout our nifty [Tonic generator](https://tonicpow.com/?affiliate=$tonicpow).
 
 This Tonic embed works in relation to the [Tonic protocol](/PROTOCOL.md).
 
-Required attributes are one of the following: `data-address` or `data-handcash`
+Required attributes are one of the following: `data-address` or `data-handcash` or `data-relayx`
 
 |Attribute |Example |Supported |Description |
 |:---|:---|:---|:---|
@@ -73,6 +73,26 @@ You can supply a [$handcash](https://handcash.io/?affiliate=$tonicpow) handle vi
 #### RelayX 1handle Support
 This Tonic embed script converts [RelayX 1handles](https://relayx.io/?affiliate=$tonicpow) to wallet addresses on-the-fly when loading.
 You can supply a [1handle](https://relayx.io/?affiliate=$tonicpow) handle via `data-relayx`.
+
+#### Supported Browsers
+TonicPow supports all commonly used browsers. Below is a list of popular browsers and their minimum supported version.
+If we're missing a browser, suggest one [via an issue](https://github.com/tonicpow/embed/issues/new).
+
+|Browser |Platform |Min Version |
+|:---|:---|:---|
+|Android|Mobile|67.0|
+|Bottle|Desktop|0.1|
+|Brave|Desktop|55.0|
+|Chrome|Desktop|55.0|
+|Chrome|Mobile|74.0|
+|Edge|Desktop|17.0|
+|Firefox|Desktop|52.0|
+|Firefox|Mobile|67.0|
+|IE|Desktop|---|
+|Opera|Desktop|42.0|
+|Opera|Mobile|---|
+|Safari|Desktop|10.1|
+|Safari|Mobile|10.3|
 
 
 #### Bitcoin Sticker Protocol Support
