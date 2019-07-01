@@ -21,6 +21,7 @@
   "homepage": "https://tonicpow.com",
   "private": true,
   "scripts": {
+    "lint": "cd src && standard --fix || true",
     "build": "webpack --config webpack.config.js"
   },
   "license": "Open BSV",
