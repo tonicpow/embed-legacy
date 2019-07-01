@@ -160,6 +160,12 @@ TonicPow.iframeLoader = async () => {
       imageUrl = ''
     }
 
+    // Got a default url?
+    let defaultUrl = tonicDiv.getAttribute('data-url')
+    if (!defaultUrl || defaultUrl === '') {
+      defaultUrl = ''
+    }
+
     // Got a custom link color
     let linkColor = tonicDiv.getAttribute('data-link-color')
     if (!linkColor || linkColor === '') {
@@ -203,6 +209,7 @@ TonicPow.iframeLoader = async () => {
       '&width=' + displayWidth +
       '&height=' + displayHeight +
       (imageUrl ? '&image=' + imageUrl : '') +
+      (defaultUrl ? '&url=' + defaultUrl : '') +
       (linkColor ? '&link_color=' + linkColor : '') +
       '&cache=' + Math.random()
     iframe.width = displayWidth
@@ -213,16 +220,20 @@ TonicPow.iframeLoader = async () => {
     iframe.setAttribute('scrolling', 'no')
 
     // Add the data to the iframe
-    iframe.setAttribute('data-unit-id', dataTonicId)
     iframe.setAttribute('data-address', dataAddress)
-    if (affiliate) {
-      iframe.setAttribute('data-affiliate', affiliate)
-    }
     iframe.setAttribute('data-handcash', handcashHandle)
+    iframe.setAttribute('data-image', imageUrl)
     iframe.setAttribute('data-link-color', linkColor)
     iframe.setAttribute('data-relayx', relayHandle)
     iframe.setAttribute('data-sticker-address', stickerAddress)
     iframe.setAttribute('data-sticker-tx', stickerTx)
+    iframe.setAttribute('data-unit-id', dataTonicId)
+    iframe.setAttribute('data-url', defaultUrl)
+
+    // Add affiliate to the iframe
+    if (affiliate) {
+      iframe.setAttribute('data-affiliate', affiliate)
+    }
 
     // Extra attributes
     // iframe.allowfullscreen = true;
