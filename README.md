@@ -109,8 +109,8 @@ The affiliate/publisher relationship is stored in user's local session for futur
 View the [interactive live demo ads](https://tonicpow.com/) and [more examples here](/example.html)
 
 #### Affiliate
-Replace `$your-handle` with your [$handcash](https://handcash.io/?affiliate=1LWyDs4qzmfAhGpSZk1K1kLmNdafBDdJSD) handle or your [1handle](https://relayx.io/?affiliate=1LWyDs4qzmfAhGpSZk1K1kLmNdafBDdJSD) or [bsv wallet address](https://en.bitcoin.it/wiki/Address) and share!
-Receive a payment if an Ad is purchased using your affiliate link. Any website that uses [TonicPow](https://tonicpow.com/) supports the [$handcash](https://handcash.io/?affiliate=1LWyDs4qzmfAhGpSZk1K1kLmNdafBDdJSD) affiliate functionality.
+Replace `1your-handle` with your [1handle](https://relayx.io/?affiliate=1LWyDs4qzmfAhGpSZk1K1kLmNdafBDdJSD) or [bsv wallet address](https://en.bitcoin.it/wiki/Address) and share!
+Receive a payment if an Ad is purchased using your affiliate link. Any website that uses [TonicPow](https://tonicpow.com/) supports the [1handle](https://relayx.io/?affiliate=1LWyDs4qzmfAhGpSZk1K1kLmNdafBDdJSD) affiliate functionality.
 ```
 https://some-website.com/?affiliate=1your-handle
 
@@ -124,8 +124,8 @@ https://some-website.com/?affiliate=1BrwAE2qg6qBaB2n...
 - Setup your own Tonic using the [Tonic generator](https://tonicpow.com/) or [above installation](#installation).
 
 ## Maintainers
-[Attila](https://github.com/attilaaf?affiliate=$attila) - [Satchmo](https://github.com/rohenaz?affiliate=$satchmo) - [MrZ](https://github.com/mrz1836?affiliate=$mr-z)
-
+[Attila](https://github.com/attilaaf?affiliate=1attila) - [Satchmo](https://github.com/rohenaz?affiliate=1satchmo) - [MrZ](https://github.com/mrz1836?affiliate=1mrz)
+                                                                                                                                                           
 Support the development of this project and the [TonicPow](https://tonicpow.com/) team 🙏
 
 ## Contributing
