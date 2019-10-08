@@ -3,11 +3,13 @@ import Tonic from './tonic.js'
 import Storage from './storage.js'
 import Handcash from './handcash.js'
 import Relay from './relay.js'
+import Paymail from './paymail.js'
 
 let TonicPow = {}
 TonicPow.Storage = Storage
 TonicPow.Handcash = Handcash
 TonicPow.Relay = Relay
+TonicPow.Paymail = Paymail
 // TonicPow.BitSocket = BitSocket
 TonicPow.Tonic = Tonic
 TonicPow.Iframes = new Map()
@@ -39,6 +41,9 @@ TonicPow.iframeLoader = async () => {
   if (affiliate) {
     // ($handcash)
     affiliate = (affiliate.includes('$')) ? await Handcash.lookup(affiliate) : affiliate
+
+    // (paymail)
+    affiliate = (affiliate.includes('@')) ? await Paymail.lookup(affiliate) : affiliate
 
     // (1handle) //todo: there needs to be a better way to detect 1handle vs a wallet address
     affiliate = (affiliate.charAt(0) === '1' && affiliate.length < 25) ? await Relay.lookup(affiliate) : affiliate
@@ -117,6 +122,23 @@ TonicPow.iframeLoader = async () => {
       }
     } else {
       relayHandle = '' // return to empty string for including in iframe
+    }
+
+    // Process paymail address if given (uses paymail address instead of address)
+    // Using paymail address will override the data-address given
+    let paymailAddress = tonicDiv.getAttribute('data-paymail')
+    let paymailWalletAddress = ''
+    if (paymailAddress && paymailAddress.includes('@')) {
+      paymailWalletAddress = await Paymail.lookup(paymailAddress)
+
+      if (typeof paymailWalletAddress === 'undefined' || !paymailWalletAddress || paymailWalletAddress === '' || paymailWalletAddress.length <= 25) {
+        paymailWalletAddress = ''
+      } else {
+        // override the address with the paymail wallet address
+        dataAddress = paymailWalletAddress
+      }
+    } else {
+      paymailAddress = '' // return to empty string for including in iframe
     }
 
     // Only a valid bitcoin address is supported, otherwise use `data-handcash` or `data-relayx`
@@ -222,6 +244,7 @@ TonicPow.iframeLoader = async () => {
     // Add the data to the iframe
     iframe.setAttribute('data-address', dataAddress)
     iframe.setAttribute('data-handcash', handcashHandle)
+    iframe.setAttribute('data-paymail', paymailAddress)
     iframe.setAttribute('data-image', imageUrl)
     iframe.setAttribute('data-link-color', linkColor)
     iframe.setAttribute('data-relayx', relayHandle)

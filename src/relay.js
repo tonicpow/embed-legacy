@@ -2,7 +2,7 @@ import Storage from './storage'
 
 const Relay = {}
 
-// relayLookup() - looks up a handle and returns an address
+// RelayLookup() - looks up a handle and returns an address
 // @param handle is the 1relay handle
 Relay.lookup = async (handle) => {
   // No handle or invalid

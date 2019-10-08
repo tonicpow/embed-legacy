@@ -4,6 +4,7 @@ const Handcash = {}
 
 // handCashLookup() - looks up a handle and returns an address
 // @param handle is the $handcash handle
+// @deprecated - Handcash is no longer supporting this public API (to be removed after 11/15/19)
 Handcash.lookup = async (handle) => {
   // No handle or invalid
   if (!handle || !handle.includes('$')) {
