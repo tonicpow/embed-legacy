@@ -1,21 +1,20 @@
 import Storage from './storage'
 
-const Handcash = {}
+const Relay = {}
 
-// handCashLookup() - looks up a handle and returns an address
-// @param handle is the $handcash handle
-// @deprecated - Handcash is no longer supporting this public API (to be removed after 11/15/19)
-Handcash.lookup = async (handle) => {
+// RelayLookup() - looks up a handle and returns an address
+// @param handle is the 1relay handle
+Relay.lookup = async (handle) => {
   // No handle or invalid
-  if (!handle || !handle.includes('$')) {
-    console.error('invalid handcash handle: ' + handle)
+  if (!handle || handle.charAt(0) !== '1') {
+    console.error('invalid relay handle: ' + handle)
     return ''
   }
 
   // Did we already look this up?
   let walletAddress = Storage.getStorage(handle)
   if (walletAddress !== null && walletAddress.length > 25) {
-    console.log('handcash found locally, skipping lookup! ' + handle + ':' + walletAddress)
+    console.log('relay found locally, skipping lookup! ' + handle + ':' + walletAddress)
     return walletAddress
   }
 
@@ -23,7 +22,7 @@ Handcash.lookup = async (handle) => {
   try {
     // Fetch the data from the handcash api
     let data = await Promise.all([
-      fetch('https://api.handcash.io/api/receivingAddress/' + handle.substr(1)).then((response) => response.json())
+      fetch('https://relayx.io/api/receivingAddress/' + handle).then((response) => response.json())
     ])
 
     // Did we get a valid object response?
@@ -40,7 +39,7 @@ Handcash.lookup = async (handle) => {
     }
 
     // Not a valid response?
-    console.log('handcash response was invalid or missing receivingAddress', data)
+    console.log('relay response was invalid or missing receivingAddress', data)
     return ''
   } catch (error) {
     console.log(error, handle)
@@ -48,4 +47,4 @@ Handcash.lookup = async (handle) => {
   }
 }
 
-export default Handcash
+export default Relay
