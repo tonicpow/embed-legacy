@@ -46,6 +46,11 @@ $ npm install
 $ npm run build
 ```
 
+#### Check Outdated Packages
+```bash
+$ npm outdated
+```
+
 ## Documentation
 Checkout our nifty [Tonic generator](https://tonicpow.com/).
 
