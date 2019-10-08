@@ -1,6 +1,6 @@
 <img src="https://github.com/tonicpow/embed/blob/master/images/tonicpow-logo.png" height="100" alt="TonicPow">
 
-View a [Tonic in action](https://tonicpow.com/). Checkout the [Tonic protocol](/PROTOCOL.md).
+View a [Tonic in action](https://tonicpow.com/). Checkout the [Tonic Protocol v0.1](/PROTOCOL.md).
 
 [![last commit](https://img.shields.io/github/last-commit/tonicpow/embed.svg?style=flat)](https://github.com/tonicpow/embed/commits/master)
 [![version](https://img.shields.io/github/release-pre/tonicpow/embed.svg?style=flat)](https://github.com/tonicpow/embed/releases)
@@ -30,10 +30,15 @@ View a [Tonic in action](https://tonicpow.com/). Checkout the [Tonic protocol](/
 <div class="tonic" data-address="YOUR_ADDRESS"></div>
 ```
 
-_(Optional)_ Use your [RelayX 1handle](https://relayx.io/?affiliate=1LWyDs4qzmfAhGpSZk1K1kLmNdafBDdJSD) in place of your wallet address
+_(Optional)_ Use your [RelayX 1handle](https://relayx.io/?affiliate=tonicpow@moneybutton.com) in place of your wallet address
 ```html
 <div class="tonic" data-relayx="1your-handle"></div>
-``` 
+```
+
+_(Optional)_ Use your [Paymail address](https://blog.moneybutton.com/2019/05/31/introducing-paymail-an-extensible-identity-protocol-for-bitcoin-bsv/) in place of your wallet address
+```html
+<div class="tonic" data-paymail="paymail@example.com"></div>
+```  
 
 ## Building
 ```bash
@@ -51,7 +56,8 @@ Required attributes are one of the following: `data-address` or `data-handcash` 
 |Attribute |Example |Supported |Description |
 |:---|:---|:---|:---|
 |data-address|1BrwAE...|**Yes**|Your bitcoin sv wallet address.|
-|data-relayx|1tonicpow|**Yes**|Your [RelayX 1handle](https://relayx.io/?affiliate=1LWyDs4qzmfAhGpSZk1K1kLmNdafBDdJSD). Used in place of data-address. |
+|data-relayx|1tonicpow|**Yes**|Your [RelayX 1handle](https://relayx.io/?affiliate=tonicpow@moneybutton.com). Used in place of data-address. |
+|data-paymail|paymail@example.com|**Yes**|Your [paymail address](https://blog.moneybutton.com/2019/05/31/introducing-paymail-an-extensible-identity-protocol-for-bitcoin-bsv/). Used in place of data-address. |
 |data-unit-id|embed-1|**Yes**|To show multiple units on one page, set each to a unique identifier of your choice.|
 |data-rate|546|**Yes**|Set the rate of sats per block. The default is 546.|
 |data-currency|bsv|_Not yet_|Set the currency rate (bsv or usd)|
@@ -66,8 +72,11 @@ Required attributes are one of the following: `data-address` or `data-handcash` 
 **This feature has been deprecated by [handcash](https://www.handcash.io/migration/en/index.html).**
 
 #### RelayX 1handle Support
-This Tonic embed script converts [RelayX 1handles](https://relayx.io/?affiliate=1LWyDs4qzmfAhGpSZk1K1kLmNdafBDdJSD) to wallet addresses on-the-fly when loading.
-You can supply a [1handle](https://relayx.io/?affiliate=1LWyDs4qzmfAhGpSZk1K1kLmNdafBDdJSD) handle via `data-relayx`.
+This Tonic embed script converts [RelayX 1handles](https://relayx.io/?affiliate=tonicpow@moneybutton.com) to wallet addresses on-the-fly when loading.
+You can supply a [1handle](https://relayx.io/?affiliate=tonicpow@moneybutton.com) handle via `data-relayx`.
+
+#### Paymail Address Support
+This Tonic embed script converts [paymail addresses](https://blog.moneybutton.com/2019/05/31/introducing-paymail-an-extensible-identity-protocol-for-bitcoin-bsv/) to wallet addresses on-the-fly when loading via the [polynym](https://github.com/uptimesv/polynym) library and api.
 
 #### Supported Browsers
 TonicPow supports all commonly used browsers. Below is a list of popular browsers and their minimum supported version.
@@ -91,14 +100,14 @@ If we're missing a browser, suggest one [via an issue](https://github.com/tonicp
 
 
 #### Bitcoin Sticker Protocol Support
-Using the [bitcoin sticker protocol](https://sticker.planaria.network/?affiliate=1LWyDs4qzmfAhGpSZk1K1kLmNdafBDdJSD), it ensures that any embed that is missing a `data-address` will use sticker address.
+Using the [bitcoin sticker protocol](https://sticker.planaria.network/?affiliate=tonicpow@moneybutton.com), it ensures that any embed that is missing a `data-address` will use sticker address.
 
 In the future this will be used for tipping, likes, sharing, etc.
 
 #### Affiliates
-If you share any url and append `?affiliate=1your-handle` the embed will process your handle and store it associated to all ads on the page.
+If you share any url and append `?affiliate=1your-handle` or `?affiliate=paymail@example.com` the embed will process your handle/address and store it associated to all ads on the page.
 
-If you don't have a [1handle](https://relayx.io/?affiliate=1LWyDs4qzmfAhGpSZk1K1kLmNdafBDdJSD) you can provide your [bsv wallet address](https://en.bitcoin.it/wiki/Address)  `?affiliate=1BrwAE2qg6qBaB2n...`. 
+If you don't have a [1handle](https://relayx.io/?affiliate=tonicpow@moneybutton.com) you can provide your [paymail address](https://blog.moneybutton.com/2019/05/31/introducing-paymail-an-extensible-identity-protocol-for-bitcoin-bsv/) `?affiliate=paymail@example.com` or a [bsv wallet address](https://en.bitcoin.it/wiki/Address)  `?affiliate=1BrwAE2qg6qBaB2n...`. 
 
 The affiliate/publisher relationship is stored in user's local session for future visits. 
 
@@ -109,10 +118,12 @@ The affiliate/publisher relationship is stored in user's local session for futur
 View the [interactive live demo ads](https://tonicpow.com/) and [more examples here](/example.html)
 
 #### Affiliate
-Replace `1your-handle` with your [1handle](https://relayx.io/?affiliate=1LWyDs4qzmfAhGpSZk1K1kLmNdafBDdJSD) or [bsv wallet address](https://en.bitcoin.it/wiki/Address) and share!
-Receive a payment if an Ad is purchased using your affiliate link. Any website that uses [TonicPow](https://tonicpow.com/) supports the [1handle](https://relayx.io/?affiliate=1LWyDs4qzmfAhGpSZk1K1kLmNdafBDdJSD) affiliate functionality.
+Replace `1your-handle` with your [1handle](https://relayx.io/?affiliate=tonicpow@moneybutton.com) or use a [paymail address](https://blog.moneybutton.com/2019/05/31/introducing-paymail-an-extensible-identity-protocol-for-bitcoin-bsv/) or [bsv wallet address](https://en.bitcoin.it/wiki/Address) and share!
+Receive a payment if an Ad is purchased using your affiliate link. Any website that uses [TonicPow](https://tonicpow.com/) supports the [1handle](https://relayx.io/?affiliate=tonicpow@moneybutton.com) and [paymail address](https://blog.moneybutton.com/2019/05/31/introducing-paymail-an-extensible-identity-protocol-for-bitcoin-bsv/) affiliate functionality.
 ```
-https://some-website.com/?affiliate=1your-handle
+https://some-website.com/?affiliate=1your-handle  
+
+https://some-website.com/?affiliate=paymail@example.com
 
 https://some-website.com/?affiliate=1BrwAE2qg6qBaB2n...
 ```
