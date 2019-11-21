@@ -39,8 +39,11 @@ TonicPow.iframeLoader = async () => {
   // Get the affiliate and convert if needed
   let affiliate = params.get('affiliate')
   if (affiliate) {
-    // ($handcash)
-    affiliate = (affiliate.includes('$')) ? await Handcash.lookup(affiliate) : affiliate
+    // ($handcash) (New way to resolve handcash 2.0 handles)
+    if (affiliate.includes('$')) {
+      affiliate = affiliate.replace("$", "") + "@handcash.io";
+    }
+    //affiliate = (affiliate.includes('$')) ? await Handcash.lookup(affiliate) : affiliate
 
     // (paymail)
     affiliate = (affiliate.includes('@')) ? await Paymail.lookup(affiliate) : affiliate
@@ -95,7 +98,10 @@ TonicPow.iframeLoader = async () => {
     let handcashHandle = tonicDiv.getAttribute('data-handcash')
     let handcashAddress = ''
     if (handcashHandle && handcashHandle.includes('$')) {
-      handcashAddress = await Handcash.lookup(handcashHandle)
+
+      handcashAddress = handcashAddress.replace("$", "") + "@handcash.io";
+
+      handcashAddress = await Paymail.lookup(handcashHandle)
 
       if (typeof handcashAddress === 'undefined' || !handcashAddress || handcashAddress === '' || handcashAddress.length <= 25) {
         handcashAddress = ''
