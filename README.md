@@ -38,6 +38,11 @@ _(Optional)_ Use your [RelayX 1handle](https://relayx.io/?affiliate=tonicpow@mon
 _(Optional)_ Use your [Paymail address](https://blog.moneybutton.com/2019/05/31/introducing-paymail-an-extensible-identity-protocol-for-bitcoin-bsv/) in place of your wallet address
 ```html
 <div class="tonic" data-paymail="paymail@example.com"></div>
+```
+
+_(Optional)_ Use your [Handcash 2.0 Handle](https://medium.com/@handcash/introducing-handcash-2-0-future-proof-4daa46131c48) in place of your wallet address
+```html
+<div class="tonic" data-handcash="$tonicpow"></div>
 ```  
 
 ## Building
@@ -63,6 +68,7 @@ Required attributes are one of the following: `data-address` or `data-handcash` 
 |data-address|1BrwAE...|**Yes**|Your bitcoin sv wallet address.|
 |data-relayx|1tonicpow|**Yes**|Your [RelayX 1handle](https://relayx.io/?affiliate=tonicpow@moneybutton.com). Used in place of data-address. |
 |data-paymail|paymail@example.com|**Yes**|Your [paymail address](https://blog.moneybutton.com/2019/05/31/introducing-paymail-an-extensible-identity-protocol-for-bitcoin-bsv/). Used in place of data-address. |
+|data-handcash|$tonicpow|**Yes**|Your [handcash handle](https://medium.com/@handcash/introducing-handcash-2-0-future-proof-4daa46131c48). Used in place of data-address. |
 |data-unit-id|embed-1|**Yes**|To show multiple units on one page, set each to a unique identifier of your choice.|
 |data-rate|546|**Yes**|Set the rate of sats per block. The default is 546.|
 |data-currency|bsv|_Not yet_|Set the currency rate (bsv or usd)|
@@ -75,6 +81,7 @@ Required attributes are one of the following: `data-address` or `data-handcash` 
 
 #### Handcash Support _(Deprecated)_
 **This feature has been deprecated by [handcash](https://www.handcash.io/migration/en/index.html).**
+We support new handcash handles that have related paymail addresses.
 
 #### RelayX 1handle Support
 This Tonic embed script converts [RelayX 1handles](https://relayx.io/?affiliate=tonicpow@moneybutton.com) to wallet addresses on-the-fly when loading.
