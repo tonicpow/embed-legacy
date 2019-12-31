@@ -147,8 +147,10 @@ https://some-website.com/?affiliate=1BrwAE2qg6qBaB2n...
 - Setup your own Tonic using the [Tonic generator](https://tonicpow.com/) or [above installation](#installation).
 
 ## Maintainers
-[Attila](https://github.com/attilaaf?affiliate=1attila) - [Satchmo](https://github.com/rohenaz?affiliate=1satchmo) - [MrZ](https://github.com/mrz1836?affiliate=1mrz)
-                                                                                                                                                           
+| [<img src="https://github.com/mrz1836.png" height="50" alt="MrZ" />](https://github.com/mrz1836) | [<img src="https://github.com/rohenaz.png" height="50" alt="Satchmo" />](https://github.com/rohenaz) | [<img src="https://github.com/attilaaf.png" height="50" alt="Atilla" />](https://github.com/attilaaf) |
+|:---:|:---:|:---:|
+| [MrZ](https://github.com/mrz1836) | [Satchmo](https://github.com/rohenaz) | [Atilla](https://github.com/attilaaf) |
+                                                                                                                                                         
 Support the development of this project and the [TonicPow](https://tonicpow.com/) team 🙏
 
 ## Contributing
