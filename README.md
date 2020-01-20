@@ -127,7 +127,7 @@ The affiliate/publisher relationship is stored in user's local session for futur
 ## Examples
 
 #### Demo Tonics
-View the [interactive live demo ads](https://tonicpow.com/) and [more examples here](/example.html)
+View the [interactive live demo ads](https://tonicpow.com/) and [more examples here](/examples/example.html)
 
 #### Affiliate
 Replace `1your-handle` with your [1handle](https://relayx.io/?affiliate=tonicpow@moneybutton.com) or use a [paymail address](https://blog.moneybutton.com/2019/05/31/introducing-paymail-an-extensible-identity-protocol-for-bitcoin-bsv/) or [bsv wallet address](https://en.bitcoin.it/wiki/Address) and share!
