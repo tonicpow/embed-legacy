@@ -7,7 +7,7 @@ const Paymail = {}
 Paymail.lookup = async (address) => {
   // No handle or invalid
   if (!address || !address.includes('@') || !address.includes('.')) {
-    //todo: add email/paymail verification regex
+    // todo: add email/paymail verification regex
     console.error('invalid paymail address: ' + address)
     return ''
   }
