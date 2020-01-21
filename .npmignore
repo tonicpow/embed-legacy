@@ -6,6 +6,7 @@ test
 .idea
 examples/
 images/
+src/
 .github
 .firebase
 .firebase/
