@@ -67,10 +67,12 @@ If we're missing a browser, suggest one [via an issue](https://github.com/tonicp
 View some [example Tonic widgets](/examples/example.html)
 
 ## Code Standards
-- Always use the language's best practices!
+Always use the language's best practices and don't optimize early :P
 
 ## Usage
-todo: @mrz
+We are using it! Visit [our website](https://tonicpow.com) to see it in action.
+
+Check out the [Tonic Widgets](https://tonicpow.com/embed.html).
 
 ## Maintainers
 | [<img src="https://github.com/mrz1836.png" height="50" alt="MrZ" />](https://github.com/mrz1836) | [<img src="https://github.com/rohenaz.png" height="50" alt="Satchmo" />](https://github.com/rohenaz) | [<img src="https://github.com/attilaaf.png" height="50" alt="Atilla" />](https://github.com/attilaaf) |
