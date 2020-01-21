@@ -1,5 +1,7 @@
 const Storage = {}
 
+/* global localStorage */
+
 /*
 removeStorage: removes a key from localStorage and its sibling expiracy key
 params:
