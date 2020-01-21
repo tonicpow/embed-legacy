@@ -21,7 +21,7 @@ Learn more [about TonicPow](https://tonicpow.com/). Checkout the [TonicPow API D
 - [License](#license)
 
 ## Installation
-1. Add the script to your web application
+1. Add the script to your web application (using our CDN hosting)
 ```html
 <script src="https://tonicpow.com/tonic.js"></script>
 ```
@@ -30,7 +30,12 @@ _(Optional)_ Get the visitor session
 ```javascript
 let session = window.TonicPow.getVisitorSession()
 console.log(session) //1b40c235dd9532213f5d611ffz06f9dd018efeffad8d6fbc35dc421fed18babz
-```
+``` 
+
+_(Optional)_ Install as an npm package
+```bash
+$ npm install tonicpow-embed --save
+``` 
 
 #### Building (For Developers)
 ```bash
