@@ -4,12 +4,18 @@ import Storage from './storage.js'
 import Handcash from './handcash.js'
 import Relay from './relay.js'
 import Paymail from './paymail.js'
+import Utilities from './utilities'
 
+/* global fetch */
+
+// Start the TonicPow service
 let TonicPow = {}
+
+// Load modules
 TonicPow.Storage = Storage
+TonicPow.Paymail = Paymail
 TonicPow.Handcash = Handcash
 TonicPow.Relay = Relay
-TonicPow.Paymail = Paymail
 // TonicPow.BitSocket = BitSocket
 TonicPow.Tonic = Tonic
 TonicPow.Iframes = new Map()
@@ -43,7 +49,6 @@ TonicPow.iframeLoader = async () => {
     if (affiliate.includes('$')) {
       affiliate = affiliate.replace('$', '') + '@handcash.io'
     }
-    // affiliate = (affiliate.includes('$')) ? await Handcash.lookup(affiliate) : affiliate
 
     // (paymail)
     affiliate = (affiliate.includes('@')) ? await Paymail.lookup(affiliate) : affiliate
@@ -58,7 +63,7 @@ TonicPow.iframeLoader = async () => {
     }
   }
 
-  // Get all tonic divs
+  // Get all tonic divs (This is redundant, but just protecting loading without divs)
   let tonicDivs = document.getElementsByClassName('tonic')
   if (!tonicDivs || tonicDivs.length === 0) {
     console.info('no tonic divs found with class \'tonic\'')
@@ -113,7 +118,6 @@ TonicPow.iframeLoader = async () => {
     }
 
     // Process relayx 1handle handle if given (uses relayX 1handle instead of address)
-    // Using relayx 1handle will override the data-address given
     let relayHandle = tonicDiv.getAttribute('data-relayx')
     let relayAddress = ''
     if (relayHandle && relayHandle.charAt(0) === '1') {
@@ -130,7 +134,6 @@ TonicPow.iframeLoader = async () => {
     }
 
     // Process paymail address if given (uses paymail address instead of address)
-    // Using paymail address will override the data-address given
     let paymailAddress = tonicDiv.getAttribute('data-paymail')
     let paymailWalletAddress = ''
     if (paymailAddress && paymailAddress.includes('@')) {
@@ -159,21 +162,14 @@ TonicPow.iframeLoader = async () => {
     }
 
     // Do we have a known affiliate for this address?
-    let knownAffiliate = localStorage.getItem('affiliate_' + dataAddress)
+    let knownAffiliate = Storage.getStorage('affiliate_' + dataAddress)
     if (knownAffiliate) {
       affiliate = knownAffiliate
       console.log('existing affiliate found in local storage: ' + affiliate)
     } else if (affiliate) { // Nope - let's store it for the future!
-      localStorage.setItem('affiliate_' + dataAddress, affiliate)
+      Storage.setStorage('affiliate_' + dataAddress, affiliate, 24 * 60 * 60 * 60)
       console.log('saving new affiliate in local storage: ' + affiliate)
     }
-
-    // Got a state to load by default
-    // @mrz deprecated this feature
-    // let loadState = tonicDiv.getAttribute('data-state')
-    // if (!loadState || loadState === '') {
-    //  loadState = ''
-    // }
 
     // Got a default rate?
     let rate = tonicDiv.getAttribute('data-rate')
@@ -224,7 +220,6 @@ TonicPow.iframeLoader = async () => {
 
     // Build the iframe, pass along configuration variables
     let iframe = document.createElement('iframe')
-    // iframe.src = networkUrl + '/'+ loadState +'?' +
     iframe.src = networkUrl + '/?' +
       'unit_id=' + dataTonicId +
       '&address=' + dataAddress +
@@ -289,8 +284,14 @@ TonicPow.iframeLoader = async () => {
 
 // Load the application
 TonicPow.load = () => {
-  // Load iframe(s)
-  TonicPow.iframeLoader()
+  // Load all tonics found on the page (if we have div)
+  let tonicDivs = document.getElementsByClassName('tonic')
+  if (tonicDivs && tonicDivs.length > 0) {
+    TonicPow.iframeLoader()
+  }
+
+  // Process visitor token
+  Utilities.captureVisitorSession()
 
   // Ping planaria for analytics
   // todo: update to planaria.tonicpow.com when available
