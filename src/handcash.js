@@ -34,7 +34,7 @@ Handcash.lookup = async (handle) => {
     if (typeof data === 'object' && data[0] && data[0].hasOwnProperty('address')) {
       walletAddress = data[0]['address']
       if (walletAddress.length > 25) {
-        Storage.setStorage(address, walletAddress, (2 * 60 * 60)) // 2 Hour expiration
+        Storage.setStorage(handle, walletAddress, (2 * 60 * 60)) // 2 Hour expiration
         return walletAddress
       }
 
