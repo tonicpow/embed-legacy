@@ -12,15 +12,16 @@ let TonicPow = {}
 
 // Load modules
 TonicPow.Storage = Storage
+// TonicPow.BitSocket = BitSocket
 TonicPow.Paymail = Paymail
 TonicPow.Handcash = Handcash
 TonicPow.Relay = Relay
-// TonicPow.BitSocket = BitSocket
 TonicPow.Tonic = Tonic
 TonicPow.Iframes = new Map()
 
 // sessionName is the incoming query parameter from any link service
 const sessionName = 'tncpw_session'
+const maxCookieAgeDays = 60
 
 // setOreo for creating new oreos
 TonicPow.setOreo = (name, value, days) => {
@@ -39,8 +40,8 @@ TonicPow.captureVisitorSession = (customSessionId = '') => {
     sessionId = urlParams.get(sessionName)
   }
   if (sessionId && sessionId.length > 0) {
-    this.setOreo(sessionName, sessionId, 60)
-    this.Storage.setStorage(sessionName, sessionId, (24 * 60 * 60 * 60)) // default is 60 days
+    this.setOreo(sessionName, sessionId, maxCookieAgeDays)
+    this.Storage.setStorage(sessionName, sessionId, (24 * 60 * 60 * maxCookieAgeDays))
   }
 }
 
@@ -49,8 +50,14 @@ TonicPow.getVisitorSession = () => {
   return this.Storage.getStorage(sessionName)
 }
 
-// iframeLoader() - replaces each tonic div with a corresponding iframe
+// iframeLoader() - replaces each Tonic div with a corresponding iframe (embed widget)
 TonicPow.iframeLoader = async () => {
+  // We only work in a browser
+  if (typeof window === 'undefined') {
+    console.error('TonicPow embed only works in the browser')
+    return
+  }
+
   // Set config
   const networkUrl = 'https://app.tonicpow.com' // Url for Tonic App
   const footerLinkHeight = 28 // Size for the footer link area (px)
@@ -311,8 +318,14 @@ TonicPow.iframeLoader = async () => {
   console.log('Tonic Map:', TonicPow.Iframes)
 }
 
-// Load the TonicPow script
+// Load the TonicPow script(s) and default settings
 TonicPow.load = () => {
+  // We only work in a browser
+  if (typeof window === 'undefined') {
+    console.error('TonicPow embed only works in the browser')
+    return
+  }
+
   // Load all tonics found on the page (if we have div)
   let tonicDivs = document.getElementsByClassName('tonic')
   if (tonicDivs && tonicDivs.length > 0) {
@@ -365,7 +378,7 @@ TonicPow.load = () => {
   // })
 }
 
-// Load the iframe(s) if we are loaded dynamically
+// Load the TonicPow application if we are loaded dynamically
 if (document.readyState === 'complete' || document.readyState === 'interactive') {
   // This loads if the <script> is dynamically injected into the page
   TonicPow.load()
@@ -378,5 +391,7 @@ if (document.readyState === 'complete' || document.readyState === 'interactive')
   })
 }
 
-// Store on the window
-window.TonicPow = TonicPow
+// Store on the window (safely)
+if (typeof window !== 'undefined') {
+  window.TonicPow = TonicPow
+}

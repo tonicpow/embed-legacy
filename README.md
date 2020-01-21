@@ -29,7 +29,7 @@ Learn more [about TonicPow](https://tonicpow.com/). Checkout the [TonicPow API D
 _(Optional)_ Get the visitor session
 ```javascript
 let session = window.TonicPow.getVisitorSession()
-console.log(session) //1b40c235dd9532213f5d611ff706f9dd018efeffad8d6fbc35dc421fed18bab8
+console.log(session) //1b40c235dd9532213f5d611ffz06f9dd018efeffad8d6fbc35dc421fed18babz
 ```
 
 #### Building (For Developers)
