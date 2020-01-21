@@ -26,7 +26,7 @@ Learn more [about TonicPow](https://tonicpow.com/). Checkout the [TonicPow API D
 <script src="https://tonicpow.com/tonic.js"></script>
 ```
 
-_(Optional) Get the visitor session
+_(Optional)_ Get the visitor session
 ```javascript
 let session = window.TonicPow.getVisitorSession()
 console.log(session) //1b40c235dd9532213f5d611ff706f9dd018efeffad8d6fbc35dc421fed18bab8
