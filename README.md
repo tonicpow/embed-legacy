@@ -21,26 +21,27 @@ Learn more [about TonicPow](https://tonicpow.com/). Checkout the [TonicPow API D
 - [License](#license)
 
 ## Installation
-1. Add the script to your site.
+1. Add the script to your web application
 ```html
 <script src="https://tonicpow.com/tonic.js"></script>
 ```
 
-#### Building (For Development)
+_(Optional) Get the visitor session
+```javascript
+let session = window.TonicPow.getVisitorSession()
+console.log(session) //1b40c235dd9532213f5d611ff706f9dd018efeffad8d6fbc35dc421fed18bab8
+```
+
+#### Building (For Developers)
 ```bash
 $ npm install
 $ npm run build
 ```
 
-#### Check Outdated Packages
-```bash
-$ npm outdated
-```
-
 ## Documentation
 Read more about the [TonicPow API](https://docs.tonicpow.com) platform.
 
-[TonicPow embed widget](widget.md) documentation
+Check out the [TonicPow embed widget](widget.md) documentation.
 
 #### Supported Browsers
 TonicPow supports all commonly used browsers. Below is a list of popular browsers and their minimum supported version.

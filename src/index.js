@@ -4,7 +4,6 @@ import Storage from './storage.js'
 import Handcash from './handcash.js'
 import Relay from './relay.js'
 import Paymail from './paymail.js'
-import Utilities from './utilities'
 
 /* global fetch */
 
@@ -19,6 +18,36 @@ TonicPow.Relay = Relay
 // TonicPow.BitSocket = BitSocket
 TonicPow.Tonic = Tonic
 TonicPow.Iframes = new Map()
+
+// sessionName is the incoming query parameter from any link service
+const sessionName = 'tncpw_session'
+
+// setOreo for creating new oreos
+TonicPow.setOreo = (name, value, days) => {
+  let d = new Date()
+  d.setTime(d.getTime() + 24 * 60 * 60 * 1000 * days)
+  document.cookie = name + '=' + value + ';path=/;expires=' + d.toGMTString()
+}
+
+// captureVisitorSession will capture the session and store it
+// Builds a cookie so it's sent on requests automatically
+// Stores in local storage for easy access from the application
+TonicPow.captureVisitorSession = (customSessionId = '') => {
+  let sessionId = customSessionId
+  if ((!customSessionId || customSessionId.length === 0) && typeof window !== 'undefined') {
+    let urlParams = new URLSearchParams(window.location.search)
+    sessionId = urlParams.get(sessionName)
+  }
+  if (sessionId && sessionId.length > 0) {
+    this.setOreo(sessionName, sessionId, 60)
+    this.Storage.setStorage(sessionName, sessionId, (24 * 60 * 60 * 60)) // default is 60 days
+  }
+}
+
+// getVisitorSession will get the session if it exists
+TonicPow.getVisitorSession = () => {
+  return this.Storage.getStorage(sessionName)
+}
 
 // iframeLoader() - replaces each tonic div with a corresponding iframe
 TonicPow.iframeLoader = async () => {
@@ -282,16 +311,18 @@ TonicPow.iframeLoader = async () => {
   console.log('Tonic Map:', TonicPow.Iframes)
 }
 
-// Load the application
+// Load the TonicPow script
 TonicPow.load = () => {
   // Load all tonics found on the page (if we have div)
   let tonicDivs = document.getElementsByClassName('tonic')
   if (tonicDivs && tonicDivs.length > 0) {
-    TonicPow.iframeLoader()
+    TonicPow.iframeLoader().then(r => {
+      // do nothing right now
+    })
   }
 
   // Process visitor token
-  Utilities.captureVisitorSession()
+  TonicPow.captureVisitorSession()
 
   // Ping planaria for analytics
   // todo: update to planaria.tonicpow.com when available
@@ -347,4 +378,5 @@ if (document.readyState === 'complete' || document.readyState === 'interactive')
   })
 }
 
+// Store on the window
 window.TonicPow = TonicPow
