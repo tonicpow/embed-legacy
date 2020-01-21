@@ -59,6 +59,7 @@ TonicPow.iframeLoader = async () => {
   }
 
   // Set config
+  // todo: make config customizable and based on ENV
   const networkUrl = 'https://app.tonicpow.com' // Url for Tonic App
   const footerLinkHeight = 28 // Size for the footer link area (px)
   const defaultHeight = 250 // Height of the embed (px)
@@ -332,19 +333,18 @@ TonicPow.load = () => {
     TonicPow.iframeLoader().then(r => {
       // do nothing right now
     })
+
+    // Ping planaria for analytics
+    let url = 'https://b.map.sv/ping/'
+    fetch(url).then((r) => {
+      return r.json()
+    }).then(async (r) => {
+      // console.log('r')
+    })
   }
 
   // Process visitor token
   TonicPow.captureVisitorSession()
-
-  // Ping planaria for analytics
-  // todo: update to planaria.tonicpow.com when available
-  let url = 'https://b.map.sv/ping/'
-  fetch(url).then((r) => {
-    return r.json()
-  }).then(async (r) => {
-    // console.log('r')
-  })
 
   // Connect socket now that we have tonic divs
   // BitSocket.connect((type, data) => {
