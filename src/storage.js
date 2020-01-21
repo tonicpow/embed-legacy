@@ -1,5 +1,7 @@
 const Storage = {}
 
+/* global localStorage */
+
 /*
 removeStorage: removes a key from localStorage and its sibling expiracy key
 params:
@@ -68,12 +70,12 @@ Storage.setStorage = (key, value, expires = null) => {
     expires = (24 * 60 * 60) // default: seconds for 1 day
   }
 
-  // millisecs since epoch time, lets deal only with integer
+  // Milli seconds since epoch time, lets deal only with integer
   let now = Date.now()
   let schedule = now + expires * 1000
   try {
     localStorage.setItem(key, value)
-    localStorage.setItem(key + '_expires', schedule)
+    localStorage.setItem(key + '_expires', schedule.toString())
   } catch (e) {
     console.log('setStorage: Error setting key [' + key + '] in localStorage: ' + JSON.stringify(e))
     return false

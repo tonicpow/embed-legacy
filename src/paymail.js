@@ -2,12 +2,14 @@ import Storage from './storage'
 
 const Paymail = {}
 
+/* global fetch */
+
 // PaymailLookup() - looks up a handle and returns an address
 // @param handle is the 1relay handle
 Paymail.lookup = async (address) => {
   // No handle or invalid
   if (!address || !address.includes('@') || !address.includes('.')) {
-    //todo: add email/paymail verification regex
+    // todo: add email/paymail verification regex
     console.error('invalid paymail address: ' + address)
     return ''
   }

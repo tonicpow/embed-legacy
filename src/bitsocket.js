@@ -1,5 +1,11 @@
 const BitSocket = {}
+
+/* global btoa */
+/* global EventSource */
+
 const MAP_PREFIX = '1PuQa7K62MiKCtssSLKy1kh56WWU7MtUR5'
+
+// Query for socket
 const query = {
   'v': 3,
   'q': {
@@ -40,7 +46,7 @@ BitSocket.connect = (cb) => {
         case 'block':
           console.log('NEW BLOCK.', data)
           // for (let iframe of tonicIframes) {
-            // todo: update domain later to a const (WIP)
+          // todo: update domain later to a const (WIP)
           //  iframe.contentWindow.postMessage({ block: JSON.stringify(data) }, 'https://app.tonicpow.com')
           // }
       }
