@@ -26,7 +26,6 @@
     "url": "https://github.com/tonicpow/embed/issues"
   },
   "homepage": "https://github.com/tonicpow/embed",
-  "private": true,
   "scripts": {
     "lint": "cd src && standard --fix || true",
     "build": "webpack --config webpack.config.js"
@@ -38,6 +37,7 @@
   },
   "keywords": [
     "tonic",
+    "tonicpow-js",
     "tonicpow",
     "tonic pow",
     "embed",
