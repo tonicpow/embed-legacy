@@ -27,7 +27,7 @@ _(Optional)_ Use your [Handcash 2.0 Handle](https://medium.com/@handcash/introdu
 ## Documentation
 Checkout our nifty [Tonic generator](https://tonicpow.com/).
 
-This Tonic embed works in relation to the [Tonic protocol](/PROTOCOL.md).
+This Tonic embed works in relation to the [Tonic protocol](/tonic_embed_procotol.md).
 
 Required attributes are one of the following: `data-address` or `data-handcash` or `data-relayx`
 
