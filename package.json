@@ -49,7 +49,7 @@
     "webpack": "^4.41.5",
     "webpack-cli": "^3.3.10",
     "chai": "^4.2.0",
-    "mocha": "^6.2.2"
+    "mocha": "^7.0.0"
   },
   "files": [
     "dist/*"
