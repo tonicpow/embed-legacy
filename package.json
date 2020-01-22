@@ -1,6 +1,6 @@
 {
   "name": "tonicpow-embed",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "TonicPow Embed helps manage visitor sessions and load any Tonic Widgets",
   "main": "dist/tonic.js",
   "author": {
