@@ -40,14 +40,14 @@ TonicPow.captureVisitorSession = (customSessionId = '') => {
     sessionId = urlParams.get(sessionName)
   }
   if (sessionId && sessionId.length > 0) {
-    this.setOreo(sessionName, sessionId, maxCookieAgeDays)
-    this.Storage.setStorage(sessionName, sessionId, (24 * 60 * 60 * maxCookieAgeDays))
+    TonicPow.setOreo(sessionName, sessionId, maxCookieAgeDays)
+    TonicPow.Storage.setStorage(sessionName, sessionId, (24 * 60 * 60 * maxCookieAgeDays))
   }
 }
 
 // getVisitorSession will get the session if it exists
 TonicPow.getVisitorSession = () => {
-  return this.Storage.getStorage(sessionName)
+  return TonicPow.Storage.getStorage(sessionName)
 }
 
 // iframeLoader() - replaces each Tonic div with a corresponding iframe (embed widget)
