@@ -1,13 +1,13 @@
-<img src="https://github.com/tonicpow/embed/blob/master/images/tonicpow-logo.png" height="100" alt="TonicPow">
+<img src="https://github.com/tonicpow/embed/blob/master/images/tonicpow-logo.png?raw=true" height="100" alt="TonicPow">
 
-View a [Tonic in action](https://tonicpow.com/). Checkout the [Tonic Protocol v0.1](/PROTOCOL.md).
+Learn more [about TonicPow](https://tonicpow.com/). Checkout the [TonicPow API Docs](https://docs.tonicpow.com).
 
 [![last commit](https://img.shields.io/github/last-commit/tonicpow/embed.svg?style=flat)](https://github.com/tonicpow/embed/commits/master)
 [![version](https://img.shields.io/github/release-pre/tonicpow/embed.svg?style=flat)](https://github.com/tonicpow/embed/releases)
-[![license](https://img.shields.io/badge/license-Open%20BSV-brightgreen.svg?style=flat)](/LICENSE)
+[![Npm](https://img.shields.io/npm/v/tonicpow-embed?style=flat)](https://www.npmjs.com/package/tonicpow-embed)
 [![standard-readme compliant](https://img.shields.io/badge/standard--readme-OK-green.svg?style=flat)](https://github.com/RichardLitt/standard-readme)
 [![slack](https://img.shields.io/badge/slack-tonicpow-orange.svg?style=flat)](https://atlantistic.slack.com/app_redirect?channel=tonicpow)
-[![app health](https://img.shields.io/website-up-down-green-red/https/faucet.allaboard.cash.svg?label=status)](https://tonicpow.com/)
+[![app health](https://img.shields.io/website-up-down-green-red/https/tonicpow.com.svg?label=status)](https://tonicpow.com/)
 
 ## Table of Contents
 - [Installation](#installation)
@@ -20,68 +20,32 @@ View a [Tonic in action](https://tonicpow.com/). Checkout the [Tonic Protocol v0
 - [License](#license)
 
 ## Installation
-1. Add the script to your site.
+1. Add the script to your web application (using our CDN hosting)
 ```html
 <script src="https://tonicpow.com/tonic.js"></script>
 ```
 
-2. Replace `data-address` with your BSV address and place the tag wherever it will be displayed.
-```html
-<div class="tonic" data-address="YOUR_ADDRESS"></div>
-```
+_(Optional)_ Get the visitor session
+```javascript
+let session = window.TonicPow.getVisitorSession()
+console.log(session) //1b40c235dd9532213f5d611ffz06f9dd018efeffad8d6fbc35dc421fed18babz
+``` 
 
-_(Optional)_ Use your [RelayX 1handle](https://relayx.io/?affiliate=tonicpow@moneybutton.com) in place of your wallet address
-```html
-<div class="tonic" data-relayx="1your-handle"></div>
-```
+_(Optional)_ Install as an npm package
+```bash
+$ npm install tonicpow-embed --save
+``` 
 
-_(Optional)_ Use your [Paymail address](https://blog.moneybutton.com/2019/05/31/introducing-paymail-an-extensible-identity-protocol-for-bitcoin-bsv/) in place of your wallet address
-```html
-<div class="tonic" data-paymail="paymail@example.com"></div>
-```  
-
-## Building
+#### Building (For Developers)
 ```bash
 $ npm install
 $ npm run build
 ```
 
-#### Check Outdated Packages
-```bash
-$ npm outdated
-```
-
 ## Documentation
-Checkout our nifty [Tonic generator](https://tonicpow.com/).
+Read more about the [TonicPow API](https://docs.tonicpow.com) platform.
 
-This Tonic embed works in relation to the [Tonic protocol](/PROTOCOL.md).
-
-Required attributes are one of the following: `data-address` or `data-handcash` or `data-relayx`
-
-|Attribute |Example |Supported |Description |
-|:---|:---|:---|:---|
-|data-address|1BrwAE...|**Yes**|Your bitcoin sv wallet address.|
-|data-relayx|1tonicpow|**Yes**|Your [RelayX 1handle](https://relayx.io/?affiliate=tonicpow@moneybutton.com). Used in place of data-address. |
-|data-paymail|paymail@example.com|**Yes**|Your [paymail address](https://blog.moneybutton.com/2019/05/31/introducing-paymail-an-extensible-identity-protocol-for-bitcoin-bsv/). Used in place of data-address. |
-|data-unit-id|embed-1|**Yes**|To show multiple units on one page, set each to a unique identifier of your choice.|
-|data-rate|546|**Yes**|Set the rate of sats per block. The default is 546.|
-|data-currency|bsv|_Not yet_|Set the currency rate (bsv or usd)|
-|data-width|300|**Yes**|Set a custom width. The default is 300px. Minimum is 160x|
-|data-height|250|**Yes**|Set a custom height. The default and minimum is 250px; There is an additional 22px footer.|
-|data-image|https://...|**Yes**|Default image url if no ad is present||
-|data-url|https://...|**Yes**|Default click url if no ad is present||
-|data-link-color|#FFF|**Yes**|Change the link color via CSS value (#007bff)|
-|data-funding|true|_Not yet_|Toggle funding campaigns, default is true (on)|
-
-#### Handcash Support _(Deprecated)_
-**This feature has been deprecated by [handcash](https://www.handcash.io/migration/en/index.html).**
-
-#### RelayX 1handle Support
-This Tonic embed script converts [RelayX 1handles](https://relayx.io/?affiliate=tonicpow@moneybutton.com) to wallet addresses on-the-fly when loading.
-You can supply a [1handle](https://relayx.io/?affiliate=tonicpow@moneybutton.com) handle via `data-relayx`.
-
-#### Paymail Address Support
-This Tonic embed script converts [paymail addresses](https://blog.moneybutton.com/2019/05/31/introducing-paymail-an-extensible-identity-protocol-for-bitcoin-bsv/) to wallet addresses on-the-fly when loading via the [polynym](https://github.com/uptimesv/polynym) library and api.
+Check out the [TonicPow embed widget](widget.md) documentation.
 
 #### Supported Browsers
 TonicPow supports all commonly used browsers. Below is a list of popular browsers and their minimum supported version.
@@ -103,45 +67,22 @@ If we're missing a browser, suggest one [via an issue](https://github.com/tonicp
 |Safari|Desktop|10.1|
 |Safari|Mobile|10.3|
 
-
-#### Bitcoin Sticker Protocol Support
-Using the [bitcoin sticker protocol](https://sticker.planaria.network/?affiliate=tonicpow@moneybutton.com), it ensures that any embed that is missing a `data-address` will use sticker address.
-
-In the future this will be used for tipping, likes, sharing, etc.
-
-#### Affiliates
-If you share any url and append `?affiliate=1your-handle` or `?affiliate=paymail@example.com` the embed will process your handle/address and store it associated to all ads on the page.
-
-If you don't have a [1handle](https://relayx.io/?affiliate=tonicpow@moneybutton.com) you can provide your [paymail address](https://blog.moneybutton.com/2019/05/31/introducing-paymail-an-extensible-identity-protocol-for-bitcoin-bsv/) `?affiliate=paymail@example.com` or a [bsv wallet address](https://en.bitcoin.it/wiki/Address)  `?affiliate=1BrwAE2qg6qBaB2n...`. 
-
-The affiliate/publisher relationship is stored in user's local session for future visits. 
-
-
 ## Examples
-
-#### Demo Tonics
-View the [interactive live demo ads](https://tonicpow.com/) and [more examples here](/example.html)
-
-#### Affiliate
-Replace `1your-handle` with your [1handle](https://relayx.io/?affiliate=tonicpow@moneybutton.com) or use a [paymail address](https://blog.moneybutton.com/2019/05/31/introducing-paymail-an-extensible-identity-protocol-for-bitcoin-bsv/) or [bsv wallet address](https://en.bitcoin.it/wiki/Address) and share!
-Receive a payment if an Ad is purchased using your affiliate link. Any website that uses [TonicPow](https://tonicpow.com/) supports the [1handle](https://relayx.io/?affiliate=tonicpow@moneybutton.com) and [paymail address](https://blog.moneybutton.com/2019/05/31/introducing-paymail-an-extensible-identity-protocol-for-bitcoin-bsv/) affiliate functionality.
-```
-https://some-website.com/?affiliate=1your-handle  
-
-https://some-website.com/?affiliate=paymail@example.com
-
-https://some-website.com/?affiliate=1BrwAE2qg6qBaB2n...
-```
+View some [example Tonic widgets](/examples/example.html)
 
 ## Code Standards
-- Always use the language's best practices!
+Always use the language's best practices and don't optimize early :P
 
 ## Usage
-- Setup your own Tonic using the [Tonic generator](https://tonicpow.com/) or [above installation](#installation).
+We are using it! Visit [our website](https://tonicpow.com) to see it in action.
+
+Check out the [Tonic Widgets](https://tonicpow.com/embed.html).
 
 ## Maintainers
-[Attila](https://github.com/attilaaf?affiliate=1attila) - [Satchmo](https://github.com/rohenaz?affiliate=1satchmo) - [MrZ](https://github.com/mrz1836?affiliate=1mrz)
-                                                                                                                                                           
+| [<img src="https://github.com/mrz1836.png" height="50" alt="MrZ" />](https://github.com/mrz1836) | [<img src="https://github.com/rohenaz.png" height="50" alt="Satchmo" />](https://github.com/rohenaz) | [<img src="https://github.com/attilaaf.png" height="50" alt="Atilla" />](https://github.com/attilaaf) |
+|:---:|:---:|:---:|
+| [MrZ](https://github.com/mrz1836) | [Satchmo](https://github.com/rohenaz) | [Atilla](https://github.com/attilaaf) |
+                                                                                                                                                         
 Support the development of this project and the [TonicPow](https://tonicpow.com/) team 🙏
 
 ## Contributing

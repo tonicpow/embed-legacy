@@ -5,18 +5,61 @@ import Handcash from './handcash.js'
 import Relay from './relay.js'
 import Paymail from './paymail.js'
 
+/* global fetch */
+
+// Start the TonicPow service
 let TonicPow = {}
+
+// Load modules
 TonicPow.Storage = Storage
+// TonicPow.BitSocket = BitSocket
+TonicPow.Paymail = Paymail
 TonicPow.Handcash = Handcash
 TonicPow.Relay = Relay
-TonicPow.Paymail = Paymail
-// TonicPow.BitSocket = BitSocket
 TonicPow.Tonic = Tonic
 TonicPow.Iframes = new Map()
 
-// iframeLoader() - replaces each tonic div with a corresponding iframe
+// sessionName is the incoming query parameter from any link service
+const sessionName = 'tncpw_session'
+const maxCookieAgeDays = 60
+
+// setOreo for creating new oreos
+TonicPow.setOreo = (name, value, days) => {
+  let d = new Date()
+  d.setTime(d.getTime() + 24 * 60 * 60 * 1000 * days)
+  document.cookie = name + '=' + value + ';path=/;expires=' + d.toGMTString()
+}
+
+// captureVisitorSession will capture the session and store it
+// Builds a cookie so it's sent on requests automatically
+// Stores in local storage for easy access from the application
+TonicPow.captureVisitorSession = (customSessionId = '') => {
+  let sessionId = customSessionId
+  if ((!customSessionId || customSessionId.length === 0) && typeof window !== 'undefined') {
+    let urlParams = new URLSearchParams(window.location.search)
+    sessionId = urlParams.get(sessionName)
+  }
+  if (sessionId && sessionId.length > 0) {
+    TonicPow.setOreo(sessionName, sessionId, maxCookieAgeDays)
+    TonicPow.Storage.setStorage(sessionName, sessionId, (24 * 60 * 60 * maxCookieAgeDays))
+  }
+}
+
+// getVisitorSession will get the session if it exists
+TonicPow.getVisitorSession = () => {
+  return TonicPow.Storage.getStorage(sessionName)
+}
+
+// iframeLoader() - replaces each Tonic div with a corresponding iframe (embed widget)
 TonicPow.iframeLoader = async () => {
+  // We only work in a browser
+  if (typeof window === 'undefined') {
+    console.error('TonicPow embed only works in the browser')
+    return
+  }
+
   // Set config
+  // todo: make config customizable and based on ENV
   const networkUrl = 'https://app.tonicpow.com' // Url for Tonic App
   const footerLinkHeight = 28 // Size for the footer link area (px)
   const defaultHeight = 250 // Height of the embed (px)
@@ -39,8 +82,10 @@ TonicPow.iframeLoader = async () => {
   // Get the affiliate and convert if needed
   let affiliate = params.get('affiliate')
   if (affiliate) {
-    // ($handcash)
-    affiliate = (affiliate.includes('$')) ? await Handcash.lookup(affiliate) : affiliate
+    // ($handcash) (New way to resolve handcash 2.0 handles)
+    if (affiliate.includes('$')) {
+      affiliate = affiliate.replace('$', '') + '@handcash.io'
+    }
 
     // (paymail)
     affiliate = (affiliate.includes('@')) ? await Paymail.lookup(affiliate) : affiliate
@@ -55,7 +100,7 @@ TonicPow.iframeLoader = async () => {
     }
   }
 
-  // Get all tonic divs
+  // Get all tonic divs (This is redundant, but just protecting loading without divs)
   let tonicDivs = document.getElementsByClassName('tonic')
   if (!tonicDivs || tonicDivs.length === 0) {
     console.info('no tonic divs found with class \'tonic\'')
@@ -95,7 +140,9 @@ TonicPow.iframeLoader = async () => {
     let handcashHandle = tonicDiv.getAttribute('data-handcash')
     let handcashAddress = ''
     if (handcashHandle && handcashHandle.includes('$')) {
-      handcashAddress = await Handcash.lookup(handcashHandle)
+      handcashAddress = handcashAddress.replace('$', '') + '@handcash.io'
+
+      handcashAddress = await Paymail.lookup(handcashHandle)
 
       if (typeof handcashAddress === 'undefined' || !handcashAddress || handcashAddress === '' || handcashAddress.length <= 25) {
         handcashAddress = ''
@@ -108,7 +155,6 @@ TonicPow.iframeLoader = async () => {
     }
 
     // Process relayx 1handle handle if given (uses relayX 1handle instead of address)
-    // Using relayx 1handle will override the data-address given
     let relayHandle = tonicDiv.getAttribute('data-relayx')
     let relayAddress = ''
     if (relayHandle && relayHandle.charAt(0) === '1') {
@@ -125,7 +171,6 @@ TonicPow.iframeLoader = async () => {
     }
 
     // Process paymail address if given (uses paymail address instead of address)
-    // Using paymail address will override the data-address given
     let paymailAddress = tonicDiv.getAttribute('data-paymail')
     let paymailWalletAddress = ''
     if (paymailAddress && paymailAddress.includes('@')) {
@@ -154,21 +199,14 @@ TonicPow.iframeLoader = async () => {
     }
 
     // Do we have a known affiliate for this address?
-    let knownAffiliate = localStorage.getItem('affiliate_' + dataAddress)
+    let knownAffiliate = Storage.getStorage('affiliate_' + dataAddress)
     if (knownAffiliate) {
       affiliate = knownAffiliate
       console.log('existing affiliate found in local storage: ' + affiliate)
     } else if (affiliate) { // Nope - let's store it for the future!
-      localStorage.setItem('affiliate_' + dataAddress, affiliate)
+      Storage.setStorage('affiliate_' + dataAddress, affiliate, 24 * 60 * 60 * 60)
       console.log('saving new affiliate in local storage: ' + affiliate)
     }
-
-    // Got a state to load by default
-    // @mrz deprecated this feature
-    // let loadState = tonicDiv.getAttribute('data-state')
-    // if (!loadState || loadState === '') {
-    //  loadState = ''
-    // }
 
     // Got a default rate?
     let rate = tonicDiv.getAttribute('data-rate')
@@ -219,7 +257,6 @@ TonicPow.iframeLoader = async () => {
 
     // Build the iframe, pass along configuration variables
     let iframe = document.createElement('iframe')
-    // iframe.src = networkUrl + '/'+ loadState +'?' +
     iframe.src = networkUrl + '/?' +
       'unit_id=' + dataTonicId +
       '&address=' + dataAddress +
@@ -282,19 +319,32 @@ TonicPow.iframeLoader = async () => {
   console.log('Tonic Map:', TonicPow.Iframes)
 }
 
-// Load the application
+// Load the TonicPow script(s) and default settings
 TonicPow.load = () => {
-  // Load iframe(s)
-  TonicPow.iframeLoader()
+  // We only work in a browser
+  if (typeof window === 'undefined') {
+    console.error('TonicPow embed only works in the browser')
+    return
+  }
 
-  // Ping planaria for analytics
-  // todo: update to planaria.tonicpow.com when available
-  let url = 'https://b.map.sv/ping/'
-  fetch(url).then((r) => {
-    return r.json()
-  }).then(async (r) => {
-    // console.log('r')
-  })
+  // Load all tonics found on the page (if we have div)
+  let tonicDivs = document.getElementsByClassName('tonic')
+  if (tonicDivs && tonicDivs.length > 0) {
+    TonicPow.iframeLoader().then(r => {
+      // do nothing right now
+    })
+
+    // Ping planaria for analytics
+    let url = 'https://b.map.sv/ping/'
+    fetch(url).then((r) => {
+      return r.json()
+    }).then(async (r) => {
+      // console.log('r')
+    })
+  }
+
+  // Process visitor token
+  TonicPow.captureVisitorSession()
 
   // Connect socket now that we have tonic divs
   // BitSocket.connect((type, data) => {
@@ -328,7 +378,7 @@ TonicPow.load = () => {
   // })
 }
 
-// Load the iframe(s) if we are loaded dynamically
+// Load the TonicPow application if we are loaded dynamically
 if (document.readyState === 'complete' || document.readyState === 'interactive') {
   // This loads if the <script> is dynamically injected into the page
   TonicPow.load()
@@ -341,4 +391,7 @@ if (document.readyState === 'complete' || document.readyState === 'interactive')
   })
 }
 
-window.TonicPow = TonicPow
+// Store on the window (safely)
+if (typeof window !== 'undefined') {
+  window.TonicPow = TonicPow
+}

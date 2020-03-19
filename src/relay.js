@@ -2,6 +2,8 @@ import Storage from './storage'
 
 const Relay = {}
 
+/* global fetch */
+
 // RelayLookup() - looks up a handle and returns an address
 // @param handle is the 1relay handle
 Relay.lookup = async (handle) => {

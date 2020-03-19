@@ -1,6 +1,6 @@
 module.exports = {
   output: {
-    filename: 'tonicpow.js'
+    filename: 'tonic.js'
   },
   mode: 'production',
   target: 'web'
