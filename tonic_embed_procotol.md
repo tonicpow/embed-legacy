@@ -149,7 +149,7 @@ Fields:
 2. **Ad Unit ID:** Arbitrary unique ID to distinguish multiple Ad Units on a site in future
 3. **Txid of B file to Ad Unit:** b:// file reference to JSON of the form:
 
-```javascript
+```text
 {
   type: 'display',    // 'display' or 'funding'
   image: 'b://...',   // B:// image link
