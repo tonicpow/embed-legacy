@@ -1,6 +1,6 @@
 <img src="https://github.com/tonicpow/embed/blob/master/images/tonicpow-logo.png?raw=true" height="100" alt="TonicPow">
 
-Learn more [about TonicPow](https://tonicpow.com/). Checkout the [TonicPow API Docs](https://docs.tonicpow.com).
+> Learn more [about TonicPow](https://tonicpow.com/). Checkout the [TonicPow API Docs](https://docs.tonicpow.com).
 
 [![last commit](https://img.shields.io/github/last-commit/tonicpow/embed.svg?style=flat)](https://github.com/tonicpow/embed/commits/master)
 [![version](https://img.shields.io/github/release-pre/tonicpow/embed.svg?style=flat)](https://github.com/tonicpow/embed/releases)
@@ -32,14 +32,14 @@ console.log(session) //1b40c235dd9532213f5d611ffz06f9dd018efeffad8d6fbc35dc421fe
 ``` 
 
 _(Optional)_ Install as an npm package
-```bash
-$ npm install tonicpow-embed --save
+```shell script
+npm install tonicpow-embed --save
 ``` 
 
 #### Building (For Developers)
-```bash
-$ npm install
-$ npm run build
+```shell script
+npm install
+npm run build
 ```
 
 ## Documentation
