@@ -47,7 +47,9 @@ Read more about the [TonicPow API](https://docs.tonicpow.com) platform.
 
 Check out the [TonicPow embed widget](widget.md) documentation.
 
-#### Supported Browsers
+<details>
+<summary><strong><code>Supported Browsers</code></strong></summary>
+
 TonicPow supports all commonly used browsers. Below is a list of popular browsers and their minimum supported version.
 If we're missing a browser, suggest one [via an issue](https://github.com/tonicpow/embed/issues/new).
 
@@ -66,6 +68,39 @@ If we're missing a browser, suggest one [via an issue](https://github.com/tonicp
 |Opera|Mobile|---|
 |Safari|Desktop|10.1|
 |Safari|Mobile|10.3|
+</details>
+
+<details>
+<summary><strong><code>Library Deployment</code></strong></summary>
+
+[goreleaser](https://github.com/goreleaser/goreleaser) for easy binary or library deployment to Github and can be installed via: `brew install goreleaser`.
+
+The [.goreleaser.yml](.goreleaser.yml) file is used to configure [goreleaser](https://github.com/goreleaser/goreleaser).
+
+Use `make release-snap` to create a snapshot version of the release, and finally `make release` to ship to production.
+</details>
+
+<details>
+<summary><strong><code>Makefile Commands</code></strong></summary>
+
+View all `makefile` commands
+```shell script
+make help
+```
+
+List of all current commands:
+```text
+clean                          Remove previous builds and any test cache data
+help                           Show all commands available
+release                        Full production release (creates release in Github)
+release-test                   Full production test release (everything except deploy)
+release-snap                   Test the full release (build binaries)
+tag                            Generate a new tag and push (IE: tag version=0.0.0)
+tag-remove                     Remove a tag if found (IE: tag-remove version=0.0.0)
+tag-update                     Update an existing tag to current commit (IE: tag-update version=0.0.0)
+update-releaser                Update the goreleaser application
+```
+</details>
 
 ## Examples
 View some [example Tonic widgets](/examples/example.html)

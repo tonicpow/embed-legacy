@@ -69,3 +69,7 @@ node_modules/
 .firebase
 .DS_Store
 todo.md
+
+# Deployment
+release
+packaged.yaml
