@@ -1,6 +1,6 @@
 {
   "name": "tonicpow-embed",
-  "version": "0.1.3",
+  "version": "0.1.4",
   "description": "TonicPow Embed helps manage visitor sessions and load any Tonic Widgets",
   "main": "dist/tonic.js",
   "author": {
@@ -28,7 +28,8 @@
   "homepage": "https://github.com/tonicpow/embed",
   "scripts": {
     "lint": "cd src && standard --fix || true",
-    "build": "webpack --config webpack.config.js"
+    "build": "webpack --config webpack.config.js",
+    "deploy": "npm publish --access public"
   },
   "license": "Open BSV",
   "repository": {
