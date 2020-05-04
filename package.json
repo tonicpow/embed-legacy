@@ -55,7 +55,7 @@
     "dist/*"
   ],
   "bin": {
-    "tonicpow-js": "dist/tonic.js"
+    "tonic-js": "dist/tonic.js"
   },
   "engines": {
     "node": "*"
