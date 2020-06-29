@@ -5,11 +5,26 @@ endif
 
 .PHONY: clean release
 
+audit: ## Checks for vulnerabilities in dependencies
+	@npm audit
+
+build: ## Builds the package for web distribution
+	@npm run build
+
 clean: ## Remove previous builds and any test cache data
 	@if [ -d $(DISTRIBUTIONS_DIR) ]; then rm -r $(DISTRIBUTIONS_DIR); fi
 
 help: ## Show all commands available
 	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-30s\033[0m %s\n", $$1, $$2}'
+
+install: ## Installs the dependencies for the packge
+	@npm install
+
+lint: ## Runs the standard-js lint tool
+	@npm run lint
+
+outdated: ## Checks for outdated packages via npm
+	@npm outdated
 
 release: ## Full production release (creates release in Github)
 	@goreleaser --rm-dist
