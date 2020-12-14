@@ -1,9 +1,9 @@
-import Tonic from './tonic.js'
+import Handcash from './handcash.js'
+import Paymail from './paymail.js'
+import Relay from './relay.js'
 // import BitSocket from './BitSocket.js'
 import Storage from './storage.js'
-import Handcash from './handcash.js'
-import Relay from './relay.js'
-import Paymail from './paymail.js'
+import Tonic from './tonic.js'
 
 /* global fetch */
 
@@ -256,44 +256,53 @@ TonicPow.iframeLoader = async () => {
     currency = currency.toLowerCase()
 
     // Build the iframe, pass along configuration variables
-    let iframe = document.createElement('iframe')
-    iframe.src = networkUrl + '/?' +
-      'unit_id=' + dataTonicId +
-      '&address=' + dataAddress +
-      (affiliate ? '&affiliate=' + affiliate : '') +
-      (stickerAddress ? '&sticker_address=' + stickerAddress : '') +
-      (stickerTx ? '&sticker_tx=' + stickerTx : '') +
-      '&rate=' + rate +
-      '&currency=' + currency +
-      '&width=' + displayWidth +
-      '&height=' + displayHeight +
-      (imageUrl ? '&image=' + imageUrl : '') +
-      (defaultUrl ? '&url=' + defaultUrl : '') +
-      (linkColor ? '&link_color=' + linkColor : '') +
-      '&cache=' + Math.random()
-    iframe.width = displayWidth
-    iframe.height = (parseInt(displayHeight) + footerLinkHeight)
-    iframe.id = 'tonic_' + dataTonicId
+    let iframe = document.createElement('div')
+    // iframe.src = networkUrl + '/?' +
+    //   'unit_id=' + dataTonicId +
+    //   '&address=' + dataAddress +
+    //   (affiliate ? '&affiliate=' + affiliate : '') +
+    //   (stickerAddress ? '&sticker_address=' + stickerAddress : '') +
+    //   (stickerTx ? '&sticker_tx=' + stickerTx : '') +
+    //   '&rate=' + rate +
+    //   '&currency=' + currency +
+    //   '&width=' + displayWidth +
+    //   '&height=' + displayHeight +
+    //   (imageUrl ? '&image=' + imageUrl : '') +
+    //   (defaultUrl ? '&url=' + defaultUrl : '') +
+    //   (linkColor ? '&link_color=' + linkColor : '') +
+    //   '&cache=' + Math.random()
+    // iframe.width = displayWidth
+    // iframe.height = (parseInt(displayHeight) + footerLinkHeight)
+    // iframe.id = 'tonic_' + dataTonicId
+
+    let promise = await fetch(`https://api.staging.tonicpow.com/v1/widgets/display/${dataTonicId}`)
+    let response = await promise.json()
+    debugger
+    iframe.innerHTML = `
+      <a href="${response.link_url}">
+        <img src="${response.image_url}" width="${response.width}" height="${response.height}" alt="Alt text" />
+      </a>
+    `
 
     // hack to prevent scrollbars on some browsers (deprecated)
-    iframe.setAttribute('scrolling', 'no')
+    // iframe.setAttribute('scrolling', 'no')
 
-    // Add the data to the iframe
-    iframe.setAttribute('data-address', dataAddress)
-    iframe.setAttribute('data-handcash', handcashHandle)
-    iframe.setAttribute('data-paymail', paymailAddress)
-    iframe.setAttribute('data-image', imageUrl)
-    iframe.setAttribute('data-link-color', linkColor)
-    iframe.setAttribute('data-relayx', relayHandle)
-    iframe.setAttribute('data-sticker-address', stickerAddress)
-    iframe.setAttribute('data-sticker-tx', stickerTx)
+    // // Add the data to the iframe
+    // iframe.setAttribute('data-address', dataAddress)
+    // iframe.setAttribute('data-handcash', handcashHandle)
+    // iframe.setAttribute('data-paymail', paymailAddress)
+    // iframe.setAttribute('data-image', imageUrl)
+    // iframe.setAttribute('data-link-color', linkColor)
+    // iframe.setAttribute('data-relayx', relayHandle)
+    // iframe.setAttribute('data-sticker-address', stickerAddress)
+    // iframe.setAttribute('data-sticker-tx', stickerTx)
     iframe.setAttribute('data-unit-id', dataTonicId)
-    iframe.setAttribute('data-url', defaultUrl)
+    // iframe.setAttribute('data-url', defaultUrl)
 
     // Add affiliate to the iframe
-    if (affiliate) {
-      iframe.setAttribute('data-affiliate', affiliate)
-    }
+    // if (affiliate) {
+    //   iframe.setAttribute('data-affiliate', affiliate)
+    // }
 
     // Extra attributes
     // iframe.allowfullscreen = true;
@@ -301,14 +310,14 @@ TonicPow.iframeLoader = async () => {
     // iframe.referrerpolicy = 'unsafe-url';
 
     // Name and border
-    iframe.importance = 'high'
-    iframe.frameBorder = '0'
-    iframe.style.border = 'none'
-    iframe.style.overflow = 'hidden' // (app should take care of this)
+    // iframe.importance = 'high'
+    // iframe.frameBorder = '0'
+    // iframe.style.border = 'none'
+    // iframe.style.overflow = 'hidden' // (app should take care of this)
 
-    // Add transparency
-    iframe.style.backgroundColor = 'transparent'
-    iframe.allowTransparency = 'true'
+    // // Add transparency
+    // iframe.style.backgroundColor = 'transparent'
+    // iframe.allowTransparency = 'true'
 
     // Add to iframe map
     TonicPow.Iframes.set(dataTonicId, dataAddress)
@@ -335,12 +344,14 @@ TonicPow.load = () => {
     })
 
     // Ping planaria for analytics
-    let url = 'https://b.map.sv/ping/'
-    fetch(url).then((r) => {
-      return r.json()
-    }).then(async (r) => {
-      // console.log('r')
-    })
+    // let url = 'https://b.map.sv/ping/'
+    // fetch(url).then((r) => {
+    //   return r.json()
+    // }).then(async (r) => {
+    //   // console.log('r')
+    // })
+
+
   }
 
   // Process visitor token
