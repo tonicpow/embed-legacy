@@ -6,7 +6,7 @@ updates:
     target-branch: "development"
     directory: "/"
     schedule:
-      interval: "daily"
+      interval: "monthly"
       # Check for npm updates at 9am UTC (5am EST)
       time: "10:00"
     reviewers:

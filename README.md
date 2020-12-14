@@ -1,9 +1,9 @@
-<img src="https://github.com/tonicpow/embed/blob/master/images/tonicpow-logo.png?raw=true" height="100" alt="TonicPow">
+<img src="https://github.com/tonicpow/embed-legacy/blob/master/images/tonicpow-logo.png?raw=true" height="100" alt="TonicPow">
 
 > Learn more [about TonicPow](https://tonicpow.com/). Checkout the [TonicPow API Docs](https://docs.tonicpow.com).
 
-[![last commit](https://img.shields.io/github/last-commit/tonicpow/embed.svg?style=flat)](https://github.com/tonicpow/embed/commits/master)
-[![version](https://img.shields.io/github/release-pre/tonicpow/embed.svg?style=flat)](https://github.com/tonicpow/embed/releases)
+[![last commit](https://img.shields.io/github/last-commit/tonicpow/embed-legacy.svg?style=flat)](https://github.com/tonicpow/embed-legacy/commits/master)
+[![version](https://img.shields.io/github/release-pre/tonicpow/embed-legacy.svg?style=flat)](https://github.com/tonicpow/embed-legacy/releases)
 [![Npm](https://img.shields.io/npm/v/tonicpow-embed?style=flat)](https://www.npmjs.com/package/tonicpow-embed)
 [![standard-readme compliant](https://img.shields.io/badge/standard--readme-OK-green.svg?style=flat)](https://github.com/RichardLitt/standard-readme)
 [![slack](https://img.shields.io/badge/slack-tonicpow-orange.svg?style=flat)](https://atlantistic.slack.com/app_redirect?channel=tonicpow)
@@ -51,7 +51,7 @@ Check out the [TonicPow embed widget](widget.md) documentation.
 <summary><strong><code>Supported Browsers</code></strong></summary>
 
 TonicPow supports all commonly used browsers. Below is a list of popular browsers and their minimum supported version.
-If we're missing a browser, suggest one [via an issue](https://github.com/tonicpow/embed/issues/new).
+If we're missing a browser, suggest one [via an issue](https://github.com/tonicpow/embed-legacy/issues/new).
 
 |Browser |Platform |Min Version |
 |:---|:---|:---|
@@ -121,7 +121,7 @@ Check out the [Tonic Widgets](https://tonicpow.com/embed.html).
 Support the development of this project and the [TonicPow](https://tonicpow.com/) team 🙏
 
 ## Contributing
-Feel free to dive in! [Open an issue](https://github.com/tonicpow/embed/issues/new) or submit PRs.
+Feel free to dive in! [Open an issue](https://github.com/tonicpow/embed-legacy/issues/new) or submit PRs.
 
 ## License
 [![License](https://img.shields.io/badge/license-Open%20BSV-brightgreen.svg?style=flat)](/LICENSE)

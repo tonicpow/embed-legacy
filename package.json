@@ -1,5 +1,5 @@
 {
-  "name": "tonicpow-embed",
+  "name": "embed-legacy",
   "version": "0.1.4",
   "description": "TonicPow Embed helps manage visitor sessions and load any Tonic Widgets",
   "main": "dist/tonic.js",
@@ -23,7 +23,7 @@
     }
   ],
   "bugs": {
-    "url": "https://github.com/tonicpow/embed/issues"
+    "url": "https://github.com/tonicpow/embed-legacy/issues"
   },
   "homepage": "https://docs.tonicpow.com",
   "scripts": {
@@ -34,7 +34,7 @@
   "license": "Open BSV",
   "repository": {
     "type": "git",
-    "url": "https://github.com/tonicpow/embed/"
+    "url": "https://github.com/tonicpow/embed-legacy/"
   },
   "keywords": [
     "tonic",
@@ -47,10 +47,10 @@
   ],
   "dependencies": {},
   "devDependencies": {
-    "webpack": "^5.2.0",
-    "webpack-cli": "^4.1.0",
     "chai": "^4.2.0",
-    "mocha": "^8.2.0"
+    "mocha": "^8.2.0",
+    "webpack": "^5.2.0",
+    "webpack-cli": "^4.1.0"
   },
   "files": [
     "dist/*"

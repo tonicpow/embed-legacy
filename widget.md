@@ -60,7 +60,7 @@ This Tonic embed script converts [paymail addresses](https://blog.moneybutton.co
 
 #### Supported Browsers
 TonicPow supports all commonly used browsers. Below is a list of popular browsers and their minimum supported version.
-If we're missing a browser, suggest one [via an issue](https://github.com/tonicpow/embed/issues/new).
+If we're missing a browser, suggest one [via an issue](https://github.com/tonicpow/embed-legacy/issues/new).
 
 |Browser |Platform |Min Version |
 |:---|:---|:---|
